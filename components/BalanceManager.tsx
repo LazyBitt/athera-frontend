@@ -11,7 +11,12 @@ import { useNotifications } from './NotificationSystem'
 
 export function BalanceManager() {
   const { address } = useAccount()
-  const { data: walletBalance } = useBalance({ address })
+  const { data: walletBalance, refetch: refetchWalletBalance } = useBalance({ 
+    address,
+    query: {
+      refetchInterval: 5000, // Auto-refresh every 5 seconds
+    }
+  })
   const { contractBalance, refetch: refetchContractBalance } = useContractBalance()
   const { addNotification } = useNotifications()
 
@@ -40,7 +45,9 @@ export function BalanceManager() {
       })
       setDepositAmount('')
       setShowDeposit(false)
+      // Refresh both balances
       refetchContractBalance()
+      refetchWalletBalance()
     }
   }, [depositSuccess])
 
@@ -54,7 +61,9 @@ export function BalanceManager() {
       })
       setWithdrawAmount('')
       setShowWithdraw(false)
+      // Refresh both balances
       refetchContractBalance()
+      refetchWalletBalance()
     }
   }, [withdrawSuccess])
 

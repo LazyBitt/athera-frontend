@@ -1,9 +1,9 @@
 'use client'
 
 import { useState } from 'react'
-import { useWriteContract, useWaitForTransactionReceipt, useReadContract } from 'wagmi'
-import { parseEther } from 'viem'
-import { FACTORY_ADDRESS, FACTORY_ABI } from '../lib/contracts'
+import { useWriteContract, useWaitForTransactionReceipt, useReadContract, useAccount } from 'wagmi'
+import { parseEther, formatEther } from 'viem'
+import { FACTORY_ADDRESS, FACTORY_ABI, VAULT_ABI } from '../lib/contracts'
 import { X, Plus, Trash2, Loader2, AlertCircle } from 'lucide-react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { useDashboardStore } from '../store/dashboard'
@@ -27,9 +27,20 @@ export function CreateInheritanceDialog({ children, onSuccess }: Props) {
   const [days, setDays] = useState('30')
   
   const { addNotification } = useDashboardStore()
+  const { address } = useAccount()
   
   const { writeContract: createVault, data: hash, isPending } = useWriteContract()
   const { isLoading: isConfirming, isSuccess } = useWaitForTransactionReceipt({ hash })
+  
+  // Get user's vault balance from Factory
+  const { data: vaultBalance } = useReadContract({
+    address: FACTORY_ADDRESS,
+    abi: FACTORY_ABI,
+    functionName: 'getBalance',
+    args: address ? [address] : undefined,
+  })
+  
+  const availableBalance = vaultBalance ? parseFloat(formatEther(vaultBalance as bigint)) : 0
   
   const addBeneficiary = () => {
     setBeneficiaries([...beneficiaries, { address: '', percentage: '' }])
@@ -46,11 +57,15 @@ export function CreateInheritanceDialog({ children, onSuccess }: Props) {
   }
   
   const totalPercentage = beneficiaries.reduce((sum, b) => sum + (parseFloat(b.percentage) || 0), 0)
+  const requestedAmount = parseFloat(amount) || 0
+  const hasInsufficientBalance = requestedAmount > availableBalance
+  
   const isValid = 
     beneficiaries.every(b => b.address && b.percentage) &&
     Math.abs(totalPercentage - 100) < 0.01 &&
     amount &&
-    parseFloat(amount) > 0 &&
+    requestedAmount > 0 &&
+    !hasInsufficientBalance &&
     days &&
     parseInt(days) > 0
   
@@ -134,36 +149,75 @@ export function CreateInheritanceDialog({ children, onSuccess }: Props) {
                 <div className="p-6 space-y-6">
                   {/* Amount */}
                   <div>
-                    <label className="block text-sm font-medium text-gray-300 mb-2">
-                      Amount to Lock (ETH)
-                    </label>
-                    <input
-                      type="number"
-                      step="0.001"
-                      value={amount}
-                      onChange={(e) => setAmount(e.target.value)}
-                      placeholder="0.0"
-                      className="w-full px-4 py-3 bg-slate-800 border border-slate-700 rounded-xl text-white placeholder-gray-500 focus:outline-none focus:border-blue-500 transition-colors"
-                    />
+                    <div className="flex items-center justify-between mb-2">
+                      <label className="block text-sm font-medium text-gray-300">
+                        Amount to Lock (ETH)
+                      </label>
+                      <span className={`text-xs ${availableBalance === 0 ? 'text-red-400' : 'text-gray-500'}`}>
+                        Available: {availableBalance.toFixed(4)} ETH
+                      </span>
+                    </div>
+                    <div className="relative">
+                      <input
+                        type="number"
+                        step="0.001"
+                        value={amount}
+                        onChange={(e) => setAmount(e.target.value)}
+                        placeholder={availableBalance === 0 ? "Deposit ETH first" : "0.0"}
+                        max={availableBalance}
+                        disabled={availableBalance === 0}
+                        className={`w-full px-4 py-3 pr-16 bg-slate-800 border rounded-xl text-white placeholder-gray-500 focus:outline-none transition-colors disabled:opacity-50 disabled:cursor-not-allowed ${
+                          hasInsufficientBalance 
+                            ? 'border-red-500 focus:border-red-500' 
+                            : 'border-slate-700 focus:border-blue-500'
+                        }`}
+                      />
+                      {availableBalance > 0 && (
+                        <button
+                          type="button"
+                          onClick={() => setAmount(availableBalance.toString())}
+                          className="absolute right-3 top-1/2 -translate-y-1/2 px-2.5 py-1 text-xs font-medium bg-slate-700 hover:bg-slate-600 text-gray-300 rounded-lg transition-colors"
+                        >
+                          MAX
+                        </button>
+                      )}
+                    </div>
+                    {hasInsufficientBalance && availableBalance > 0 && (
+                      <p className="mt-2 text-xs text-red-400">
+                        Insufficient balance. Available: {availableBalance.toFixed(4)} ETH
+                      </p>
+                    )}
+                    {availableBalance === 0 && (
+                      <p className="mt-2 text-xs text-yellow-400">
+                        Please deposit ETH to your vault first from the Vault tab
+                      </p>
+                    )}
                   </div>
                   
                   {/* Countdown */}
                   <div>
                     <label className="block text-sm font-medium text-gray-300 mb-2">
-                      Countdown Period (Days)
+                      Countdown Period
                     </label>
-                    <div className="grid grid-cols-4 gap-2 mb-2">
-                      {['7', '30', '90', '365'].map((d) => (
+                    <div className="grid grid-cols-2 sm:grid-cols-4 gap-2 mb-2">
+                      {[
+                        { label: '1 Min', days: (1/1440).toString() },
+                        { label: '1 Year', days: '365' },
+                        { label: '2 Years', days: '730' },
+                        { label: '5 Years', days: '1825' }
+                      ].map((option) => (
                         <button
-                          key={d}
-                          onClick={() => setDays(d)}
+                          key={option.label}
+                          type="button"
+                          onClick={() => setDays(option.days)}
+                          disabled={availableBalance === 0}
                           className={`px-4 py-2 text-sm font-medium rounded-xl transition-colors ${
-                            days === d
+                            days === option.days
                               ? 'bg-blue-600 text-white'
-                              : 'bg-slate-800 text-gray-400 hover:text-white'
+                              : 'bg-slate-800 text-gray-400 hover:text-white disabled:opacity-50 disabled:cursor-not-allowed'
                           }`}
                         >
-                          {d}d
+                          {option.label}
                         </button>
                       ))}
                     </div>
@@ -172,8 +226,14 @@ export function CreateInheritanceDialog({ children, onSuccess }: Props) {
                       value={days}
                       onChange={(e) => setDays(e.target.value)}
                       placeholder="Custom days"
-                      className="w-full px-4 py-3 bg-slate-800 border border-slate-700 rounded-xl text-white placeholder-gray-500 focus:outline-none focus:border-blue-500 transition-colors"
+                      disabled={availableBalance === 0}
+                      className="w-full px-4 py-3 bg-slate-800 border border-slate-700 rounded-xl text-white placeholder-gray-500 focus:outline-none focus:border-blue-500 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
                     />
+                    <p className="mt-1 text-xs text-gray-500">
+                      {days && parseFloat(days) < 1 
+                        ? `${Math.round(parseFloat(days) * 1440)} minutes for testing`
+                        : days && `${days} days`}
+                    </p>
                   </div>
                   
                   {/* Beneficiaries */}
@@ -193,30 +253,55 @@ export function CreateInheritanceDialog({ children, onSuccess }: Props) {
                     
                     <div className="space-y-3">
                       {beneficiaries.map((beneficiary, index) => (
-                        <div key={index} className="flex gap-2">
-                          <input
-                            type="text"
-                            value={beneficiary.address}
-                            onChange={(e) => updateBeneficiary(index, 'address', e.target.value)}
-                            placeholder="0x..."
-                            className="flex-1 px-4 py-3 bg-slate-800 border border-slate-700 rounded-xl text-white placeholder-gray-500 focus:outline-none focus:border-blue-500 transition-colors font-mono text-sm"
-                          />
-                          <input
-                            type="number"
-                            step="0.1"
-                            value={beneficiary.percentage}
-                            onChange={(e) => updateBeneficiary(index, 'percentage', e.target.value)}
-                            placeholder="%"
-                            className="w-24 px-4 py-3 bg-slate-800 border border-slate-700 rounded-xl text-white placeholder-gray-500 focus:outline-none focus:border-blue-500 transition-colors"
-                          />
-                          {beneficiaries.length > 1 && (
-                            <button
-                              onClick={() => removeBeneficiary(index)}
-                              className="p-3 bg-slate-800 hover:bg-red-500/20 text-gray-400 hover:text-red-400 rounded-xl transition-colors"
-                            >
-                              <Trash2 className="h-5 w-5" />
-                            </button>
-                          )}
+                        <div key={index} className="space-y-2">
+                          <div className="flex gap-2">
+                            <input
+                              type="text"
+                              value={beneficiary.address}
+                              onChange={(e) => updateBeneficiary(index, 'address', e.target.value)}
+                              placeholder="0x..."
+                              disabled={availableBalance === 0}
+                              className="flex-1 px-4 py-3 bg-slate-800 border border-slate-700 rounded-xl text-white placeholder-gray-500 focus:outline-none focus:border-blue-500 transition-colors font-mono text-sm disabled:opacity-50 disabled:cursor-not-allowed"
+                            />
+                            <input
+                              type="number"
+                              step="0.1"
+                              value={beneficiary.percentage}
+                              onChange={(e) => updateBeneficiary(index, 'percentage', e.target.value)}
+                              placeholder="%"
+                              disabled={availableBalance === 0}
+                              className="w-24 px-4 py-3 bg-slate-800 border border-slate-700 rounded-xl text-white placeholder-gray-500 focus:outline-none focus:border-blue-500 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+                            />
+                            {beneficiaries.length > 1 && (
+                              <button
+                                type="button"
+                                onClick={() => removeBeneficiary(index)}
+                                disabled={availableBalance === 0}
+                                className="p-3 bg-slate-800 hover:bg-red-500/20 text-gray-400 hover:text-red-400 rounded-xl transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+                              >
+                                <Trash2 className="h-5 w-5" />
+                              </button>
+                            )}
+                          </div>
+                          
+                          {/* Quick percentage buttons */}
+                          <div className="flex gap-1.5 pl-1">
+                            {['20', '50', '75', '100'].map((percent) => (
+                              <button
+                                key={percent}
+                                type="button"
+                                onClick={() => updateBeneficiary(index, 'percentage', percent)}
+                                disabled={availableBalance === 0}
+                                className={`px-2.5 py-1 text-xs font-medium rounded-lg transition-colors ${
+                                  beneficiary.percentage === percent
+                                    ? 'bg-violet-600 text-white'
+                                    : 'bg-slate-800 text-gray-500 hover:text-gray-300 disabled:opacity-50 disabled:cursor-not-allowed'
+                                }`}
+                              >
+                                {percent}%
+                              </button>
+                            ))}
+                          </div>
                         </div>
                       ))}
                     </div>
@@ -236,6 +321,12 @@ export function CreateInheritanceDialog({ children, onSuccess }: Props) {
                     <div className="flex gap-3 p-4 bg-yellow-500/10 border border-yellow-500/20 rounded-xl">
                       <AlertCircle className="h-5 w-5 text-yellow-400 flex-shrink-0 mt-0.5" />
                       <div className="text-sm text-yellow-300">
+                        {availableBalance === 0 && (
+                          <p>• Vault balance is 0. Please deposit ETH first.</p>
+                        )}
+                        {hasInsufficientBalance && availableBalance > 0 && (
+                          <p>• Amount exceeds vault balance ({availableBalance.toFixed(4)} ETH available)</p>
+                        )}
                         {Math.abs(totalPercentage - 100) >= 0.01 && (
                           <p>• Percentages must total 100%</p>
                         )}

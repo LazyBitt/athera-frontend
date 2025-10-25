@@ -15,6 +15,7 @@ export function useContractBalance() {
     args: address ? [address] : undefined,
     query: {
       enabled: !!address && !!factoryAddress,
+      refetchInterval: 5000, // Auto-refresh every 5 seconds
     },
   })
 
