@@ -1,7 +1,7 @@
 'use client';
 
 import { useEffect, useState } from 'react';
-import { useProvider, useNetwork } from 'wagmi';
+import { usePublicClient, useChainId, useChains } from 'wagmi';
 import { 
   getAutomationStats, 
   isAutomationEnabled,
@@ -15,14 +15,16 @@ import { Button } from '@/components/ui/button';
 import { ExternalLink, Activity, CheckCircle2, Clock, AlertCircle } from 'lucide-react';
 
 export function AutomationStatus() {
-  const provider = useProvider();
-  const { chain } = useNetwork();
+  const publicClient = usePublicClient();
+  const chainId = useChainId();
+  const chains = useChains();
+  const chain = chains.find(c => c.id === chainId);
   const [stats, setStats] = useState<AutomationStats | null>(null);
   const [loading, setLoading] = useState(true);
   const [lastUpdate, setLastUpdate] = useState<Date>(new Date());
 
   useEffect(() => {
-    if (!chain || !provider) return;
+    if (!chain || !publicClient) return;
     if (!isAutomationEnabled(chain.id)) {
       setLoading(false);
       return;
@@ -32,7 +34,7 @@ export function AutomationStatus() {
     loadStats();
 
     // Listen to automation events
-    const cleanup = listenToAutomationEvents(provider, chain.id, {
+    const cleanup = listenToAutomationEvents(publicClient, chain.id, {
       onVaultDistributed: () => {
         loadStats();
       },
@@ -48,13 +50,13 @@ export function AutomationStatus() {
       cleanup();
       clearInterval(interval);
     };
-  }, [chain, provider]);
+  }, [chain, publicClient]);
 
   const loadStats = async () => {
-    if (!chain || !provider) return;
+    if (!chain || !publicClient) return;
     
     try {
-      const data = await getAutomationStats(provider, chain.id);
+      const data = await getAutomationStats(publicClient, chain.id);
       setStats(data);
       setLastUpdate(new Date());
     } catch (error) {
