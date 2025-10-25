@@ -219,10 +219,14 @@ export function MessagesTab() {
                   <div className={`p-2.5 rounded-xl ${
                     file.type === 'image' 
                       ? 'bg-purple-500/10' 
+                      : file.type === 'file'
+                      ? 'bg-green-500/10'
                       : 'bg-blue-500/10'
                   }`}>
                     {file.type === 'image' ? (
                       <ImageIcon className="h-5 w-5 text-purple-400" />
+                    ) : file.type === 'file' ? (
+                      <FileText className="h-5 w-5 text-green-400" />
                     ) : (
                       <FileText className="h-5 w-5 text-blue-400" />
                     )}

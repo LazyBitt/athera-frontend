@@ -11,7 +11,7 @@ interface Notification {
 interface IPFSFile {
   cid: string
   name: string
-  type: 'text' | 'image'
+  type: 'text' | 'image' | 'file'
   content?: string
   timestamp: number
 }
