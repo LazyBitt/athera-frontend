@@ -85,7 +85,7 @@ export function BalanceManager() {
         abi: FACTORY_ABI,
         functionName: 'deposit',
         value,
-      })
+      } as any)
     } catch (error) {
       console.error('Deposit error:', error)
       addNotification({
