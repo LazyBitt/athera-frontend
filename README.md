@@ -136,16 +136,6 @@ Vault owners can modify beneficiary lists and percentages post-creation. Changes
 
 Upload text messages, images, or documents to IPFS through the Messages tab. Each upload generates a unique Content Identifier (CID) for permanent retrieval. Share CIDs with beneficiaries through secure channels. Content remains accessible indefinitely through IPFS gateways.
 
-**Notification Setup**
-
-Configure Telegram notifications in the Notifications tab:
-1. Create a Telegram bot via @BotFather
-2. Obtain your chat ID from @userinfobot
-3. Enter credentials in application settings
-4. Test notification delivery
-
-Alerts trigger at 24 hours and 1 hour before countdown expiry, plus distribution confirmations.
-
 ## Smart Contracts
 
 **Base Sepolia Testnet**
@@ -214,114 +204,6 @@ npm run type-check   # TypeScript type checking without emit
 npm run format       # Format code with Prettier
 npm run format:check # Check code formatting
 ```
-
-**Build Output**
-
-Production builds generate static pages where possible, with dynamic routes for vault addresses. Typical build size is ~350KB First Load JS for main dashboard. API routes compile to serverless functions.
-
-**Type Safety**
-
-The project uses strict TypeScript configuration with no implicit any. Wagmi provides full type inference for contract interactions. Run `npm run type-check` before committing to catch type errors.
-
-## Deployment
-
-### Vercel (Recommended)
-
-**Quick Deploy:**
-[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https://github.com/yourusername/athera-dashboard)
-
-**Manual Deploy:**
-1. Push code to GitHub/GitLab/Bitbucket
-2. Go to [vercel.com](https://vercel.com) and login
-3. Click "Add New Project"
-4. Import your repository
-5. Add environment variables:
-   - `NEXT_PUBLIC_WALLET_CONNECT_PROJECT_ID` (required)
-   - `NEXT_PUBLIC_FACTORY_ADDRESS` (default provided)
-   - `NEXT_PUBLIC_EXECUTOR_ADDRESS` (default provided)
-   - Other optional variables from `.env.example`
-6. Click "Deploy"
-7. Wait 2-3 minutes for build to complete
-
-**Post-Deploy:**
-- Test wallet connection on live URL
-- Verify contract interactions work
-- Setup custom domain (optional)
-- Enable Vercel Analytics (optional)
-
-### Other Platforms
-The app can be deployed to any platform supporting Next.js:
-- **Netlify**: Similar process, use Netlify CLI or dashboard
-- **Railway**: Connect GitHub and deploy
-- **AWS Amplify**: Use Amplify Console
-- **Self-hosted**: Run `npm run build && npm start` on your server
-
-## Security Considerations
-
-**Protocol Security**
-- Non-custodial architecture - users retain full control of funds
-- No private key storage or transmission
-- All operations transparent and verifiable on-chain
-- Smart contract audit recommended before mainnet deployment
-
-**User Responsibilities**
-- Verify beneficiary addresses before vault creation (irreversible)
-- Secure wallet seed phrases using industry best practices
-- Test all functionality on testnet before mainnet use
-- Maintain regular check-ins to prevent unintended distribution
-- Use hardware wallets for large value vaults
-
-**Known Limitations**
-- Chainlink Automation requires active subscription and funding
-- IPFS content persistence depends on pinning service reliability
-- Telegram notifications require bot token security
-- Gas price volatility may affect transaction costs
-
-## Troubleshooting
-
-**Wallet Connection Issues**
-
-Problem: Wallet fails to connect or shows wrong network
-- Verify Base Sepolia is added to wallet (Chain ID: 84532)
-- Clear browser cache and wallet cache
-- Try alternative wallet provider through RainbowKit
-- Check browser console for specific error messages
-
-**Transaction Failures**
-
-Problem: Transactions revert or fail to confirm
-- Ensure sufficient ETH balance for gas fees (typically 0.001-0.01 ETH)
-- Verify vault has adequate balance for inheritance vault creation
-- Confirm beneficiary addresses are valid Ethereum addresses
-- Check BaseScan for specific revert reasons
-- Increase gas limit if using custom gas settings
-
-**IPFS Upload Failures**
-
-Problem: File uploads timeout or fail
-- Verify Pinata API credentials if configured
-- Check file size (recommended maximum 10MB)
-- Test network connectivity to IPFS gateways
-- Try alternative IPFS provider
-- Confirm browser allows IPFS gateway connections
-
-**Notification Issues**
-
-Problem: Telegram notifications not received
-- Verify bot token from @BotFather is correct
-- Confirm chat ID from @userinfobot matches configuration
-- Ensure bot is not blocked or removed from chat
-- Check API route logs in Vercel dashboard
-- Test notification endpoint directly via API route
-
-**Build Errors**
-
-Problem: Production build fails
-- Run `npm run type-check` to identify TypeScript errors
-- Verify all environment variables are set
-- Check Node.js version (18+ required)
-- Clear `.next` directory and rebuild
-- Review build logs for specific error messages
 
 ## Contributing
 
