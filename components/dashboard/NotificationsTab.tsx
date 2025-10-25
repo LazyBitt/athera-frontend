@@ -49,9 +49,9 @@ export function NotificationsTab() {
       const data = await response.json()
       
       if (response.ok) {
-        alert('✅ Notifikasi test berhasil dikirim! Cek Telegram Anda.')
+        alert('✅ Test notification sent successfully! Check your Telegram.')
       } else {
-        alert(`❌ Gagal mengirim notifikasi: ${data.error || 'Chat tidak ditemukan. Pastikan bot sudah diaktifkan dan chat ID benar.'}`)
+        alert(`❌ Failed to send notification: ${data.error || 'Chat not found. Make sure the bot is activated and chat ID is correct.'}`)
       }
     } catch (error) {
       alert('❌ Error mengirim notifikasi test')
@@ -137,8 +137,8 @@ export function NotificationsTab() {
                 className="w-full px-4 py-3 bg-slate-800 border border-slate-700 rounded-xl text-white placeholder-gray-500 focus:outline-none focus:border-blue-500 transition-colors"
               />
               <p className="text-xs text-gray-500 mt-2">
-                💡 Gunakan ID numerik (contoh: 6988422332), bukan username channel. 
-                Dapatkan chat ID Anda dengan mengirim pesan ke @userinfobot di Telegram.
+                💡 Use numeric ID (example: 6988422332), not channel username. 
+                Get your chat ID by sending a message to @userinfobot on Telegram.
               </p>
             </div>
             

@@ -15,11 +15,11 @@ export async function POST(request: NextRequest) {
     const message = `
 🎉 <b>Athera Test Notification</b>
 
-Notifikasi Telegram Anda berfungsi dengan baik!
+Your Telegram notifications are working properly!
 
-Anda akan menerima notifikasi tentang:
-• Peringatan countdown vault
-• Distribusi inheritance
+You will receive notifications about:
+• Vault countdown warnings
+• Inheritance distributions
 • Update penting vault
     `.trim()
     
@@ -29,7 +29,7 @@ Anda akan menerima notifikasi tentang:
       return NextResponse.json({ success: true })
     } else {
       return NextResponse.json(
-        { error: 'Chat tidak ditemukan. Pastikan bot sudah diaktifkan dengan mengirim /start ke bot Anda.' },
+        { error: 'Chat not found. Make sure the bot is activated by sending /start to your bot.' },
         { status: 400 }
       )
     }

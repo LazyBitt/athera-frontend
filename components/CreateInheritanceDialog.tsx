@@ -282,16 +282,16 @@ export function CreateInheritanceDialog({ children, onSuccess }: Props) {
                   {/* Files Upload */}
                   <div>
                     <label className="block text-sm font-medium text-gray-300 mb-2">
-                      Dokumen & File (Opsional)
+                      Documents & Files (Optional)
                     </label>
                     <div className="space-y-2">
                       <label className="flex flex-col items-center justify-center w-full h-32 px-4 border-2 border-dashed border-slate-700 rounded-xl cursor-pointer bg-slate-800/50 hover:bg-slate-800 transition-colors">
                         <Upload className="h-8 w-8 text-gray-400 mb-2" />
                         <span className="text-sm text-gray-400">
-                          Klik atau drag & drop file
+                          Click or drag & drop files
                         </span>
                         <span className="text-xs text-gray-500 mt-1">
-                          Dokumen, foto, atau file penting lainnya
+                          Documents, photos, or other important files
                         </span>
                         <input
                           type="file"
@@ -413,22 +413,22 @@ export function CreateInheritanceDialog({ children, onSuccess }: Props) {
                       <AlertCircle className="h-5 w-5 text-yellow-400 flex-shrink-0 mt-0.5" />
                       <div className="text-sm text-yellow-300 space-y-1">
                         {availableBalance === 0 && (
-                          <p>• Saldo vault Anda 0. Silakan deposit ETH terlebih dahulu di tab Vault.</p>
+                          <p>• Vault balance is 0. Please deposit ETH first in the Vault tab.</p>
                         )}
                         {hasInsufficientBalance && availableBalance > 0 && (
-                          <p>• Jumlah melebihi saldo vault (tersedia: {availableBalance.toFixed(4)} ETH)</p>
+                          <p>• Amount exceeds vault balance (available: {availableBalance.toFixed(4)} ETH)</p>
                         )}
                         {Math.abs(totalPercentage - 100) >= 0.01 && (
-                          <p>• Total persentase harus 100%</p>
+                          <p>• Total percentage must be 100%</p>
                         )}
                         {(!amount || requestedAmount <= 0) && availableBalance > 0 && (
-                          <p>• Masukkan jumlah yang valid</p>
+                          <p>• Enter a valid amount</p>
                         )}
                         {beneficiaries.some(b => !b.address || !b.percentage) && (
-                          <p>• Lengkapi semua field beneficiary</p>
+                          <p>• Fill in all beneficiary fields</p>
                         )}
                         {(!days || parseFloat(days) <= 0) && (
-                          <p>• Pilih periode countdown yang valid</p>
+                          <p>• Select a valid countdown period</p>
                         )}
                       </div>
                     </div>
