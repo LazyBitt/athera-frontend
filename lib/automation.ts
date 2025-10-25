@@ -1,4 +1,5 @@
-import { ethers } from 'ethers';
+// import { ethers } from 'ethers';
+// Temporarily disabled - needs migration to viem
 
 // AtheraAutomation ABI (minimal for frontend)
 export const AUTOMATION_ABI = [
@@ -36,91 +37,65 @@ export interface AutomationStats {
  * Get Automation contract instance
  */
 export function getAutomationContract(
-  provider: ethers.providers.Provider | ethers.Signer,
+  provider: any,
   chainId: number
-): ethers.Contract | null {
+): any | null {
   const address = AUTOMATION_ADDRESSES[chainId];
   if (!address) return null;
   
-  return new ethers.Contract(address, AUTOMATION_ABI, provider);
+  // return new ethers.Contract(address, AUTOMATION_ABI, provider);
+  return null; // Temporarily disabled
 }
 
 /**
  * Get vaults ready for distribution
  */
 export async function getReadyVaults(
-  provider: ethers.providers.Provider,
+  provider: any,
   chainId: number
 ): Promise<string[]> {
-  const contract = getAutomationContract(provider, chainId);
-  if (!contract) return [];
-  
-  try {
-    const readyVaults = await contract.getReadyVaults();
-    return readyVaults;
-  } catch (error) {
-    console.error('Error getting ready vaults:', error);
-    return [];
-  }
+  // Temporarily disabled
+  return [];
 }
 
 /**
  * Get status of all vaults
  */
 export async function getAllVaultsStatus(
-  provider: ethers.providers.Provider,
+  provider: any,
   chainId: number
 ): Promise<VaultStatus[]> {
-  const contract = getAutomationContract(provider, chainId);
-  if (!contract) return [];
-  
-  try {
-    const [vaults, statuses, timeRemaining] = await contract.getAllVaultsStatus();
-    
-    return vaults.map((address: string, index: number) => ({
-      address,
-      isReady: statuses[index],
-      timeRemaining: timeRemaining[index].toNumber(),
-    }));
-  } catch (error) {
-    console.error('Error getting vaults status:', error);
-    return [];
-  }
+  // Temporarily disabled
+  return [];
 }
 
 /**
  * Manually execute distribution for a vault
  */
 export async function manualExecuteVault(
-  signer: ethers.Signer,
+  signer: any,
   chainId: number,
   vaultAddress: string
-): Promise<ethers.ContractTransaction> {
-  const contract = getAutomationContract(signer, chainId);
-  if (!contract) throw new Error('Automation contract not found');
-  
-  return await contract.manualExecute(vaultAddress);
+): Promise<any> {
+  throw new Error('Automation contract not found - temporarily disabled');
 }
 
 /**
  * Batch execute multiple vaults
  */
 export async function batchExecuteVaults(
-  signer: ethers.Signer,
+  signer: any,
   chainId: number,
   vaultAddresses: string[]
-): Promise<ethers.ContractTransaction> {
-  const contract = getAutomationContract(signer, chainId);
-  if (!contract) throw new Error('Automation contract not found');
-  
-  return await contract.batchManualExecute(vaultAddresses);
+): Promise<any> {
+  throw new Error('Automation contract not found - temporarily disabled');
 }
 
 /**
  * Listen to automation events
  */
 export function listenToAutomationEvents(
-  provider: ethers.providers.Provider,
+  provider: any,
   chainId: number,
   callbacks: {
     onVaultDistributed?: (vault: string, timestamp: number) => void;
@@ -128,53 +103,23 @@ export function listenToAutomationEvents(
     onUpkeepPerformed?: (vaultsChecked: number, vaultsExecuted: number) => void;
   }
 ) {
-  const contract = getAutomationContract(provider, chainId);
-  if (!contract) return () => {};
-  
-  // Listen to VaultDistributed events
-  if (callbacks.onVaultDistributed) {
-    contract.on('VaultDistributed', (vault, timestamp) => {
-      callbacks.onVaultDistributed!(vault, timestamp.toNumber());
-    });
-  }
-  
-  // Listen to DistributionFailed events
-  if (callbacks.onDistributionFailed) {
-    contract.on('DistributionFailed', (vault, reason) => {
-      callbacks.onDistributionFailed!(vault, reason);
-    });
-  }
-  
-  // Listen to UpkeepPerformed events
-  if (callbacks.onUpkeepPerformed) {
-    contract.on('UpkeepPerformed', (vaultsChecked, vaultsExecuted) => {
-      callbacks.onUpkeepPerformed!(
-        vaultsChecked.toNumber(),
-        vaultsExecuted.toNumber()
-      );
-    });
-  }
-  
-  // Return cleanup function
-  return () => {
-    contract.removeAllListeners();
-  };
+  // Temporarily disabled
+  return () => {};
 }
 
 /**
  * Get automation statistics
  */
 export async function getAutomationStats(
-  provider: ethers.providers.Provider,
+  provider: any,
   chainId: number
 ): Promise<AutomationStats> {
-  const statuses = await getAllVaultsStatus(provider, chainId);
-  
+  // Temporarily disabled - return mock data
   return {
-    totalVaults: statuses.length,
-    readyVaults: statuses.filter(s => s.isReady).length,
-    activeVaults: statuses.filter(s => !s.isReady && s.timeRemaining > 0).length,
-    executedVaults: statuses.filter(s => !s.isReady && s.timeRemaining === 0).length,
+    totalVaults: 0,
+    readyVaults: 0,
+    activeVaults: 0,
+    executedVaults: 0,
   };
 }
 

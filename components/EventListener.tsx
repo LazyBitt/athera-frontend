@@ -17,11 +17,11 @@ export function EventListener() {
     if (!factoryAddress) return
 
     // Listen for VaultCreated events
-    const unwatch = publicClient.watchContractEvent({
+    const unwatch = (publicClient as any).watchContractEvent({
       address: factoryAddress,
       abi: FACTORY_ABI,
       eventName: 'VaultCreated',
-      onLogs: (logs) => {
+      onLogs: (logs: any) => {
         logs.forEach((log: any) => {
           if (log.args?.owner === address) {
             addNotification({

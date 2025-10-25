@@ -3,7 +3,7 @@
 import { useAccount } from 'wagmi'
 import { useReadContract } from 'wagmi'
 import { FACTORY_ABI } from '../lib/contracts'
-import { VaultCard } from './VaultCard'
+import { VaultCardReal } from './VaultCardReal'
 import { Card, CardContent } from './ui/card'
 import { Loader2 } from 'lucide-react'
 
@@ -44,7 +44,7 @@ export function VaultList() {
   return (
     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
       {vaultAddresses.map((vaultAddress) => (
-        <VaultCard key={vaultAddress} vaultAddress={vaultAddress} />
+        <VaultCardReal key={vaultAddress} vaultAddress={vaultAddress as `0x${string}`} />
       ))}
     </div>
   )
