@@ -110,9 +110,11 @@ export function InheritanceVaultCard({ vaultAddress, filter, onUpdate }: Props) 
   
   const isExpired = timeLeft === 0 && !executed
   const isActive = timeLeft > 0 && !executed
+  const isDistributed = executed
   
+  // Filter logic
   if (filter === 'active' && !isActive) return null
-  if (filter === 'expired' && !isExpired) return null
+  if (filter === 'expired' && (!isExpired && !isDistributed)) return null
   
   if (isLoading) {
     return (

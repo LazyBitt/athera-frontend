@@ -11,7 +11,6 @@ import { VaultStats } from '../../components/VaultStats'
 import { QuickActions } from '../../components/QuickActions'
 import { RecentActivity } from '../../components/RecentActivity'
 import { AutomationMonitor } from '../../components/AutomationMonitor'
-import { ChainlinkAutomationSetup } from '../../components/ChainlinkAutomationSetup'
 import { useDashboardStore } from '../../store/dashboard'
 import { Wallet, Gift, MessageSquare, Bell } from 'lucide-react'
 import { useState, useEffect } from 'react'
@@ -103,11 +102,6 @@ export default function Dashboard() {
             
             {/* Stats Overview */}
             <VaultStats />
-          </div>
-          
-          {/* Automation Setup Guide */}
-          <div className="mb-6">
-            <ChainlinkAutomationSetup />
           </div>
           
           {/* Automation Monitor */}

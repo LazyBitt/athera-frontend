@@ -201,7 +201,7 @@ export function CreateInheritanceDialog({ children, onSuccess }: Props) {
                     </label>
                     <div className="grid grid-cols-2 sm:grid-cols-4 gap-2 mb-2">
                       {[
-                        { label: '1 Min', days: (1/1440).toString() },
+                        { label: '1 Min', days: '0.000694444' },
                         { label: '1 Year', days: '365' },
                         { label: '2 Years', days: '730' },
                         { label: '5 Years', days: '1825' }
@@ -320,7 +320,7 @@ export function CreateInheritanceDialog({ children, onSuccess }: Props) {
                   {!isValid && (
                     <div className="flex gap-3 p-4 bg-yellow-500/10 border border-yellow-500/20 rounded-xl">
                       <AlertCircle className="h-5 w-5 text-yellow-400 flex-shrink-0 mt-0.5" />
-                      <div className="text-sm text-yellow-300">
+                      <div className="text-sm text-yellow-300 space-y-1">
                         {availableBalance === 0 && (
                           <p>• Vault balance is 0. Please deposit ETH first.</p>
                         )}
@@ -330,9 +330,14 @@ export function CreateInheritanceDialog({ children, onSuccess }: Props) {
                         {Math.abs(totalPercentage - 100) >= 0.01 && (
                           <p>• Percentages must total 100%</p>
                         )}
-                        {!amount && <p>• Enter an amount to lock</p>}
+                        {(!amount || requestedAmount <= 0) && (
+                          <p>• Enter a valid amount to lock</p>
+                        )}
                         {beneficiaries.some(b => !b.address || !b.percentage) && (
                           <p>• Fill in all beneficiary fields</p>
+                        )}
+                        {(!days || parseFloat(days) <= 0) && (
+                          <p>• Select a valid countdown period</p>
                         )}
                       </div>
                     </div>

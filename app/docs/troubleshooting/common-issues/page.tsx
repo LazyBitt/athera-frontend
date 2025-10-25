@@ -4,7 +4,7 @@ export default function CommonIssuesPage() {
   return (
     <>
       <h1>Troubleshooting</h1>
-      <p className="lead">
+      <p className="lead text-gray-400">
         Common issues and how to fix them.
       </p>
 
@@ -12,19 +12,19 @@ export default function CommonIssuesPage() {
 
       <h3>User Rejected</h3>
       <p>You clicked "Reject" in MetaMask.</p>
-      <p className="text-sm text-gray-400"><strong>Fix:</strong> Try again and click "Confirm"</p>
+      <p className="text-sm text-gray-500"><strong className="text-gray-400">Fix:</strong> Try again and click "Confirm"</p>
 
       <h3>Insufficient Gas</h3>
       <p>Not enough ETH for gas fees.</p>
-      <p className="text-sm text-gray-400"><strong>Fix:</strong> Ensure you have at least 0.01 ETH. Get testnet ETH from the <a href="https://www.coinbase.com/faucets/base-ethereum-sepolia-faucet" target="_blank" rel="noopener noreferrer">Base Sepolia Faucet</a>.</p>
+      <p className="text-sm text-gray-500"><strong className="text-gray-400">Fix:</strong> Ensure you have at least 0.01 ETH. Get testnet ETH from the <a href="https://www.coinbase.com/faucets/base-ethereum-sepolia-faucet" target="_blank" rel="noopener noreferrer">Base Sepolia Faucet</a>.</p>
 
       <h3>Wrong Network</h3>
       <p>MetaMask is on the wrong network.</p>
-      <p className="text-sm text-gray-400"><strong>Fix:</strong> Switch to Base Sepolia (testnet) or Base (mainnet) in MetaMask.</p>
+      <p className="text-sm text-gray-500"><strong className="text-gray-400">Fix:</strong> Switch to Base Sepolia (testnet) or Base (mainnet) in MetaMask.</p>
 
       <h3>Invalid Address</h3>
       <p>Beneficiary address format is incorrect.</p>
-      <p className="text-sm text-gray-400"><strong>Fix:</strong> Verify address starts with 0x and is 42 characters. Copy-paste to avoid typos.</p>
+      <p className="text-sm text-gray-500"><strong className="text-gray-400">Fix:</strong> Verify address starts with 0x and is 42 characters. Copy-paste to avoid typos.</p>
 
       <h2>Vaults Not Loading</h2>
 
@@ -74,21 +74,19 @@ NEXT_PUBLIC_FACTORY_ADDRESS=0x...
 
       <p className="text-sm text-gray-400 mt-6">Join our Discord or open a GitHub issue for support.</p>
 
-      <div className="not-prose mt-12 pt-8 border-t border-gray-800">
-        <div className="flex justify-between text-sm">
-          <Link
-            href="/docs/core-concepts/activity-detection"
-            className="text-gray-400 hover:text-white"
-          >
-            ← Activity Detection
-          </Link>
-          <Link
-            href="/docs"
-            className="text-blue-400 hover:text-blue-300"
-          >
-            Docs Home →
-          </Link>
-        </div>
+      <div className="not-prose mt-12 pt-6 border-t border-gray-800 flex justify-between text-sm">
+        <Link
+          href="/docs/core-concepts/activity-detection"
+          className="text-gray-400 hover:text-white"
+        >
+          ← Activity Detection
+        </Link>
+        <Link
+          href="/docs"
+          className="text-gray-400 hover:text-white"
+        >
+          Documentation →
+        </Link>
       </div>
     </>
   )

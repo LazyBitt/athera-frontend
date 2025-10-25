@@ -4,7 +4,7 @@ export default function QuickStartPage() {
   return (
     <>
       <h1>Quick Start</h1>
-      <p className="lead">
+      <p className="lead text-gray-400">
         Create your first vault in 5 minutes.
       </p>
 
@@ -33,7 +33,7 @@ export default function QuickStartPage() {
         <li>Confirm the transaction</li>
       </ol>
 
-      <p className="text-sm text-gray-400">Cost: ~$2-3 in gas fees</p>
+      <p className="text-sm text-gray-500">Gas cost: approximately $2-3</p>
 
       <h2>Deposit Funds</h2>
       <ol>
@@ -46,9 +46,9 @@ export default function QuickStartPage() {
       <h2>Test Check-In</h2>
       <p>Click "Reset Timer" and confirm. The countdown resets to your threshold duration.</p>
 
-      <div className="not-prose bg-blue-900/20 border border-blue-700 rounded-lg p-4 my-6">
-        <p className="text-blue-200 text-sm">
-          <strong>Tip:</strong> Set a calendar reminder to check-in every 6 months if using a 1-year threshold.
+      <div className="not-prose border border-gray-800 rounded-md p-4 my-6">
+        <p className="text-sm text-gray-400">
+          <strong className="text-gray-300">Note:</strong> Set a calendar reminder to check-in every 6 months if using a 1-year threshold.
         </p>
       </div>
 
@@ -59,11 +59,11 @@ export default function QuickStartPage() {
         <li><Link href="/docs/troubleshooting/common-issues">Troubleshooting</Link></li>
       </ul>
 
-      <div className="not-prose mt-10 pt-6 border-t border-gray-800 flex justify-between text-sm">
+      <div className="not-prose mt-12 pt-6 border-t border-gray-800 flex justify-between text-sm">
         <Link href="/docs" className="text-gray-400 hover:text-white">
-          ← Docs Home
+          ← Documentation
         </Link>
-        <Link href="/docs/core-concepts/how-it-works" className="text-blue-400 hover:text-blue-300">
+        <Link href="/docs/core-concepts/how-it-works" className="text-gray-400 hover:text-white">
           How It Works →
         </Link>
       </div>

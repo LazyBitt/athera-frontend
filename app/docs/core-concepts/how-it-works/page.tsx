@@ -1,11 +1,10 @@
 import Link from 'next/link'
-import { ArrowRight, Shield, Clock, Users, Zap } from 'lucide-react'
 
 export default function HowItWorksPage() {
   return (
     <>
       <h1>How It Works</h1>
-      <p className="lead">
+      <p className="lead text-gray-400">
         Athera uses a countdown timer and automatic distribution to protect your assets.
       </p>
 
@@ -18,37 +17,33 @@ export default function HowItWorksPage() {
 
       <h2>Core Components</h2>
 
-      <div className="not-prose grid grid-cols-1 md:grid-cols-2 gap-6 my-8">
-        <div className="bg-gray-900 border border-gray-700 rounded-lg p-6">
-          <Clock className="h-8 w-8 text-blue-500 mb-3" />
-          <h3 className="text-lg font-semibold text-white mb-2">Inactivity Timer</h3>
-          <p className="text-gray-400 text-sm">
+      <div className="not-prose grid grid-cols-1 md:grid-cols-2 gap-3 my-8 text-sm">
+        <div className="border border-gray-800 rounded-md p-4">
+          <div className="font-medium mb-1">Inactivity Timer</div>
+          <div className="text-gray-400">
             Every vault has a countdown timer that you configure when creating the vault (1 week to 5 years).
-          </p>
+          </div>
         </div>
 
-        <div className="bg-gray-900 border border-gray-700 rounded-lg p-6">
-          <Shield className="h-8 w-8 text-blue-500 mb-3" />
-          <h3 className="text-lg font-semibold text-white mb-2">Last Check-In</h3>
-          <p className="text-gray-400 text-sm">
+        <div className="border border-gray-800 rounded-md p-4">
+          <div className="font-medium mb-1">Last Check-In</div>
+          <div className="text-gray-400">
             The smart contract stores when you last proved you're active (lastPing timestamp).
-          </p>
+          </div>
         </div>
 
-        <div className="bg-gray-900 border border-gray-700 rounded-lg p-6">
-          <Users className="h-8 w-8 text-blue-500 mb-3" />
-          <h3 className="text-lg font-semibold text-white mb-2">Beneficiaries</h3>
-          <p className="text-gray-400 text-sm">
+        <div className="border border-gray-800 rounded-md p-4">
+          <div className="font-medium mb-1">Beneficiaries</div>
+          <div className="text-gray-400">
             Your designated heirs who will receive assets when the countdown reaches zero.
-          </p>
+          </div>
         </div>
 
-        <div className="bg-gray-900 border border-gray-700 rounded-lg p-6">
-          <Zap className="h-8 w-8 text-blue-500 mb-3" />
-          <h3 className="text-lg font-semibold text-white mb-2">Automation</h3>
-          <p className="text-gray-400 text-sm">
+        <div className="border border-gray-800 rounded-md p-4">
+          <div className="font-medium mb-1">Automation</div>
+          <div className="text-gray-400">
             Chainlink Automation monitors 24/7 and executes distribution automatically.
-          </p>
+          </div>
         </div>
       </div>
 
@@ -67,9 +62,9 @@ export default function HowItWorksPage() {
         <li>Emergency withdraw</li>
       </ul>
 
-      <div className="not-prose bg-blue-900/20 border border-blue-700 rounded-lg p-4 my-4">
-        <p className="text-blue-200 text-sm">
-          If you regularly deposit to your vault, you don't need to manually check-in.
+      <div className="not-prose border border-gray-800 rounded-md p-4 my-4">
+        <p className="text-sm text-gray-400">
+          <strong className="text-gray-300">Note:</strong> If you regularly deposit to your vault, you don't need to manually check-in.
         </p>
       </div>
 
@@ -93,25 +88,13 @@ export default function HowItWorksPage() {
         No manual intervention needed.
       </p>
 
-      <div className="not-prose bg-gray-900 rounded-lg p-5 my-6 border border-gray-800">
-        <h3 className="text-sm font-semibold text-white mb-3">The Process</h3>
-        <ol className="space-y-2 text-gray-300 text-sm">
-          <li className="flex gap-3">
-            <span className="flex-shrink-0 w-6 h-6 bg-blue-600 rounded-full flex items-center justify-center text-white text-xs font-bold">1</span>
-            <span>Chainlink monitors all vaults</span>
-          </li>
-          <li className="flex gap-3">
-            <span className="flex-shrink-0 w-6 h-6 bg-blue-600 rounded-full flex items-center justify-center text-white text-xs font-bold">2</span>
-            <span>Checks if countdown = 0</span>
-          </li>
-          <li className="flex gap-3">
-            <span className="flex-shrink-0 w-6 h-6 bg-blue-600 rounded-full flex items-center justify-center text-white text-xs font-bold">3</span>
-            <span>Executes distribute()</span>
-          </li>
-          <li className="flex gap-3">
-            <span className="flex-shrink-0 w-6 h-6 bg-blue-600 rounded-full flex items-center justify-center text-white text-xs font-bold">4</span>
-            <span>Heirs receive funds</span>
-          </li>
+      <div className="not-prose border border-gray-800 rounded-md p-4 my-6">
+        <div className="text-sm font-medium mb-3">The Process</div>
+        <ol className="space-y-2 text-gray-400 text-sm list-decimal list-inside">
+          <li>Chainlink monitors all vaults</li>
+          <li>Checks if countdown = 0</li>
+          <li>Executes distribute()</li>
+          <li>Heirs receive funds</li>
         </ol>
       </div>
 
@@ -139,25 +122,25 @@ function distribute() external {
       </pre>
 
       <h2>Costs</h2>
-      <div className="not-prose grid grid-cols-1 md:grid-cols-3 gap-4 my-6">
-        <div className="bg-gray-900 border border-gray-800 rounded-lg p-4">
-          <h4 className="text-white font-semibold mb-2 text-sm">Create Vault</h4>
-          <p className="text-xl font-bold text-blue-400 mb-1">~$2-3</p>
-          <p className="text-gray-400 text-xs">One-time</p>
+      <div className="not-prose grid grid-cols-1 md:grid-cols-3 gap-3 my-6 text-sm">
+        <div className="border border-gray-800 rounded-md p-4">
+          <div className="font-medium mb-2">Create Vault</div>
+          <div className="text-lg mb-1">~$2-3</div>
+          <div className="text-gray-500 text-xs">One-time</div>
         </div>
-        <div className="bg-gray-900 border border-gray-800 rounded-lg p-4">
-          <h4 className="text-white font-semibold mb-2 text-sm">Check-In</h4>
-          <p className="text-xl font-bold text-blue-400 mb-1">~$0.50</p>
-          <p className="text-gray-400 text-xs">Per check-in</p>
+        <div className="border border-gray-800 rounded-md p-4">
+          <div className="font-medium mb-2">Check-In</div>
+          <div className="text-lg mb-1">~$0.50</div>
+          <div className="text-gray-500 text-xs">Per check-in</div>
         </div>
-        <div className="bg-gray-900 border border-gray-800 rounded-lg p-4">
-          <h4 className="text-white font-semibold mb-2 text-sm">Distribution</h4>
-          <p className="text-xl font-bold text-blue-400 mb-1">$0</p>
-          <p className="text-gray-400 text-xs">Paid by Chainlink</p>
+        <div className="border border-gray-800 rounded-md p-4">
+          <div className="font-medium mb-2">Distribution</div>
+          <div className="text-lg mb-1">$0</div>
+          <div className="text-gray-500 text-xs">Paid by Chainlink</div>
         </div>
       </div>
 
-      <p className="text-gray-400 text-sm">
+      <p className="text-gray-500 text-sm">
         Example: 1 year threshold with check-ins every 6 months = ~$1-2/year
       </p>
 
@@ -177,22 +160,19 @@ function distribute() external {
         <li><Link href="/docs/core-concepts/security">Read Security Features</Link></li>
       </ul>
 
-      <div className="not-prose mt-12 pt-8 border-t border-gray-800">
-        <div className="flex justify-between">
-          <Link
-            href="/docs/getting-started/quick-start"
-            className="text-gray-400 hover:text-white flex items-center"
-          >
-            ← Quick Start
-          </Link>
-          <Link
-            href="/docs/core-concepts/activity-detection"
-            className="text-blue-400 hover:text-blue-300 flex items-center"
-          >
-            Activity Detection
-            <ArrowRight className="ml-2 h-4 w-4" />
-          </Link>
-        </div>
+      <div className="not-prose mt-12 pt-6 border-t border-gray-800 flex justify-between text-sm">
+        <Link
+          href="/docs/getting-started/quick-start"
+          className="text-gray-400 hover:text-white"
+        >
+          ← Quick Start
+        </Link>
+        <Link
+          href="/docs/core-concepts/activity-detection"
+          className="text-gray-400 hover:text-white"
+        >
+          Activity Detection →
+        </Link>
       </div>
     </>
   )

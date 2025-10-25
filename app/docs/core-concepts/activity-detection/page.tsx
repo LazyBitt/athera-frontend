@@ -4,7 +4,7 @@ export default function ActivityDetectionPage() {
   return (
     <>
       <h1>Activity Detection</h1>
-      <p className="lead">
+      <p className="lead text-gray-400">
         How Athera tracks your activity.
       </p>
 
@@ -22,10 +22,9 @@ export default function ActivityDetectionPage() {
         <li><strong>Security:</strong> Requires owner signature</li>
       </ul>
 
-      <div className="not-prose bg-blue-900/20 border border-blue-700 rounded-lg p-4 my-6">
-        <p className="text-blue-200 text-sm">
-          If you regularly deposit to your vault, you don't need to manually check-in.
-          Each deposit resets the countdown.
+      <div className="not-prose border border-gray-800 rounded-md p-4 my-6">
+        <p className="text-sm text-gray-400">
+          <strong className="text-gray-300">Note:</strong> If you regularly deposit to your vault, you don't need to manually check-in. Each deposit resets the countdown.
         </p>
       </div>
 
@@ -72,21 +71,21 @@ export default function ActivityDetectionPage() {
       </ul>
 
       <h2>Costs</h2>
-      <div className="not-prose grid grid-cols-1 md:grid-cols-3 gap-3 my-6">
-        <div className="bg-gray-900 border border-gray-800 rounded-lg p-4">
-          <h4 className="text-white font-semibold mb-1 text-xs">Check-In</h4>
-          <p className="text-lg font-bold text-blue-400 mb-1">~$0.50</p>
-          <p className="text-gray-400 text-xs">Per check-in</p>
+      <div className="not-prose grid grid-cols-1 md:grid-cols-3 gap-3 my-6 text-sm">
+        <div className="border border-gray-800 rounded-md p-4">
+          <div className="font-medium mb-2">Check-In</div>
+          <div className="text-lg mb-1">~$0.50</div>
+          <div className="text-gray-500 text-xs">Per check-in</div>
         </div>
-        <div className="bg-gray-900 border border-gray-800 rounded-lg p-4">
-          <h4 className="text-white font-semibold mb-1 text-xs">Distribution</h4>
-          <p className="text-lg font-bold text-blue-400 mb-1">$0</p>
-          <p className="text-gray-400 text-xs">Paid by Chainlink</p>
+        <div className="border border-gray-800 rounded-md p-4">
+          <div className="font-medium mb-2">Distribution</div>
+          <div className="text-lg mb-1">$0</div>
+          <div className="text-gray-500 text-xs">Paid by Chainlink</div>
         </div>
-        <div className="bg-gray-900 border border-gray-800 rounded-lg p-4">
-          <h4 className="text-white font-semibold mb-1 text-xs">Annual</h4>
-          <p className="text-lg font-bold text-blue-400 mb-1">~$1-2</p>
-          <p className="text-gray-400 text-xs">2 check-ins/year</p>
+        <div className="border border-gray-800 rounded-md p-4">
+          <div className="font-medium mb-2">Annual</div>
+          <div className="text-lg mb-1">~$1-2</div>
+          <div className="text-gray-500 text-xs">2 check-ins/year</div>
         </div>
       </div>
 
@@ -108,11 +107,11 @@ export default function ActivityDetectionPage() {
         They cannot see your other wallet activity.
       </p>
 
-      <div className="not-prose mt-10 pt-6 border-t border-gray-800 flex justify-between text-sm">
+      <div className="not-prose mt-12 pt-6 border-t border-gray-800 flex justify-between text-sm">
         <Link href="/docs/core-concepts/how-it-works" className="text-gray-400 hover:text-white">
           ← How It Works
         </Link>
-        <Link href="/docs/troubleshooting/common-issues" className="text-blue-400 hover:text-blue-300">
+        <Link href="/docs/troubleshooting/common-issues" className="text-gray-400 hover:text-white">
           Troubleshooting →
         </Link>
       </div>
