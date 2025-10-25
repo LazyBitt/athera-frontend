@@ -1,6 +1,6 @@
 'use client'
 
-import { ArrowDownToLine, Shield, MessageSquare, Settings } from 'lucide-react'
+import { ArrowDownToLine, Shield, Settings } from 'lucide-react'
 import { motion } from 'framer-motion'
 import { useDashboardStore } from '../store/dashboard'
 
@@ -21,12 +21,6 @@ export function QuickActions() {
       onClick: () => setActiveTab('inheritance'),
     },
     {
-      label: 'Add Message',
-      icon: MessageSquare,
-      color: 'purple',
-      onClick: () => setActiveTab('messages'),
-    },
-    {
       label: 'Notifications',
       icon: Settings,
       color: 'orange',
@@ -35,7 +29,7 @@ export function QuickActions() {
   ]
   
   return (
-    <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
+    <div className="grid grid-cols-2 md:grid-cols-3 gap-3">
       {actions.map((action, index) => {
         const Icon = action.icon
         return (
