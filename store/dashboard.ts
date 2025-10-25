@@ -22,7 +22,7 @@ interface DashboardState {
   notifications: Notification[]
   ipfsFiles: IPFSFile[]
   telegramChatId: string | null
-  activeTab: 'vault' | 'inheritance' | 'messages' | 'notifications'
+  activeTab: 'vault' | 'inheritance' | 'notifications'
   
   addNotification: (notification: Omit<Notification, 'id' | 'timestamp' | 'read'>) => void
   markAsRead: (id: string) => void

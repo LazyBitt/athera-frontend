@@ -36,7 +36,7 @@ You will receive notifications about:
   } catch (error: any) {
     console.error('Telegram test error:', error)
     
-    // Berikan pesan error yang lebih spesifik
+    // Provide more specific error message
     const errorMessage = error?.response?.data?.description || 'Internal server error'
     
     return NextResponse.json(

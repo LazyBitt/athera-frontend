@@ -5,14 +5,13 @@ import { ConnectButton } from '@rainbow-me/rainbowkit'
 import { Navbar } from '../../components/Navbar'
 import { VaultTab } from '../../components/dashboard/VaultTab'
 import { InheritanceTab } from '../../components/dashboard/InheritanceTab'
-import { MessagesTab } from '../../components/dashboard/MessagesTab'
 import { NotificationsTab } from '../../components/dashboard/NotificationsTab'
 import { VaultStats } from '../../components/VaultStats'
 import { QuickActions } from '../../components/QuickActions'
 import { RecentActivity } from '../../components/RecentActivity'
 import { AutomationMonitor } from '../../components/AutomationMonitor'
 import { useDashboardStore } from '../../store/dashboard'
-import { Wallet, Gift, MessageSquare, Bell } from 'lucide-react'
+import { Wallet, Gift, Bell } from 'lucide-react'
 import { useState, useEffect } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 
@@ -80,7 +79,6 @@ export default function Dashboard() {
   const tabs = [
     { id: 'vault' as const, label: 'Vault', icon: Wallet, badge: 0 },
     { id: 'inheritance' as const, label: 'Inheritance', icon: Gift, badge: 0 },
-    { id: 'messages' as const, label: 'Messages', icon: MessageSquare, badge: 0 },
     { id: 'notifications' as const, label: 'Notifications', icon: Bell, badge: unreadCount },
   ]
 
@@ -156,7 +154,6 @@ export default function Dashboard() {
             >
               {activeTab === 'vault' && <VaultTab />}
               {activeTab === 'inheritance' && <InheritanceTab />}
-              {activeTab === 'messages' && <MessagesTab />}
               {activeTab === 'notifications' && <NotificationsTab />}
             </motion.div>
           </AnimatePresence>

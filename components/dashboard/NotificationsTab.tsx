@@ -31,10 +31,10 @@ export function NotificationsTab() {
   const handleTestNotification = async () => {
     if (!chatIdInput) return
     
-    // Validasi chat ID harus numerik atau dimulai dengan @
+    // Validate chat ID must be numeric or start with @
     const trimmedChatId = chatIdInput.trim()
     if (!trimmedChatId.match(/^(@\w+|\d+)$/)) {
-      alert('❌ Chat ID tidak valid! Gunakan ID numerik (contoh: 6988422332) atau username channel dengan @ (contoh: @channelname)')
+      alert('❌ Invalid Chat ID! Use numeric ID (example: 6988422332) or channel username with @ (example: @channelname)')
       return
     }
     

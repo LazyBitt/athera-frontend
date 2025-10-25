@@ -28,7 +28,7 @@ export async function sendTelegramNotification(
       status: error?.response?.status,
     })
     
-    // Throw error agar bisa ditangani di level atas
+    // Throw error so it can be handled at higher level
     if (error?.response?.data) {
       throw error
     }
