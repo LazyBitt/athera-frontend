@@ -36,14 +36,16 @@ interface DashboardState {
 export const useDashboardStore = create<DashboardState>((set) => ({
   notifications: [],
   ipfsFiles: [],
-  telegramChatId: null,
+  telegramChatId: typeof window !== 'undefined' 
+    ? localStorage.getItem('telegramChatId') || process.env.NEXT_PUBLIC_TELEGRAM_CHAT_ID || null
+    : null,
   activeTab: 'vault',
   
   addNotification: (notification) => set((state) => ({
     notifications: [
       {
         ...notification,
-        id: Math.random().toString(36).substr(2, 9),
+        id: Math.random().toString(36).substring(2, 11),
         timestamp: Date.now(),
         read: false,
       },
@@ -70,7 +72,12 @@ export const useDashboardStore = create<DashboardState>((set) => ({
     ipfsFiles: state.ipfsFiles.filter((f) => f.cid !== cid),
   })),
   
-  setTelegramChatId: (chatId) => set({ telegramChatId: chatId }),
+  setTelegramChatId: (chatId) => {
+    if (typeof window !== 'undefined') {
+      localStorage.setItem('telegramChatId', chatId)
+    }
+    set({ telegramChatId: chatId })
+  },
   
   setActiveTab: (tab) => set({ activeTab: tab }),
 }))

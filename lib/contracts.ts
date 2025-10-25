@@ -143,34 +143,18 @@ export const VAULT_ABI = [
 ] as const
 
 export const FACTORY_ABI = [
-  {
-    inputs: [],
-    name: 'InsufficientBalance',
-    type: 'error'
-  },
-  {
-    inputs: [],
-    name: 'InsufficientContractBalance',
-    type: 'error'
-  },
-  {
-    inputs: [],
-    name: 'InvalidAmount',
-    type: 'error'
-  },
-  {
-    inputs: [],
-    name: 'TransferFailed',
-    type: 'error'
-  },
+  { inputs: [], name: 'InsufficientBalance', type: 'error' },
+  { inputs: [], name: 'InsufficientContractBalance', type: 'error' },
+  { inputs: [], name: 'InvalidAmount', type: 'error' },
+  { inputs: [], name: 'TransferFailed', type: 'error' },
   {
     anonymous: false,
     inputs: [
       { indexed: true, internalType: 'address', name: 'user', type: 'address' },
-      { indexed: false, internalType: 'uint256', name: 'amount', type: 'uint256' }
+      { indexed: false, internalType: 'uint256', name: 'amount', type: 'uint256' },
     ],
     name: 'Deposited',
-    type: 'event'
+    type: 'event',
   },
   {
     anonymous: false,
@@ -180,129 +164,206 @@ export const FACTORY_ABI = [
       { indexed: false, internalType: 'address[]', name: 'beneficiaries', type: 'address[]' },
       { indexed: false, internalType: 'uint256[]', name: 'percentages', type: 'uint256[]' },
       { indexed: false, internalType: 'uint256', name: 'threshold', type: 'uint256' },
-      { indexed: false, internalType: 'uint256', name: 'amount', type: 'uint256' }
+      { indexed: false, internalType: 'uint256', name: 'amount', type: 'uint256' },
     ],
     name: 'VaultCreated',
-    type: 'event'
+    type: 'event',
   },
   {
     anonymous: false,
     inputs: [
       { indexed: true, internalType: 'address', name: 'user', type: 'address' },
-      { indexed: false, internalType: 'uint256', name: 'amount', type: 'uint256' }
+      { indexed: false, internalType: 'uint256', name: 'amount', type: 'uint256' },
     ],
     name: 'Withdrawn',
-    type: 'event'
+    type: 'event',
   },
   {
     inputs: [{ internalType: 'uint256', name: '', type: 'uint256' }],
     name: 'allVaults',
     outputs: [{ internalType: 'address', name: '', type: 'address' }],
     stateMutability: 'view',
-    type: 'function'
+    type: 'function',
   },
   {
     inputs: [
       { internalType: 'address[]', name: 'bens', type: 'address[]' },
       { internalType: 'uint256[]', name: 'percents', type: 'uint256[]' },
       { internalType: 'uint256', name: 'thresholdSeconds', type: 'uint256' },
-      { internalType: 'uint256', name: 'amount', type: 'uint256' }
+      { internalType: 'uint256', name: 'amount', type: 'uint256' },
     ],
     name: 'createVault',
     outputs: [{ internalType: 'address', name: 'vault', type: 'address' }],
     stateMutability: 'nonpayable',
-    type: 'function'
+    type: 'function',
   },
   {
     inputs: [],
     name: 'deposit',
     outputs: [],
     stateMutability: 'payable',
-    type: 'function'
+    type: 'function',
   },
   {
     inputs: [],
     name: 'getAllVaults',
     outputs: [{ internalType: 'address[]', name: '', type: 'address[]' }],
     stateMutability: 'view',
-    type: 'function'
+    type: 'function',
   },
   {
     inputs: [{ internalType: 'address', name: 'user', type: 'address' }],
     name: 'getBalance',
     outputs: [{ internalType: 'uint256', name: '', type: 'uint256' }],
     stateMutability: 'view',
-    type: 'function'
+    type: 'function',
   },
   {
     inputs: [{ internalType: 'address', name: 'owner', type: 'address' }],
     name: 'getOwnerVaults',
     outputs: [{ internalType: 'address[]', name: '', type: 'address[]' }],
     stateMutability: 'view',
-    type: 'function'
+    type: 'function',
   },
   {
     inputs: [],
     name: 'getVaultCount',
     outputs: [{ internalType: 'uint256', name: '', type: 'uint256' }],
     stateMutability: 'view',
-    type: 'function'
+    type: 'function',
   },
   {
     inputs: [
       { internalType: 'address', name: '', type: 'address' },
-      { internalType: 'uint256', name: '', type: 'uint256' }
+      { internalType: 'uint256', name: '', type: 'uint256' },
     ],
     name: 'ownerVaults',
     outputs: [{ internalType: 'address', name: '', type: 'address' }],
     stateMutability: 'view',
-    type: 'function'
+    type: 'function',
   },
   {
     inputs: [{ internalType: 'address', name: '', type: 'address' }],
     name: 'userBalances',
     outputs: [{ internalType: 'uint256', name: '', type: 'uint256' }],
     stateMutability: 'view',
-    type: 'function'
+    type: 'function',
   },
   {
     inputs: [{ internalType: 'uint256', name: 'amount', type: 'uint256' }],
     name: 'withdraw',
     outputs: [],
     stateMutability: 'nonpayable',
-    type: 'function'
+    type: 'function',
   },
-  {
-    stateMutability: 'payable',
-    type: 'receive'
-  }
+  { stateMutability: 'payable', type: 'receive' },
 ] as const
 
 export const EXECUTOR_ABI = [
   {
-    inputs: [{ internalType: 'address', name: 'vault', type: 'address' }],
-    name: 'executeVault',
+    inputs: [{ internalType: 'address payable', name: 'factoryAddress', type: 'address' }],
+    stateMutability: 'nonpayable',
+    type: 'constructor',
+  },
+  { inputs: [], name: 'InvalidFactory', type: 'error' },
+  { inputs: [], name: 'OnlySimulatedBackend', type: 'error' },
+  {
+    anonymous: false,
+    inputs: [
+      { indexed: true, internalType: 'address', name: 'vault', type: 'address' },
+      { indexed: false, internalType: 'string', name: 'reason', type: 'string' },
+    ],
+    name: 'DistributionFailed',
+    type: 'event',
+  },
+  {
+    anonymous: false,
+    inputs: [
+      { indexed: false, internalType: 'uint256', name: 'vaultsChecked', type: 'uint256' },
+      { indexed: false, internalType: 'uint256', name: 'vaultsExecuted', type: 'uint256' },
+    ],
+    name: 'UpkeepPerformed',
+    type: 'event',
+  },
+  {
+    anonymous: false,
+    inputs: [
+      { indexed: true, internalType: 'address', name: 'vault', type: 'address' },
+      { indexed: false, internalType: 'uint256', name: 'timestamp', type: 'uint256' },
+    ],
+    name: 'VaultDistributed',
+    type: 'event',
+  },
+  {
+    inputs: [],
+    name: 'MAX_VAULTS_PER_CHECK',
+    outputs: [{ internalType: 'uint256', name: '', type: 'uint256' }],
+    stateMutability: 'view',
+    type: 'function',
+  },
+  {
+    inputs: [{ internalType: 'address payable[]', name: 'vaultAddresses', type: 'address[]' }],
+    name: 'batchManualExecute',
     outputs: [],
     stateMutability: 'nonpayable',
-    type: 'function'
+    type: 'function',
   },
   {
-    inputs: [{ internalType: 'address', name: 'vault', type: 'address' }],
-    name: 'isVaultReady',
-    outputs: [{ internalType: 'bool', name: '', type: 'bool' }],
-    stateMutability: 'view',
-    type: 'function'
-  },
-  {
-    inputs: [{ internalType: 'address', name: 'vault', type: 'address' }],
-    name: 'getVaultExecutionInfo',
+    inputs: [{ internalType: 'bytes', name: '', type: 'bytes' }],
+    name: 'checkUpkeep',
     outputs: [
-      { internalType: 'bool', name: 'ready', type: 'bool' },
-      { internalType: 'uint256', name: 'timeUntilReady', type: 'uint256' }
+      { internalType: 'bool', name: 'upkeepNeeded', type: 'bool' },
+      { internalType: 'bytes', name: 'performData', type: 'bytes' },
     ],
     stateMutability: 'view',
-    type: 'function'
-  }
+    type: 'function',
+  },
+  {
+    inputs: [],
+    name: 'factory',
+    outputs: [{ internalType: 'contract Factory', name: '', type: 'address' }],
+    stateMutability: 'view',
+    type: 'function',
+  },
+  {
+    inputs: [],
+    name: 'getAllVaultsStatus',
+    outputs: [
+      { internalType: 'address[]', name: 'vaults', type: 'address[]' },
+      { internalType: 'bool[]', name: 'statuses', type: 'bool[]' },
+      { internalType: 'uint256[]', name: 'timeRemaining', type: 'uint256[]' },
+    ],
+    stateMutability: 'view',
+    type: 'function',
+  },
+  {
+    inputs: [],
+    name: 'getReadyVaults',
+    outputs: [{ internalType: 'address[]', name: '', type: 'address[]' }],
+    stateMutability: 'view',
+    type: 'function',
+  },
+  {
+    inputs: [],
+    name: 'lastCheckedIndex',
+    outputs: [{ internalType: 'uint256', name: '', type: 'uint256' }],
+    stateMutability: 'view',
+    type: 'function',
+  },
+  {
+    inputs: [{ internalType: 'address payable', name: 'vaultAddress', type: 'address' }],
+    name: 'manualExecute',
+    outputs: [],
+    stateMutability: 'nonpayable',
+    type: 'function',
+  },
+  {
+    inputs: [{ internalType: 'bytes', name: 'performData', type: 'bytes' }],
+    name: 'performUpkeep',
+    outputs: [],
+    stateMutability: 'nonpayable',
+    type: 'function',
+  },
 ] as const
 
 // Contract Addresses - Base Sepolia

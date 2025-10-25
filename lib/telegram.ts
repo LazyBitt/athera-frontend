@@ -21,8 +21,17 @@ export async function sendTelegramNotification(
       }
     )
     return response.data.ok
-  } catch (error) {
-    console.error('Telegram notification error:', error)
+  } catch (error: any) {
+    console.error('Telegram notification error:', {
+      message: error?.response?.data?.description || error.message,
+      chatId,
+      status: error?.response?.status,
+    })
+    
+    // Throw error agar bisa ditangani di level atas
+    if (error?.response?.data) {
+      throw error
+    }
     return false
   }
 }

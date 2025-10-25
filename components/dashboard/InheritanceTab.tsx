@@ -33,7 +33,7 @@ export function InheritanceTab() {
         </div>
         
         <CreateInheritanceDialog onSuccess={refetch}>
-          <button className="flex items-center gap-2 px-5 py-2.5 bg-gradient-to-r from-emerald-600 to-teal-600 hover:from-emerald-700 hover:to-teal-700 text-white font-medium rounded-xl transition-all shadow-lg shadow-emerald-500/20">
+          <button className="flex items-center gap-2 px-5 py-2.5 bg-blue-600 hover:bg-blue-700 text-white font-medium rounded-xl transition-all shadow-lg shadow-blue-500/20">
             <Plus className="h-4 w-4" />
             Create Vault
           </button>
@@ -46,7 +46,7 @@ export function InheritanceTab() {
           onClick={() => setFilter('all')}
           className={`px-4 py-2 text-sm font-medium rounded-xl transition-all ${
             filter === 'all'
-              ? 'bg-gradient-to-r from-emerald-500 to-teal-500 text-white shadow-lg shadow-emerald-500/20'
+              ? 'bg-blue-600 text-white shadow-lg shadow-blue-500/20'
               : 'bg-gray-800 text-gray-400 hover:text-white'
           }`}
         >
@@ -56,7 +56,7 @@ export function InheritanceTab() {
           onClick={() => setFilter('active')}
           className={`px-4 py-2 text-sm font-medium rounded-xl transition-all ${
             filter === 'active'
-              ? 'bg-gradient-to-r from-emerald-500 to-teal-500 text-white shadow-lg shadow-emerald-500/20'
+              ? 'bg-blue-600 text-white shadow-lg shadow-blue-500/20'
               : 'bg-gray-800 text-gray-400 hover:text-white'
           }`}
         >
@@ -66,7 +66,7 @@ export function InheritanceTab() {
           onClick={() => setFilter('expired')}
           className={`px-4 py-2 text-sm font-medium rounded-xl transition-all ${
             filter === 'expired'
-              ? 'bg-gradient-to-r from-emerald-500 to-teal-500 text-white shadow-lg shadow-emerald-500/20'
+              ? 'bg-blue-600 text-white shadow-lg shadow-blue-500/20'
               : 'bg-gray-800 text-gray-400 hover:text-white'
           }`}
         >
@@ -112,7 +112,7 @@ export function InheritanceTab() {
               Create your first inheritance vault to secure your digital assets for your loved ones
             </p>
             <CreateInheritanceDialog onSuccess={refetch}>
-              <button className="px-6 py-3 bg-gradient-to-r from-emerald-600 to-teal-600 hover:from-emerald-700 hover:to-teal-700 text-white font-medium rounded-xl transition-all shadow-lg shadow-emerald-500/20">
+              <button className="px-6 py-3 bg-blue-600 hover:bg-blue-700 text-white font-medium rounded-xl transition-all shadow-lg shadow-blue-500/20">
                 Create Your First Vault
               </button>
             </CreateInheritanceDialog>

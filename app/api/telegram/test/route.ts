@@ -7,7 +7,7 @@ export async function POST(request: NextRequest) {
     
     if (!chatId) {
       return NextResponse.json(
-        { error: 'Chat ID is required' },
+        { error: 'Chat ID diperlukan' },
         { status: 400 }
       )
     }
@@ -15,12 +15,12 @@ export async function POST(request: NextRequest) {
     const message = `
 🎉 <b>Athera Test Notification</b>
 
-Your Telegram notifications are working correctly!
+Notifikasi Telegram Anda berfungsi dengan baik!
 
-You'll receive alerts about:
-• Vault countdown warnings
-• Inheritance distributions
-• Important vault updates
+Anda akan menerima notifikasi tentang:
+• Peringatan countdown vault
+• Distribusi inheritance
+• Update penting vault
     `.trim()
     
     const success = await sendTelegramNotification(chatId, message)
@@ -29,14 +29,18 @@ You'll receive alerts about:
       return NextResponse.json({ success: true })
     } else {
       return NextResponse.json(
-        { error: 'Failed to send notification' },
-        { status: 500 }
+        { error: 'Chat tidak ditemukan. Pastikan bot sudah diaktifkan dengan mengirim /start ke bot Anda.' },
+        { status: 400 }
       )
     }
-  } catch (error) {
+  } catch (error: any) {
     console.error('Telegram test error:', error)
+    
+    // Berikan pesan error yang lebih spesifik
+    const errorMessage = error?.response?.data?.description || 'Internal server error'
+    
     return NextResponse.json(
-      { error: 'Internal server error' },
+      { error: errorMessage },
       { status: 500 }
     )
   }

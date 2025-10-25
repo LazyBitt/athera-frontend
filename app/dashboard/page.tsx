@@ -111,7 +111,7 @@ export default function Dashboard() {
 
           {/* Tab Navigation */}
           <div className="mb-8">
-            <div className="flex gap-2 p-1.5 bg-gray-900/50 rounded-2xl border border-gray-800 w-fit">
+            <div className="flex gap-2 p-1.5 bg-slate-900/50 rounded-2xl border border-slate-800 w-fit">
               {tabs.map((tab) => {
                 const Icon = tab.icon
                 const isActive = activeTab === tab.id
@@ -124,8 +124,8 @@ export default function Dashboard() {
                       relative flex items-center gap-2 px-5 py-2.5 rounded-xl text-sm font-medium
                       transition-all duration-200
                       ${isActive 
-                        ? 'bg-gradient-to-r from-emerald-500 to-teal-500 text-white shadow-lg shadow-emerald-500/20' 
-                        : 'text-gray-400 hover:text-white hover:bg-gray-800/50'
+                        ? 'bg-blue-600 text-white shadow-lg shadow-blue-500/20' 
+                        : 'text-gray-400 hover:text-white hover:bg-slate-800/50'
                       }
                     `}
                   >
@@ -134,7 +134,7 @@ export default function Dashboard() {
                     {tab.badge && tab.badge > 0 && (
                       <span className={`
                         ml-1 px-1.5 py-0.5 text-xs rounded-full
-                        ${isActive ? 'bg-white/20 text-white' : 'bg-emerald-500/20 text-emerald-400'}
+                        ${isActive ? 'bg-white/20 text-white' : 'bg-blue-500/20 text-blue-400'}
                       `}>
                         {tab.badge}
                       </span>

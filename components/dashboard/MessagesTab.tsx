@@ -3,7 +3,7 @@
 import { useState } from 'react'
 import { useDashboardStore } from '../../store/dashboard'
 import { uploadToIPFS, uploadTextToIPFS, getIPFSUrl } from '../../lib/ipfs'
-import { FileText, Image as ImageIcon, Upload, Loader2, ExternalLink, Trash2, MessageSquare } from 'lucide-react'
+import { FileText, Image as ImageIcon, Upload, Loader2, ExternalLink, Trash2, MessageSquare, X } from 'lucide-react'
 import { motion } from 'framer-motion'
 import { formatDistance } from 'date-fns'
 
@@ -11,59 +11,65 @@ export function MessagesTab() {
   const { ipfsFiles, addIPFSFile, removeIPFSFile, addNotification } = useDashboardStore()
   const [isUploading, setIsUploading] = useState(false)
   const [textMessage, setTextMessage] = useState('')
-  const [uploadType, setUploadType] = useState<'text' | 'file'>('text')
+  const [selectedFile, setSelectedFile] = useState<File | null>(null)
   
-  const handleTextUpload = async () => {
-    if (!textMessage.trim()) return
+  const handleUpload = async () => {
+    if (!textMessage.trim() && !selectedFile) return
     
     setIsUploading(true)
     try {
-      const cid = await uploadTextToIPFS(textMessage)
-      addIPFSFile({
-        cid,
-        name: 'Message',
-        type: 'text',
-        content: textMessage,
-      })
+      // Upload text message if provided
+      if (textMessage.trim()) {
+        const textCid = await uploadTextToIPFS(textMessage)
+        addIPFSFile({
+          cid: textCid,
+          name: 'Message',
+          type: 'text',
+          content: textMessage,
+        })
+      }
+      
+      // Upload file if provided
+      if (selectedFile) {
+        const fileCid = await uploadToIPFS(selectedFile)
+        addIPFSFile({
+          cid: fileCid,
+          name: selectedFile.name,
+          type: selectedFile.type.startsWith('image/') ? 'image' : 'file',
+        })
+      }
+      
       addNotification({
         type: 'success',
-        message: 'Message uploaded (Demo Mode - Mock CID generated)',
+        message: textMessage && selectedFile 
+          ? 'Message and file uploaded successfully'
+          : textMessage 
+            ? 'Message uploaded successfully'
+            : 'File uploaded successfully',
       })
+      
+      // Reset form
       setTextMessage('')
+      setSelectedFile(null)
     } catch (error: any) {
       addNotification({
         type: 'error',
-        message: error.message || 'Failed to upload message',
+        message: error.message || 'Failed to upload',
       })
     } finally {
       setIsUploading(false)
     }
   }
   
-  const handleFileUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
+  const handleFileSelect = (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0]
-    if (!file) return
-    
-    setIsUploading(true)
-    try {
-      const cid = await uploadToIPFS(file)
-      addIPFSFile({
-        cid,
-        name: file.name,
-        type: file.type.startsWith('image/') ? 'image' : 'text',
-      })
-      addNotification({
-        type: 'success',
-        message: `${file.name} uploaded (Demo Mode - Mock CID generated)`,
-      })
-    } catch (error: any) {
-      addNotification({
-        type: 'error',
-        message: error.message || 'Failed to upload file',
-      })
-    } finally {
-      setIsUploading(false)
+    if (file) {
+      setSelectedFile(file)
     }
+  }
+  
+  const removeSelectedFile = () => {
+    setSelectedFile(null)
   }
   
   const handleDelete = (cid: string) => {
@@ -86,99 +92,108 @@ export function MessagesTab() {
       
       {/* Upload Section */}
       <div className="bg-slate-900/50 border border-slate-800 rounded-2xl p-6">
-        <div className="flex gap-2 mb-4">
-          <button
-            onClick={() => setUploadType('text')}
-            className={`flex items-center gap-2 px-4 py-2 text-sm font-medium rounded-xl transition-all ${
-              uploadType === 'text'
-                ? 'bg-gradient-to-r from-violet-500 to-purple-500 text-white shadow-lg shadow-violet-500/20'
-                : 'bg-gray-800 text-gray-400 hover:text-white'
-            }`}
-          >
-            <FileText className="h-4 w-4" />
-            Text Message
-          </button>
-          <button
-            onClick={() => setUploadType('file')}
-            className={`flex items-center gap-2 px-4 py-2 text-sm font-medium rounded-xl transition-all ${
-              uploadType === 'file'
-                ? 'bg-gradient-to-r from-violet-500 to-purple-500 text-white shadow-lg shadow-violet-500/20'
-                : 'bg-gray-800 text-gray-400 hover:text-white'
-            }`}
-          >
-            <ImageIcon className="h-4 w-4" />
-            Upload File
-          </button>
-        </div>
+        <h3 className="text-sm font-medium text-gray-400 mb-4">
+          Upload message and/or files for your heirs
+        </h3>
         
-        {uploadType === 'text' ? (
-          <div className="space-y-4">
-            <div>
-              <label className="block text-sm text-gray-400 mb-2">Your Message</label>
-              <textarea
-                value={textMessage}
-                onChange={(e) => setTextMessage(e.target.value)}
-                placeholder="Write a message for your heirs..."
-                rows={6}
-                className="w-full px-4 py-3 bg-slate-800 border border-slate-700 rounded-xl text-white placeholder-gray-500 focus:outline-none focus:border-blue-500 transition-colors resize-none"
-              />
-            </div>
+        <div className="space-y-4">
+          {/* Text Message */}
+          <div>
+            <label className="block text-sm text-gray-400 mb-2">
+              Message (Optional)
+            </label>
+            <textarea
+              value={textMessage}
+              onChange={(e) => setTextMessage(e.target.value)}
+              placeholder="Write a message for your heirs..."
+              rows={5}
+              className="w-full px-4 py-3 bg-slate-800 border border-slate-700 rounded-xl text-white placeholder-gray-500 focus:outline-none focus:border-violet-500 transition-colors resize-none"
+            />
+          </div>
+          
+          {/* File Upload */}
+          <div>
+            <label className="block text-sm text-gray-400 mb-2">
+              Attachment (Optional)
+            </label>
             
-            <button
-              onClick={handleTextUpload}
-              disabled={!textMessage.trim() || isUploading}
-              className="w-full px-4 py-3 bg-gradient-to-r from-violet-600 to-purple-600 hover:from-violet-700 hover:to-purple-700 disabled:from-gray-700 disabled:to-gray-700 disabled:text-gray-500 text-white font-medium rounded-xl transition-all flex items-center justify-center gap-2 shadow-lg shadow-violet-500/20"
-            >
-              {isUploading ? (
-                <>
-                  <Loader2 className="h-4 w-4 animate-spin" />
-                  Uploading (Demo)...
-                </>
-              ) : (
-                <>
-                  <Upload className="h-4 w-4" />
-                  Upload (Demo Mode)
-                </>
-              )}
-            </button>
+            {selectedFile ? (
+              <div className="bg-slate-800 border border-slate-700 rounded-xl p-4">
+                <div className="flex items-center gap-3">
+                  <div className="p-2 bg-violet-500/10 rounded-lg">
+                    {selectedFile.type.startsWith('image/') ? (
+                      <ImageIcon className="h-5 w-5 text-violet-400" />
+                    ) : (
+                      <FileText className="h-5 w-5 text-violet-400" />
+                    )}
+                  </div>
+                  <div className="flex-1 min-w-0">
+                    <p className="text-sm text-white font-medium truncate">
+                      {selectedFile.name}
+                    </p>
+                    <p className="text-xs text-gray-500">
+                      {(selectedFile.size / 1024).toFixed(2)} KB
+                    </p>
+                  </div>
+                  <button
+                    onClick={removeSelectedFile}
+                    className="p-1.5 text-gray-500 hover:text-red-400 hover:bg-red-500/10 rounded-lg transition-colors"
+                  >
+                    <X className="h-4 w-4" />
+                  </button>
+                </div>
+              </div>
+            ) : (
+              <div className="border-2 border-dashed border-slate-700 rounded-xl p-6 text-center hover:border-violet-500 transition-colors">
+                <input
+                  type="file"
+                  onChange={handleFileSelect}
+                  disabled={isUploading}
+                  accept="image/*,.txt,.pdf"
+                  className="hidden"
+                  id="file-upload"
+                />
+                <label
+                  htmlFor="file-upload"
+                  className="cursor-pointer flex flex-col items-center gap-2"
+                >
+                  <Upload className="h-8 w-8 text-gray-500" />
+                  <div>
+                    <p className="text-sm text-white font-medium">
+                      Click to upload
+                    </p>
+                    <p className="text-xs text-gray-500">
+                      Images, PDFs, or text files
+                    </p>
+                  </div>
+                </label>
+              </div>
+            )}
           </div>
-        ) : (
-          <div className="space-y-4">
-            <div className="border-2 border-dashed border-slate-700 rounded-xl p-8 text-center hover:border-blue-500 transition-colors">
-              <input
-                type="file"
-                onChange={handleFileUpload}
-                disabled={isUploading}
-                accept="image/*,.txt,.pdf"
-                className="hidden"
-                id="file-upload"
-              />
-              <label
-                htmlFor="file-upload"
-                className="cursor-pointer flex flex-col items-center gap-3"
-              >
-                {isUploading ? (
-                  <>
-                    <Loader2 className="h-12 w-12 text-blue-500 animate-spin" />
-                    <p className="text-sm text-gray-400">Uploading to IPFS...</p>
-                  </>
-                ) : (
-                  <>
-                    <Upload className="h-12 w-12 text-gray-500" />
-                    <div>
-                      <p className="text-sm text-white font-medium mb-1">
-                        Click to upload or drag and drop
-                      </p>
-                      <p className="text-xs text-gray-500">
-                        Images, PDFs, or text files
-                      </p>
-                    </div>
-                  </>
-                )}
-              </label>
-            </div>
-          </div>
-        )}
+          
+          {/* Upload Button */}
+          <button
+            onClick={handleUpload}
+            disabled={(!textMessage.trim() && !selectedFile) || isUploading}
+            className="w-full px-4 py-3 bg-blue-600 hover:bg-blue-700 disabled:bg-slate-700 disabled:text-gray-500 text-white font-medium rounded-xl transition-all flex items-center justify-center gap-2 shadow-lg shadow-blue-500/20"
+          >
+            {isUploading ? (
+              <>
+                <Loader2 className="h-4 w-4 animate-spin" />
+                Uploading to IPFS...
+              </>
+            ) : (
+              <>
+                <Upload className="h-4 w-4" />
+                Upload to IPFS
+              </>
+            )}
+          </button>
+          
+          <p className="text-xs text-gray-500 text-center">
+            You can upload a message, a file, or both together
+          </p>
+        </div>
       </div>
       
       {/* Files List */}
@@ -250,34 +265,7 @@ export function MessagesTab() {
         )}
       </div>
       
-      {/* Info */}
-      <div className="bg-blue-500/10 border border-blue-500/20 rounded-2xl p-4">
-        <div className="flex gap-3">
-          <div className="text-2xl">💡</div>
-          <div>
-            <p className="text-sm text-blue-300 font-semibold mb-2">
-              IPFS Storage with Pinata (Free)
-            </p>
-            <p className="text-xs text-blue-200 mb-2">
-              To enable real IPFS uploads:
-            </p>
-            <ol className="text-xs text-blue-300 space-y-1 list-decimal list-inside">
-              <li>Sign up at <a href="https://www.pinata.cloud/" target="_blank" rel="noopener noreferrer" className="underline">pinata.cloud</a> (Free 1GB)</li>
-              <li>Get your API Key and Secret</li>
-              <li>Add to <code className="bg-blue-900/30 px-1 py-0.5 rounded">.env.local</code>:
-                <div className="mt-1 bg-blue-900/30 p-2 rounded text-xs font-mono">
-                  NEXT_PUBLIC_PINATA_API_KEY=your_key<br/>
-                  NEXT_PUBLIC_PINATA_SECRET_KEY=your_secret
-                </div>
-              </li>
-              <li>Restart server and uploads will work!</li>
-            </ol>
-            <p className="text-xs text-blue-400 mt-2">
-              Without credentials, demo mode with mock CIDs is used.
-            </p>
-          </div>
-        </div>
-      </div>
+
     </div>
   )
 }

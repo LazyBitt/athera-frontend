@@ -15,7 +15,9 @@ export function NotificationsTab() {
     setTelegramChatId,
   } = useDashboardStore()
   
-  const [chatIdInput, setChatIdInput] = useState(telegramChatId || '')
+  const [chatIdInput, setChatIdInput] = useState(
+    telegramChatId || process.env.NEXT_PUBLIC_TELEGRAM_CHAT_ID || ''
+  )
   const [isTesting, setIsTesting] = useState(false)
   const [showSettings, setShowSettings] = useState(false)
   
@@ -29,21 +31,30 @@ export function NotificationsTab() {
   const handleTestNotification = async () => {
     if (!chatIdInput) return
     
+    // Validasi chat ID harus numerik atau dimulai dengan @
+    const trimmedChatId = chatIdInput.trim()
+    if (!trimmedChatId.match(/^(@\w+|\d+)$/)) {
+      alert('❌ Chat ID tidak valid! Gunakan ID numerik (contoh: 6988422332) atau username channel dengan @ (contoh: @channelname)')
+      return
+    }
+    
     setIsTesting(true)
     try {
       const response = await fetch('/api/telegram/test', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ chatId: chatIdInput }),
+        body: JSON.stringify({ chatId: trimmedChatId }),
       })
       
+      const data = await response.json()
+      
       if (response.ok) {
-        alert('Test notification sent! Check your Telegram.')
+        alert('✅ Notifikasi test berhasil dikirim! Cek Telegram Anda.')
       } else {
-        alert('Failed to send test notification. Check your chat ID.')
+        alert(`❌ Gagal mengirim notifikasi: ${data.error || 'Chat tidak ditemukan. Pastikan bot sudah diaktifkan dan chat ID benar.'}`)
       }
     } catch (error) {
-      alert('Error sending test notification')
+      alert('❌ Error mengirim notifikasi test')
     } finally {
       setIsTesting(false)
     }
@@ -126,7 +137,8 @@ export function NotificationsTab() {
                 className="w-full px-4 py-3 bg-slate-800 border border-slate-700 rounded-xl text-white placeholder-gray-500 focus:outline-none focus:border-blue-500 transition-colors"
               />
               <p className="text-xs text-gray-500 mt-2">
-                Get your chat ID by messaging @userinfobot on Telegram
+                💡 Gunakan ID numerik (contoh: 6988422332), bukan username channel. 
+                Dapatkan chat ID Anda dengan mengirim pesan ke @userinfobot di Telegram.
               </p>
             </div>
             
@@ -134,7 +146,7 @@ export function NotificationsTab() {
               <button
                 onClick={handleSaveChatId}
                 disabled={!chatIdInput}
-                className="flex-1 px-4 py-2.5 bg-gradient-to-r from-emerald-600 to-teal-600 hover:from-emerald-700 hover:to-teal-700 disabled:from-gray-700 disabled:to-gray-700 disabled:text-gray-500 text-white font-medium rounded-xl transition-all shadow-lg shadow-emerald-500/20"
+                className="flex-1 px-4 py-2.5 bg-blue-600 hover:bg-blue-700 disabled:bg-slate-700 disabled:text-gray-500 text-white font-medium rounded-xl transition-all shadow-lg shadow-blue-500/20"
               >
                 Save Settings
               </button>

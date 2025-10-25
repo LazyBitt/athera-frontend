@@ -123,12 +123,12 @@ export function VaultTab() {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.2 }}
-          className="bg-gradient-to-br from-emerald-900/30 to-teal-900/20 border border-emerald-700/50 rounded-2xl p-6"
+          className="bg-gradient-to-br from-blue-900/30 to-blue-800/20 border border-blue-700/50 rounded-2xl p-6"
         >
           <div className="flex items-center justify-between mb-4">
             <div className="flex items-center gap-3">
-              <div className="p-2.5 bg-emerald-500/20 rounded-xl">
-                <TrendingUp className="h-5 w-5 text-emerald-400" />
+              <div className="p-2.5 bg-blue-500/20 rounded-xl">
+                <TrendingUp className="h-5 w-5 text-blue-400" />
               </div>
               <h3 className="text-sm font-medium text-gray-300">Vault Balance</h3>
             </div>
@@ -137,7 +137,7 @@ export function VaultTab() {
             <p className="text-3xl font-bold text-white">
               {parseFloat(vaultBalanceFormatted).toFixed(4)}
             </p>
-            <p className="text-sm text-emerald-400">ETH</p>
+            <p className="text-sm text-blue-400">ETH</p>
           </div>
         </motion.div>
       </div>
@@ -152,8 +152,8 @@ export function VaultTab() {
           className="bg-gray-900/50 border border-gray-800 rounded-2xl p-6"
         >
           <div className="flex items-center gap-3 mb-4">
-            <div className="p-2 bg-emerald-500/10 rounded-xl">
-              <ArrowDownToLine className="h-5 w-5 text-emerald-400" />
+            <div className="p-2 bg-green-500/10 rounded-xl">
+              <ArrowDownToLine className="h-5 w-5 text-green-400" />
             </div>
             <h3 className="text-lg font-semibold text-white">Deposit</h3>
           </div>
@@ -167,14 +167,14 @@ export function VaultTab() {
                 value={depositAmount}
                 onChange={(e) => setDepositAmount(e.target.value)}
                 placeholder="0.0"
-                className="w-full px-4 py-3 bg-gray-800 border border-gray-700 rounded-xl text-white placeholder-gray-500 focus:outline-none focus:border-emerald-500 transition-colors"
+                className="w-full px-4 py-3 bg-gray-800 border border-gray-700 rounded-xl text-white placeholder-gray-500 focus:outline-none focus:border-green-500 transition-colors"
               />
             </div>
             
             <button
               onClick={handleDeposit}
               disabled={!depositAmount || isDepositing || isDepositConfirming}
-              className="w-full px-4 py-3 bg-gradient-to-r from-emerald-600 to-teal-600 hover:from-emerald-700 hover:to-teal-700 disabled:from-gray-700 disabled:to-gray-700 disabled:text-gray-500 disabled:shadow-none text-white font-medium rounded-xl transition-all flex items-center justify-center gap-2 shadow-lg shadow-emerald-500/20"
+              className="w-full px-4 py-3 bg-green-600 hover:bg-green-700 disabled:bg-slate-700 disabled:text-gray-500 disabled:shadow-none text-white font-medium rounded-xl transition-all flex items-center justify-center gap-2 shadow-lg shadow-green-500/20"
             >
               {(isDepositing || isDepositConfirming) ? (
                 <>
@@ -221,7 +221,7 @@ export function VaultTab() {
             <button
               onClick={handleWithdraw}
               disabled={!withdrawAmount || isWithdrawing || isWithdrawConfirming}
-              className="w-full px-4 py-3 bg-gradient-to-r from-rose-600 to-pink-600 hover:from-rose-700 hover:to-pink-700 disabled:from-gray-700 disabled:to-gray-700 disabled:text-gray-500 disabled:shadow-none text-white font-medium rounded-xl transition-all flex items-center justify-center gap-2 shadow-lg shadow-rose-500/20"
+              className="w-full px-4 py-3 bg-red-600 hover:bg-red-700 disabled:bg-slate-700 disabled:text-gray-500 disabled:shadow-none text-white font-medium rounded-xl transition-all flex items-center justify-center gap-2 shadow-lg shadow-red-500/20"
             >
               {(isWithdrawing || isWithdrawConfirming) ? (
                 <>
@@ -244,9 +244,9 @@ export function VaultTab() {
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ delay: 0.5 }}
-        className="bg-emerald-500/10 border border-emerald-500/20 rounded-2xl p-4"
+        className="bg-blue-500/10 border border-blue-500/20 rounded-2xl p-4"
       >
-        <p className="text-sm text-emerald-300">
+        <p className="text-sm text-blue-300">
           💡 Your vault balance is used to fund inheritance vaults. Deposit funds here before creating new vaults.
         </p>
       </motion.div>

@@ -16,6 +16,18 @@ export async function POST(request: NextRequest) {
     
     if (type === 'warning' && hoursRemaining !== undefined) {
       success = await notifyCountdownWarning(chatId, vaultAddress, hoursRemaining)
+    } else if (type === 'expired') {
+      const message = `
+❌ <b>Vault Expired</b>
+
+Your inheritance vault countdown has reached zero.
+
+<b>Vault:</b> <code>${vaultAddress.slice(0, 10)}...${vaultAddress.slice(-8)}</code>
+
+Beneficiaries can now claim their inheritance. If you're still active, please check in immediately to reset the countdown!
+      `.trim()
+      const { sendTelegramNotification } = await import('../../../../lib/telegram')
+      success = await sendTelegramNotification(chatId, message)
     } else if (type === 'executed' && amount) {
       success = await notifyInheritanceExecuted(chatId, vaultAddress, amount)
     } else {
