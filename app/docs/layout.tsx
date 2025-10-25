@@ -73,8 +73,8 @@ export default function DocsLayout({ children }: { children: React.ReactNode }) 
                           href={item.href}
                           onClick={() => setSidebarOpen(false)}
                           className={`block px-2 py-1 text-sm ${isActive
-                              ? 'text-white'
-                              : 'text-gray-400 hover:text-white'
+                            ? 'text-white'
+                            : 'text-gray-400 hover:text-white'
                             }`}
                         >
                           {item.title}
