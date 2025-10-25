@@ -9,10 +9,10 @@ export function ProblemSolution() {
   return (
     <Section className="py-24 bg-black border-t border-gray-900">
       <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex gap-1 mb-12 bg-gray-900 p-1 w-fit mx-auto">
+        <div className="flex gap-2 mb-12 bg-gray-900 p-1.5 rounded-full w-fit mx-auto">
           <button
             onClick={() => setActiveTab('problem')}
-            className={`px-6 py-2 font-medium transition-all ${
+            className={`px-6 py-2.5 font-medium transition-all rounded-full ${
               activeTab === 'problem'
                 ? 'bg-blue-500 text-white'
                 : 'text-gray-400 hover:text-gray-300'
@@ -22,7 +22,7 @@ export function ProblemSolution() {
           </button>
           <button
             onClick={() => setActiveTab('solution')}
-            className={`px-6 py-2 font-medium transition-all ${
+            className={`px-6 py-2.5 font-medium transition-all rounded-full ${
               activeTab === 'solution'
                 ? 'bg-blue-500 text-white'
                 : 'text-gray-400 hover:text-gray-300'
