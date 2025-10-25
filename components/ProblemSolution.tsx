@@ -14,7 +14,7 @@ export function ProblemSolution() {
             onClick={() => setActiveTab('problem')}
             className={`px-6 py-2 font-medium transition-all ${
               activeTab === 'problem'
-                ? 'bg-black text-white'
+                ? 'bg-blue-500 text-white'
                 : 'text-gray-400 hover:text-gray-300'
             }`}
           >
@@ -24,7 +24,7 @@ export function ProblemSolution() {
             onClick={() => setActiveTab('solution')}
             className={`px-6 py-2 font-medium transition-all ${
               activeTab === 'solution'
-                ? 'bg-black text-white'
+                ? 'bg-blue-500 text-white'
                 : 'text-gray-400 hover:text-gray-300'
             }`}
           >
@@ -47,28 +47,28 @@ export function ProblemSolution() {
             </div>
 
             <div className="grid md:grid-cols-2 gap-6">
-              <div className="p-6 bg-gray-900 border border-gray-800 rounded-3xl">
+              <div className="p-6 bg-gray-900/50 border border-gray-700 rounded-3xl hover:border-blue-500 transition-colors">
                 <h4 className="text-lg font-semibold text-white mb-2">Private keys die with you</h4>
                 <p className="text-gray-400 text-sm">
                   Your family knows you have crypto, but they can't access it. The keys are on your laptop, in your head, or written on paper somewhere.
                 </p>
               </div>
 
-              <div className="p-6 bg-gray-900 border border-gray-800 rounded-3xl">
+              <div className="p-6 bg-gray-900/50 border border-gray-700 rounded-3xl hover:border-blue-500 transition-colors">
                 <h4 className="text-lg font-semibold text-white mb-2">Traditional wills don't work</h4>
                 <p className="text-gray-400 text-sm">
                   You can't just write "give my Bitcoin to my kids" in a will. Without the private keys, it's worthless.
                 </p>
               </div>
 
-              <div className="p-6 bg-gray-900 border border-gray-800 rounded-3xl">
+              <div className="p-6 bg-gray-900/50 border border-gray-700 rounded-3xl hover:border-blue-500 transition-colors">
                 <h4 className="text-lg font-semibold text-white mb-2">Custodial solutions require trust</h4>
                 <p className="text-gray-400 text-sm">
                   Giving your keys to a third party defeats the whole point of crypto. Not your keys, not your coins.
                 </p>
               </div>
 
-              <div className="p-6 bg-gray-900 border border-gray-800 rounded-3xl">
+              <div className="p-6 bg-gray-900/50 border border-gray-700 rounded-3xl hover:border-blue-500 transition-colors">
                 <h4 className="text-lg font-semibold text-white mb-2">No good alternatives exist</h4>
                 <p className="text-gray-400 text-sm">
                   Current solutions are either too complex, require custody, or don't actually work when you need them.
@@ -93,28 +93,28 @@ export function ProblemSolution() {
             </div>
 
             <div className="grid md:grid-cols-2 gap-6">
-              <div className="p-6 bg-gradient-to-br from-blue-500/5 to-transparent border border-blue-500/20 rounded-3xl">
+              <div className="p-6 bg-gray-900/50 border border-gray-700 rounded-3xl hover:border-blue-500 transition-colors">
                 <h4 className="text-lg font-semibold text-white mb-2">Automatic distribution</h4>
                 <p className="text-gray-400 text-sm">
                   Set an inactivity period (e.g., 6 months). If you don't ping your vault in that time, it automatically sends your crypto to your beneficiaries.
                 </p>
               </div>
 
-              <div className="p-6 bg-gradient-to-br from-blue-500/5 to-transparent border border-blue-500/20 rounded-3xl">
+              <div className="p-6 bg-gray-900/50 border border-gray-700 rounded-3xl hover:border-blue-500 transition-colors">
                 <h4 className="text-lg font-semibold text-white mb-2">You keep full control</h4>
                 <p className="text-gray-400 text-sm">
                   Your crypto stays in your wallet. You can withdraw, update beneficiaries, or cancel anytime. We never have custody.
                 </p>
               </div>
 
-              <div className="p-6 bg-gradient-to-br from-blue-500/5 to-transparent border border-blue-500/20 rounded-3xl">
+              <div className="p-6 bg-gray-900/50 border border-gray-700 rounded-3xl hover:border-blue-500 transition-colors">
                 <h4 className="text-lg font-semibold text-white mb-2">Multiple beneficiaries</h4>
                 <p className="text-gray-400 text-sm">
                   Split your assets however you want. 50% to your spouse, 25% to each kid. The smart contract handles the distribution.
                 </p>
               </div>
 
-              <div className="p-6 bg-gradient-to-br from-blue-500/5 to-transparent border border-blue-500/20 rounded-3xl">
+              <div className="p-6 bg-gray-900/50 border border-gray-700 rounded-3xl hover:border-blue-500 transition-colors">
                 <h4 className="text-lg font-semibold text-white mb-2">Notifications keep everyone informed</h4>
                 <p className="text-gray-400 text-sm">
                   Get Telegram alerts when you're approaching inactivity. Your beneficiaries get notified before distribution happens.
@@ -122,14 +122,7 @@ export function ProblemSolution() {
               </div>
             </div>
 
-            <div className="pt-8">
-              <a 
-                href="/dashboard"
-                className="inline-block px-6 py-3 bg-white text-black font-medium hover:bg-gray-100 transition-colors"
-              >
-                Create your vault →
-              </a>
-            </div>
+
           </div>
         )}
       </div>

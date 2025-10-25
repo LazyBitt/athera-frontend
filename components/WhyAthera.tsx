@@ -38,7 +38,7 @@ export function WhyAthera() {
         {/* Features Grid */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-20">
           {features.map((feature, index) => (
-            <div key={index} className="card text-center hover:border-accent transition-colors duration-300">
+            <div key={index} className="p-6 bg-gray-900/50 border border-gray-700 rounded-3xl text-center hover:border-accent transition-colors duration-300">
               <div className="w-16 h-16 bg-accent/20 rounded-2xl flex items-center justify-center mx-auto mb-6">
                 <feature.icon className="h-8 w-8 text-accent" />
               </div>

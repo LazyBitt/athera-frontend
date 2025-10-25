@@ -7,7 +7,7 @@ export function Benefits() {
     <Section className="py-24 bg-black border-t border-gray-900">
       <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
         <h2 className="text-3xl md:text-4xl font-bold text-white mb-16 text-center">
-          Why Athera
+          Why Athera?
         </h2>
 
         <div className="grid md:grid-cols-2 gap-x-16 gap-y-12">
