@@ -10,37 +10,37 @@ export default function HowItWorksPage() {
 
       <h2>Dead Man's Switch</h2>
       <p>
-        Athera implements a dead man's switch—a mechanism that triggers when you stop checking in. 
-        Similar to train safety systems or emergency protocols, it activates automatically when 
+        Athera implements a dead man's switch—a mechanism that triggers when you stop checking in.
+        Similar to train safety systems or emergency protocols, it activates automatically when
         regular confirmation stops.
       </p>
 
       <h2>Core Components</h2>
 
-      <div className="not-prose grid grid-cols-1 md:grid-cols-2 gap-3 my-8 text-sm">
-        <div className="border border-gray-800 rounded-md p-4">
-          <div className="font-medium mb-1">Inactivity Timer</div>
+      <div className="not-prose grid grid-cols-1 md:grid-cols-2 gap-4 my-8 text-sm">
+        <div className="border border-gray-800 rounded-lg p-5 bg-slate-900/30">
+          <div className="text-base font-semibold mb-2 text-white">Inactivity Timer</div>
           <div className="text-gray-400">
             Every vault has a countdown timer that you configure when creating the vault (1 week to 5 years).
           </div>
         </div>
 
-        <div className="border border-gray-800 rounded-md p-4">
-          <div className="font-medium mb-1">Last Check-In</div>
+        <div className="border border-gray-800 rounded-lg p-5 bg-slate-900/30">
+          <div className="text-base font-semibold mb-2 text-white">Last Check-In</div>
           <div className="text-gray-400">
             The smart contract stores when you last proved you're active (lastPing timestamp).
           </div>
         </div>
 
-        <div className="border border-gray-800 rounded-md p-4">
-          <div className="font-medium mb-1">Beneficiaries</div>
+        <div className="border border-gray-800 rounded-lg p-5 bg-slate-900/30">
+          <div className="text-base font-semibold mb-2 text-white">Beneficiaries</div>
           <div className="text-gray-400">
             Your designated heirs who will receive assets when the countdown reaches zero.
           </div>
         </div>
 
-        <div className="border border-gray-800 rounded-md p-4">
-          <div className="font-medium mb-1">Automation</div>
+        <div className="border border-gray-800 rounded-lg p-5 bg-slate-900/30">
+          <div className="text-base font-semibold mb-2 text-white">Automation</div>
           <div className="text-gray-400">
             Chainlink Automation monitors 24/7 and executes distribution automatically.
           </div>
@@ -49,7 +49,7 @@ export default function HowItWorksPage() {
 
       <h2>Activity Detection</h2>
       <p>
-        Any vault transaction resets your timer. Athera only tracks vault activity—not your other 
+        Any vault transaction resets your timer. Athera only tracks vault activity—not your other
         wallet transactions.
       </p>
 
@@ -62,9 +62,9 @@ export default function HowItWorksPage() {
         <li>Emergency withdraw</li>
       </ul>
 
-      <div className="not-prose border border-gray-800 rounded-md p-4 my-4">
-        <p className="text-sm text-gray-400">
-          <strong className="text-gray-300">Note:</strong> If you regularly deposit to your vault, you don't need to manually check-in.
+      <div className="not-prose border border-gray-800 rounded-lg p-4 my-4 bg-blue-500/10 border-blue-500/20">
+        <p className="text-sm text-gray-300">
+          <strong className="text-white">💡 Note:</strong> If you regularly deposit to your vault, you don't need to manually check-in.
         </p>
       </div>
 
@@ -78,19 +78,19 @@ export default function HowItWorksPage() {
 
       <h3>Why Vault-Only?</h3>
       <p>
-        Athera only monitors vault transactions for privacy and simplicity. No tracking across dApps, 
+        Athera only monitors vault transactions for privacy and simplicity. No tracking across dApps,
         no false positives, and regular vault usage keeps you active automatically.
       </p>
 
       <h2>Automatic Distribution</h2>
       <p>
-        When your countdown reaches zero, Chainlink Automation executes distribution automatically. 
+        When your countdown reaches zero, Chainlink Automation executes distribution automatically.
         No manual intervention needed.
       </p>
 
-      <div className="not-prose border border-gray-800 rounded-md p-4 my-6">
-        <div className="text-sm font-medium mb-3">The Process</div>
-        <ol className="space-y-2 text-gray-400 text-sm list-decimal list-inside">
+      <div className="not-prose border border-gray-800 rounded-lg p-5 my-6 bg-slate-900/30">
+        <div className="text-base font-semibold mb-3 text-white">The Process</div>
+        <ol className="space-y-2 text-gray-300 text-sm list-decimal list-inside">
           <li>Chainlink monitors all vaults</li>
           <li>Checks if countdown = 0</li>
           <li>Executes distribute()</li>
@@ -122,26 +122,26 @@ function distribute() external {
       </pre>
 
       <h2>Costs</h2>
-      <div className="not-prose grid grid-cols-1 md:grid-cols-3 gap-3 my-6 text-sm">
-        <div className="border border-gray-800 rounded-md p-4">
-          <div className="font-medium mb-2">Create Vault</div>
-          <div className="text-lg mb-1">~$2-3</div>
-          <div className="text-gray-500 text-xs">One-time</div>
+      <div className="not-prose grid grid-cols-1 md:grid-cols-3 gap-4 my-6 text-sm">
+        <div className="border border-gray-800 rounded-lg p-5 bg-slate-900/30">
+          <div className="text-base font-semibold mb-2 text-white">Create Vault</div>
+          <div className="text-2xl font-bold mb-1 text-white">~$0.10-0.20</div>
+          <div className="text-gray-400 text-xs">One-time (Base L2)</div>
         </div>
-        <div className="border border-gray-800 rounded-md p-4">
-          <div className="font-medium mb-2">Check-In</div>
-          <div className="text-lg mb-1">~$0.50</div>
-          <div className="text-gray-500 text-xs">Per check-in</div>
+        <div className="border border-gray-800 rounded-lg p-5 bg-slate-900/30">
+          <div className="text-base font-semibold mb-2 text-white">Check-In</div>
+          <div className="text-2xl font-bold mb-1 text-white">~$0.02-0.05</div>
+          <div className="text-gray-400 text-xs">Per check-in</div>
         </div>
-        <div className="border border-gray-800 rounded-md p-4">
-          <div className="font-medium mb-2">Distribution</div>
-          <div className="text-lg mb-1">$0</div>
-          <div className="text-gray-500 text-xs">Paid by Chainlink</div>
+        <div className="border border-gray-800 rounded-lg p-5 bg-slate-900/30">
+          <div className="text-base font-semibold mb-2 text-white">Distribution</div>
+          <div className="text-2xl font-bold mb-1 text-white">$0</div>
+          <div className="text-gray-400 text-xs">Paid by Chainlink</div>
         </div>
       </div>
 
-      <p className="text-gray-500 text-sm">
-        Example: 1 year threshold with check-ins every 6 months = ~$1-2/year
+      <p className="text-gray-400 text-sm">
+        Example: 1 year threshold with check-ins every 6 months = ~$0.04-0.10/year on Base L2
       </p>
 
       <h2>Best Practices</h2>

@@ -138,9 +138,15 @@ export function InheritanceVaultCard({ vaultAddress, filter, onUpdate }: Props) 
       <div className="flex items-start justify-between mb-4">
         <div className="flex-1">
           <div className="flex items-center gap-2 mb-2">
-            <code className="text-xs text-gray-500 font-mono">
-              {vaultAddress.slice(0, 10)}...{vaultAddress.slice(-8)}
-            </code>
+            <a
+              href={`https://sepolia.basescan.org/address/${vaultAddress}`}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-xs text-gray-500 hover:text-blue-400 font-mono transition-colors"
+              title="View on BaseScan"
+            >
+              {vaultAddress.slice(0, 10)}...{vaultAddress.slice(-8)} ↗
+            </a>
             {executed && (
               <span className="px-2 py-0.5 bg-green-500/20 text-green-400 text-xs rounded-full">
                 Distributed
@@ -216,9 +222,15 @@ export function InheritanceVaultCard({ vaultAddress, filter, onUpdate }: Props) 
         <div className="space-y-2">
           {beneficiaries.map((heir, index) => (
             <div key={heir} className="flex items-center justify-between text-sm">
-              <code className="text-gray-400 font-mono text-xs">
-                {heir.slice(0, 8)}...{heir.slice(-6)}
-              </code>
+              <a
+                href={`https://sepolia.basescan.org/address/${heir}`}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-gray-400 hover:text-blue-400 font-mono text-xs transition-colors"
+                title="View on BaseScan"
+              >
+                {heir.slice(0, 8)}...{heir.slice(-6)} ↗
+              </a>
               <span className="text-white font-medium">
                 {(Number(percentages[index]) / 100).toFixed(1)}%
               </span>

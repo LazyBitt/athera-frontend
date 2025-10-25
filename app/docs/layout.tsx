@@ -35,7 +35,7 @@ export default function DocsLayout({ children }: { children: React.ReactNode }) 
               >
                 {sidebarOpen ? '✕' : '☰'}
               </button>
-              <Link href="/" className="text-sm font-medium">
+              <Link href="/" className="text-lg font-bold text-white hover:text-blue-400 transition-colors">
                 Athera
               </Link>
               <span className="text-sm text-gray-600">/</span>
@@ -55,9 +55,8 @@ export default function DocsLayout({ children }: { children: React.ReactNode }) 
       <div className="flex">
         {/* Sidebar */}
         <aside
-          className={`${
-            sidebarOpen ? 'block' : 'hidden'
-          } fixed lg:sticky top-14 left-0 z-40 h-[calc(100vh-3.5rem)] w-56 overflow-y-auto border-r border-gray-800 bg-black lg:block`}
+          className={`${sidebarOpen ? 'block' : 'hidden'
+            } fixed lg:sticky top-14 left-0 z-40 h-[calc(100vh-3.5rem)] w-56 overflow-y-auto border-r border-gray-800 bg-black lg:block`}
         >
           <nav className="p-6">
             {Object.entries(navigation).map(([section, items]) => (
@@ -73,11 +72,10 @@ export default function DocsLayout({ children }: { children: React.ReactNode }) 
                         <Link
                           href={item.href}
                           onClick={() => setSidebarOpen(false)}
-                          className={`block px-2 py-1 text-sm ${
-                            isActive
+                          className={`block px-2 py-1 text-sm ${isActive
                               ? 'text-white'
                               : 'text-gray-400 hover:text-white'
-                          }`}
+                            }`}
                         >
                           {item.title}
                         </Link>

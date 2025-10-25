@@ -6,6 +6,8 @@ interface Notification {
   message: string
   timestamp: number
   read: boolean
+  link?: string
+  linkText?: string
 }
 
 interface IPFSFile {

@@ -46,9 +46,9 @@ export default function QuickStartPage() {
       <h2>Test Check-In</h2>
       <p>Click "Reset Timer" and confirm. The countdown resets to your threshold duration.</p>
 
-      <div className="not-prose border border-gray-800 rounded-md p-4 my-6">
-        <p className="text-sm text-gray-400">
-          <strong className="text-gray-300">Note:</strong> Set a calendar reminder to check-in every 6 months if using a 1-year threshold.
+      <div className="not-prose border border-gray-800 rounded-lg p-4 my-6 bg-blue-500/10 border-blue-500/20">
+        <p className="text-sm text-gray-300">
+          <strong className="text-white">💡 Note:</strong> Set a calendar reminder to check-in every 6 months if using a 1-year threshold.
         </p>
       </div>
 

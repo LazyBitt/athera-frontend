@@ -211,6 +211,17 @@ export function NotificationsTab() {
                     }`}>
                       {notification.message}
                     </p>
+                    {notification.link && (
+                      <a
+                        href={notification.link}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="text-xs text-blue-400 hover:text-blue-300 underline inline-flex items-center gap-1 mb-1"
+                      >
+                        {notification.linkText || 'View Transaction'}
+                        <span>↗</span>
+                      </a>
+                    )}
                     <p className="text-xs text-gray-500">
                       {formatDistance(notification.timestamp, new Date(), { addSuffix: true })}
                     </p>

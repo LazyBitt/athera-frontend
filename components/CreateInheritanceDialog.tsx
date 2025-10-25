@@ -1,12 +1,13 @@
 'use client'
 
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { useWriteContract, useWaitForTransactionReceipt, useReadContract, useAccount } from 'wagmi'
 import { parseEther, formatEther } from 'viem'
-import { FACTORY_ADDRESS, FACTORY_ABI, VAULT_ABI } from '../lib/contracts'
-import { X, Plus, Trash2, Loader2, AlertCircle } from 'lucide-react'
+import { FACTORY_ADDRESS, FACTORY_ABI } from '../lib/contracts'
+import { X, Plus, Trash2, Loader2, AlertCircle, Upload, FileText } from 'lucide-react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { useDashboardStore } from '../store/dashboard'
+import { uploadToIPFS } from '../lib/ipfs'
 
 interface Beneficiary {
   address: string
@@ -25,6 +26,8 @@ export function CreateInheritanceDialog({ children, onSuccess }: Props) {
   ])
   const [amount, setAmount] = useState('')
   const [days, setDays] = useState('30')
+  const [files, setFiles] = useState<File[]>([])
+  const [isUploading, setIsUploading] = useState(false)
   
   const { addNotification } = useDashboardStore()
   const { address } = useAccount()
@@ -67,12 +70,38 @@ export function CreateInheritanceDialog({ children, onSuccess }: Props) {
     requestedAmount > 0 &&
     !hasInsufficientBalance &&
     days &&
-    parseInt(days) > 0
+    parseFloat(days) > 0
   
+  const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    if (e.target.files) {
+      setFiles(Array.from(e.target.files))
+    }
+  }
+  
+  const removeFile = (index: number) => {
+    setFiles(files.filter((_, i) => i !== index))
+  }
+
   const handleCreate = async () => {
     if (!isValid) return
     
     try {
+      setIsUploading(true)
+      
+      // Upload files to IPFS if any
+      let ipfsHashes: string[] = []
+      if (files.length > 0) {
+        addNotification({
+          type: 'info',
+          message: `Uploading ${files.length} file(s) to IPFS...`,
+        })
+        
+        for (const file of files) {
+          const hash = await uploadToIPFS(file)
+          ipfsHashes.push(hash)
+        }
+      }
+      
       const addresses = beneficiaries.map(b => b.address as `0x${string}`)
       const percentages = beneficiaries.map(b => BigInt(Math.round(parseFloat(b.percentage) * 100)))
       const thresholdSeconds = BigInt(parseInt(days) * 86400)
@@ -85,6 +114,13 @@ export function CreateInheritanceDialog({ children, onSuccess }: Props) {
         args: [addresses, percentages, thresholdSeconds, amountWei],
       } as any)
       
+      // Store IPFS hashes in localStorage for demo
+      if (ipfsHashes.length > 0) {
+        const vaultFiles = JSON.parse(localStorage.getItem('vaultFiles') || '{}')
+        vaultFiles[`${address}-${Date.now()}`] = ipfsHashes
+        localStorage.setItem('vaultFiles', JSON.stringify(vaultFiles))
+      }
+      
       addNotification({
         type: 'info',
         message: 'Creating inheritance vault...',
@@ -94,23 +130,30 @@ export function CreateInheritanceDialog({ children, onSuccess }: Props) {
         type: 'error',
         message: error.message || 'Failed to create vault',
       })
+    } finally {
+      setIsUploading(false)
     }
   }
   
-  if (isSuccess) {
-    setTimeout(() => {
-      setIsOpen(false)
-      onSuccess()
-      setBeneficiaries([{ address: '', percentage: '' }])
-      setAmount('')
-      setDays('30')
-      
+  useEffect(() => {
+    if (isSuccess && hash) {
       addNotification({
         type: 'success',
         message: 'Inheritance vault created successfully!',
+        link: `https://sepolia.basescan.org/tx/${hash}`,
+        linkText: 'View on BaseScan',
       })
-    }, 1000)
-  }
+      
+      setTimeout(() => {
+        setIsOpen(false)
+        onSuccess()
+        setBeneficiaries([{ address: '', percentage: '' }])
+        setAmount('')
+        setDays('30')
+        setFiles([])
+      }, 1000)
+    }
+  }, [isSuccess, hash])
   
   return (
     <>
@@ -236,6 +279,54 @@ export function CreateInheritanceDialog({ children, onSuccess }: Props) {
                     </p>
                   </div>
                   
+                  {/* Files Upload */}
+                  <div>
+                    <label className="block text-sm font-medium text-gray-300 mb-2">
+                      Dokumen & File (Opsional)
+                    </label>
+                    <div className="space-y-2">
+                      <label className="flex flex-col items-center justify-center w-full h-32 px-4 border-2 border-dashed border-slate-700 rounded-xl cursor-pointer bg-slate-800/50 hover:bg-slate-800 transition-colors">
+                        <Upload className="h-8 w-8 text-gray-400 mb-2" />
+                        <span className="text-sm text-gray-400">
+                          Klik atau drag & drop file
+                        </span>
+                        <span className="text-xs text-gray-500 mt-1">
+                          Dokumen, foto, atau file penting lainnya
+                        </span>
+                        <input
+                          type="file"
+                          multiple
+                          onChange={handleFileChange}
+                          className="hidden"
+                          disabled={availableBalance === 0}
+                        />
+                      </label>
+                      
+                      {files.length > 0 && (
+                        <div className="space-y-2">
+                          {files.map((file, index) => (
+                            <div key={index} className="flex items-center gap-2 p-2 bg-slate-800 rounded-lg">
+                              <FileText className="h-4 w-4 text-blue-400 flex-shrink-0" />
+                              <span className="text-sm text-gray-300 flex-1 truncate">
+                                {file.name}
+                              </span>
+                              <span className="text-xs text-gray-500">
+                                {(file.size / 1024).toFixed(1)} KB
+                              </span>
+                              <button
+                                type="button"
+                                onClick={() => removeFile(index)}
+                                className="p-1 hover:bg-slate-700 rounded transition-colors"
+                              >
+                                <X className="h-4 w-4 text-gray-400" />
+                              </button>
+                            </div>
+                          ))}
+                        </div>
+                      )}
+                    </div>
+                  </div>
+                  
                   {/* Beneficiaries */}
                   <div>
                     <div className="flex items-center justify-between mb-3">
@@ -322,22 +413,22 @@ export function CreateInheritanceDialog({ children, onSuccess }: Props) {
                       <AlertCircle className="h-5 w-5 text-yellow-400 flex-shrink-0 mt-0.5" />
                       <div className="text-sm text-yellow-300 space-y-1">
                         {availableBalance === 0 && (
-                          <p>• Vault balance is 0. Please deposit ETH first.</p>
+                          <p>• Saldo vault Anda 0. Silakan deposit ETH terlebih dahulu di tab Vault.</p>
                         )}
                         {hasInsufficientBalance && availableBalance > 0 && (
-                          <p>• Amount exceeds vault balance ({availableBalance.toFixed(4)} ETH available)</p>
+                          <p>• Jumlah melebihi saldo vault (tersedia: {availableBalance.toFixed(4)} ETH)</p>
                         )}
                         {Math.abs(totalPercentage - 100) >= 0.01 && (
-                          <p>• Percentages must total 100%</p>
+                          <p>• Total persentase harus 100%</p>
                         )}
-                        {(!amount || requestedAmount <= 0) && (
-                          <p>• Enter a valid amount to lock</p>
+                        {(!amount || requestedAmount <= 0) && availableBalance > 0 && (
+                          <p>• Masukkan jumlah yang valid</p>
                         )}
                         {beneficiaries.some(b => !b.address || !b.percentage) && (
-                          <p>• Fill in all beneficiary fields</p>
+                          <p>• Lengkapi semua field beneficiary</p>
                         )}
                         {(!days || parseFloat(days) <= 0) && (
-                          <p>• Select a valid countdown period</p>
+                          <p>• Pilih periode countdown yang valid</p>
                         )}
                       </div>
                     </div>
@@ -353,10 +444,15 @@ export function CreateInheritanceDialog({ children, onSuccess }: Props) {
                     </button>
                     <button
                       onClick={handleCreate}
-                      disabled={!isValid || isPending || isConfirming}
+                      disabled={!isValid || isPending || isConfirming || isUploading}
                       className="flex-1 px-4 py-3 bg-blue-600 hover:bg-blue-700 disabled:bg-slate-700 disabled:text-gray-500 text-white font-medium rounded-xl transition-colors flex items-center justify-center gap-2"
                     >
-                      {(isPending || isConfirming) ? (
+                      {isUploading ? (
+                        <>
+                          <Loader2 className="h-4 w-4 animate-spin" />
+                          Uploading files...
+                        </>
+                      ) : (isPending || isConfirming) ? (
                         <>
                           <Loader2 className="h-4 w-4 animate-spin" />
                           Creating...

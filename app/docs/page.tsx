@@ -14,36 +14,37 @@ export default function DocsPage() {
 
       <section className="mb-12">
         <h2 className="text-xl font-semibold mb-3">What is Athera?</h2>
-        <p className="text-gray-300 leading-relaxed mb-4">
-          Athera automatically distributes your crypto to beneficiaries when you become inactive. 
-          Create a vault, set a threshold, and check-in periodically. If you stop checking in, 
-          your assets transfer automatically.
+        <p className="text-gray-300 leading-relaxed mb-4 text-justify">
+          Athera is a decentralized inheritance protocol built on Base blockchain that automatically distributes your crypto assets to designated beneficiaries when you become inactive. Create a vault, deposit your assets, set a countdown period (e.g., 1 year), and check-in periodically to prove you're still active. If you stop checking in for the specified period, your assets are automatically distributed to your beneficiaries according to the percentages you've set—powered by Chainlink Automation for trustless execution.
         </p>
-        <p className="text-gray-400 leading-relaxed">
-          It's a dead man's switch for crypto—simple, automated, and non-custodial.
+        <p className="text-gray-400 leading-relaxed text-justify">
+          Unlike traditional inheritance systems that require lawyers and lengthy legal processes, Athera uses smart contracts to automate everything. It's completely non-custodial (you maintain full control), transparent (all transactions verifiable on BaseScan), and supports additional features like IPFS document storage and Telegram notifications. Think of it as a dead man's switch for crypto—simple, automated, and trustless.
         </p>
       </section>
 
-      <div className="not-prose grid grid-cols-1 md:grid-cols-3 gap-3 mb-12 text-sm">
-        <div className="border border-gray-800 rounded-md p-4">
-          <div className="font-medium mb-1">Non-Custodial</div>
-          <div className="text-gray-400">
-            Full control of your assets
+      <section className="mb-12">
+        <h2 className="text-xl font-semibold mb-4">Key Features</h2>
+        <div className="not-prose grid grid-cols-1 md:grid-cols-3 gap-4 text-sm">
+          <div className="border border-gray-800 rounded-lg p-5 bg-slate-900/30">
+            <div className="text-lg font-semibold mb-2 text-white">Non-Custodial</div>
+            <div className="text-gray-400">
+              Full control of your assets
+            </div>
+          </div>
+          <div className="border border-gray-800 rounded-lg p-5 bg-slate-900/30">
+            <div className="text-lg font-semibold mb-2 text-white">Automated</div>
+            <div className="text-gray-400">
+              Chainlink handles distribution
+            </div>
+          </div>
+          <div className="border border-gray-800 rounded-lg p-5 bg-slate-900/30">
+            <div className="text-lg font-semibold mb-2 text-white">Trustless</div>
+            <div className="text-gray-400">
+              Smart contracts, no intermediaries
+            </div>
           </div>
         </div>
-        <div className="border border-gray-800 rounded-md p-4">
-          <div className="font-medium mb-1">Automated</div>
-          <div className="text-gray-400">
-            Chainlink handles distribution
-          </div>
-        </div>
-        <div className="border border-gray-800 rounded-md p-4">
-          <div className="font-medium mb-1">Trustless</div>
-          <div className="text-gray-400">
-            Smart contracts, no intermediaries
-          </div>
-        </div>
-      </div>
+      </section>
 
       <section className="mb-12">
         <h2 className="text-xl font-semibold mb-3">Get Started</h2>

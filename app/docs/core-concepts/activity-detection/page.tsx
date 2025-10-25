@@ -22,9 +22,9 @@ export default function ActivityDetectionPage() {
         <li><strong>Security:</strong> Requires owner signature</li>
       </ul>
 
-      <div className="not-prose border border-gray-800 rounded-md p-4 my-6">
-        <p className="text-sm text-gray-400">
-          <strong className="text-gray-300">Note:</strong> If you regularly deposit to your vault, you don't need to manually check-in. Each deposit resets the countdown.
+      <div className="not-prose border border-gray-800 rounded-lg p-4 my-6 bg-blue-500/10 border-blue-500/20">
+        <p className="text-sm text-gray-300">
+          <strong className="text-white">💡 Note:</strong> If you regularly deposit to your vault, you don't need to manually check-in. Each deposit resets the countdown.
         </p>
       </div>
 
@@ -71,21 +71,21 @@ export default function ActivityDetectionPage() {
       </ul>
 
       <h2>Costs</h2>
-      <div className="not-prose grid grid-cols-1 md:grid-cols-3 gap-3 my-6 text-sm">
-        <div className="border border-gray-800 rounded-md p-4">
-          <div className="font-medium mb-2">Check-In</div>
-          <div className="text-lg mb-1">~$0.50</div>
-          <div className="text-gray-500 text-xs">Per check-in</div>
+      <div className="not-prose grid grid-cols-1 md:grid-cols-3 gap-4 my-6 text-sm">
+        <div className="border border-gray-800 rounded-lg p-5 bg-slate-900/30">
+          <div className="text-base font-semibold mb-2 text-white">Check-In</div>
+          <div className="text-2xl font-bold mb-1 text-white">~$0.02-0.05</div>
+          <div className="text-gray-400 text-xs">Per check-in (Base L2)</div>
         </div>
-        <div className="border border-gray-800 rounded-md p-4">
-          <div className="font-medium mb-2">Distribution</div>
-          <div className="text-lg mb-1">$0</div>
-          <div className="text-gray-500 text-xs">Paid by Chainlink</div>
+        <div className="border border-gray-800 rounded-lg p-5 bg-slate-900/30">
+          <div className="text-base font-semibold mb-2 text-white">Distribution</div>
+          <div className="text-2xl font-bold mb-1 text-white">$0</div>
+          <div className="text-gray-400 text-xs">Paid by Chainlink</div>
         </div>
-        <div className="border border-gray-800 rounded-md p-4">
-          <div className="font-medium mb-2">Annual</div>
-          <div className="text-lg mb-1">~$1-2</div>
-          <div className="text-gray-500 text-xs">2 check-ins/year</div>
+        <div className="border border-gray-800 rounded-lg p-5 bg-slate-900/30">
+          <div className="text-base font-semibold mb-2 text-white">Annual Cost</div>
+          <div className="text-2xl font-bold mb-1 text-white">~$0.04-0.10</div>
+          <div className="text-gray-400 text-xs">2 check-ins/year</div>
         </div>
       </div>
 
