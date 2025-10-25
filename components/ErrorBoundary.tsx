@@ -78,7 +78,7 @@ export class ErrorBoundary extends React.Component<ErrorBoundaryProps, ErrorBoun
               <Button 
                 onClick={() => window.location.reload()}
                 className="flex-1"
-                variant="gold"
+                variant="default"
               >
                 Refresh Page
               </Button>

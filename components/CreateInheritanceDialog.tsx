@@ -1,0 +1,281 @@
+'use client'
+
+import { useState } from 'react'
+import { useWriteContract, useWaitForTransactionReceipt, useReadContract } from 'wagmi'
+import { parseEther } from 'viem'
+import { FACTORY_ADDRESS, FACTORY_ABI } from '../lib/contracts'
+import { X, Plus, Trash2, Loader2, AlertCircle } from 'lucide-react'
+import { motion, AnimatePresence } from 'framer-motion'
+import { useDashboardStore } from '../store/dashboard'
+
+interface Beneficiary {
+  address: string
+  percentage: string
+}
+
+interface Props {
+  children: React.ReactNode
+  onSuccess: () => void
+}
+
+export function CreateInheritanceDialog({ children, onSuccess }: Props) {
+  const [isOpen, setIsOpen] = useState(false)
+  const [beneficiaries, setBeneficiaries] = useState<Beneficiary[]>([
+    { address: '', percentage: '' }
+  ])
+  const [amount, setAmount] = useState('')
+  const [days, setDays] = useState('30')
+  
+  const { addNotification } = useDashboardStore()
+  
+  const { writeContract: createVault, data: hash, isPending } = useWriteContract()
+  const { isLoading: isConfirming, isSuccess } = useWaitForTransactionReceipt({ hash })
+  
+  const addBeneficiary = () => {
+    setBeneficiaries([...beneficiaries, { address: '', percentage: '' }])
+  }
+  
+  const removeBeneficiary = (index: number) => {
+    setBeneficiaries(beneficiaries.filter((_, i) => i !== index))
+  }
+  
+  const updateBeneficiary = (index: number, field: 'address' | 'percentage', value: string) => {
+    const updated = [...beneficiaries]
+    updated[index][field] = value
+    setBeneficiaries(updated)
+  }
+  
+  const totalPercentage = beneficiaries.reduce((sum, b) => sum + (parseFloat(b.percentage) || 0), 0)
+  const isValid = 
+    beneficiaries.every(b => b.address && b.percentage) &&
+    Math.abs(totalPercentage - 100) < 0.01 &&
+    amount &&
+    parseFloat(amount) > 0 &&
+    days &&
+    parseInt(days) > 0
+  
+  const handleCreate = async () => {
+    if (!isValid) return
+    
+    try {
+      const addresses = beneficiaries.map(b => b.address as `0x${string}`)
+      const percentages = beneficiaries.map(b => BigInt(Math.round(parseFloat(b.percentage) * 100)))
+      const thresholdSeconds = BigInt(parseInt(days) * 86400)
+      const amountWei = parseEther(amount)
+      
+      createVault({
+        address: FACTORY_ADDRESS,
+        abi: FACTORY_ABI,
+        functionName: 'createVault',
+        args: [addresses, percentages, thresholdSeconds, amountWei],
+      } as any)
+      
+      addNotification({
+        type: 'info',
+        message: 'Creating inheritance vault...',
+      })
+    } catch (error: any) {
+      addNotification({
+        type: 'error',
+        message: error.message || 'Failed to create vault',
+      })
+    }
+  }
+  
+  if (isSuccess) {
+    setTimeout(() => {
+      setIsOpen(false)
+      onSuccess()
+      setBeneficiaries([{ address: '', percentage: '' }])
+      setAmount('')
+      setDays('30')
+      
+      addNotification({
+        type: 'success',
+        message: 'Inheritance vault created successfully!',
+      })
+    }, 1000)
+  }
+  
+  return (
+    <>
+      <div onClick={() => setIsOpen(true)}>
+        {children}
+      </div>
+      
+      <AnimatePresence>
+        {isOpen && (
+          <>
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              onClick={() => setIsOpen(false)}
+              className="fixed inset-0 bg-black/80 backdrop-blur-sm z-50"
+            />
+            
+            <div className="fixed inset-0 z-50 flex items-center justify-center p-4">
+              <motion.div
+                initial={{ opacity: 0, scale: 0.95, y: 20 }}
+                animate={{ opacity: 1, scale: 1, y: 0 }}
+                exit={{ opacity: 0, scale: 0.95, y: 20 }}
+                className="bg-slate-900 border border-slate-800 rounded-2xl w-full max-w-2xl max-h-[90vh] overflow-y-auto"
+              >
+                <div className="sticky top-0 bg-slate-900 border-b border-slate-800 p-6 flex items-center justify-between">
+                  <h2 className="text-xl font-bold text-white">Create Inheritance Vault</h2>
+                  <button
+                    onClick={() => setIsOpen(false)}
+                    className="p-2 hover:bg-slate-800 rounded-lg transition-colors"
+                  >
+                    <X className="h-5 w-5 text-gray-400" />
+                  </button>
+                </div>
+                
+                <div className="p-6 space-y-6">
+                  {/* Amount */}
+                  <div>
+                    <label className="block text-sm font-medium text-gray-300 mb-2">
+                      Amount to Lock (ETH)
+                    </label>
+                    <input
+                      type="number"
+                      step="0.001"
+                      value={amount}
+                      onChange={(e) => setAmount(e.target.value)}
+                      placeholder="0.0"
+                      className="w-full px-4 py-3 bg-slate-800 border border-slate-700 rounded-xl text-white placeholder-gray-500 focus:outline-none focus:border-blue-500 transition-colors"
+                    />
+                  </div>
+                  
+                  {/* Countdown */}
+                  <div>
+                    <label className="block text-sm font-medium text-gray-300 mb-2">
+                      Countdown Period (Days)
+                    </label>
+                    <div className="grid grid-cols-4 gap-2 mb-2">
+                      {['7', '30', '90', '365'].map((d) => (
+                        <button
+                          key={d}
+                          onClick={() => setDays(d)}
+                          className={`px-4 py-2 text-sm font-medium rounded-xl transition-colors ${
+                            days === d
+                              ? 'bg-blue-600 text-white'
+                              : 'bg-slate-800 text-gray-400 hover:text-white'
+                          }`}
+                        >
+                          {d}d
+                        </button>
+                      ))}
+                    </div>
+                    <input
+                      type="number"
+                      value={days}
+                      onChange={(e) => setDays(e.target.value)}
+                      placeholder="Custom days"
+                      className="w-full px-4 py-3 bg-slate-800 border border-slate-700 rounded-xl text-white placeholder-gray-500 focus:outline-none focus:border-blue-500 transition-colors"
+                    />
+                  </div>
+                  
+                  {/* Beneficiaries */}
+                  <div>
+                    <div className="flex items-center justify-between mb-3">
+                      <label className="block text-sm font-medium text-gray-300">
+                        Beneficiaries
+                      </label>
+                      <button
+                        onClick={addBeneficiary}
+                        className="flex items-center gap-1 px-3 py-1.5 bg-slate-800 hover:bg-slate-700 text-sm text-gray-300 rounded-lg transition-colors"
+                      >
+                        <Plus className="h-4 w-4" />
+                        Add
+                      </button>
+                    </div>
+                    
+                    <div className="space-y-3">
+                      {beneficiaries.map((beneficiary, index) => (
+                        <div key={index} className="flex gap-2">
+                          <input
+                            type="text"
+                            value={beneficiary.address}
+                            onChange={(e) => updateBeneficiary(index, 'address', e.target.value)}
+                            placeholder="0x..."
+                            className="flex-1 px-4 py-3 bg-slate-800 border border-slate-700 rounded-xl text-white placeholder-gray-500 focus:outline-none focus:border-blue-500 transition-colors font-mono text-sm"
+                          />
+                          <input
+                            type="number"
+                            step="0.1"
+                            value={beneficiary.percentage}
+                            onChange={(e) => updateBeneficiary(index, 'percentage', e.target.value)}
+                            placeholder="%"
+                            className="w-24 px-4 py-3 bg-slate-800 border border-slate-700 rounded-xl text-white placeholder-gray-500 focus:outline-none focus:border-blue-500 transition-colors"
+                          />
+                          {beneficiaries.length > 1 && (
+                            <button
+                              onClick={() => removeBeneficiary(index)}
+                              className="p-3 bg-slate-800 hover:bg-red-500/20 text-gray-400 hover:text-red-400 rounded-xl transition-colors"
+                            >
+                              <Trash2 className="h-5 w-5" />
+                            </button>
+                          )}
+                        </div>
+                      ))}
+                    </div>
+                    
+                    <div className="mt-3 flex items-center justify-between text-sm">
+                      <span className="text-gray-400">Total percentage:</span>
+                      <span className={`font-medium ${
+                        Math.abs(totalPercentage - 100) < 0.01 ? 'text-green-400' : 'text-red-400'
+                      }`}>
+                        {totalPercentage.toFixed(1)}%
+                      </span>
+                    </div>
+                  </div>
+                  
+                  {/* Warning */}
+                  {!isValid && (
+                    <div className="flex gap-3 p-4 bg-yellow-500/10 border border-yellow-500/20 rounded-xl">
+                      <AlertCircle className="h-5 w-5 text-yellow-400 flex-shrink-0 mt-0.5" />
+                      <div className="text-sm text-yellow-300">
+                        {Math.abs(totalPercentage - 100) >= 0.01 && (
+                          <p>• Percentages must total 100%</p>
+                        )}
+                        {!amount && <p>• Enter an amount to lock</p>}
+                        {beneficiaries.some(b => !b.address || !b.percentage) && (
+                          <p>• Fill in all beneficiary fields</p>
+                        )}
+                      </div>
+                    </div>
+                  )}
+                  
+                  {/* Actions */}
+                  <div className="flex gap-3 pt-4">
+                    <button
+                      onClick={() => setIsOpen(false)}
+                      className="flex-1 px-4 py-3 bg-slate-800 hover:bg-slate-700 text-white font-medium rounded-xl transition-colors"
+                    >
+                      Cancel
+                    </button>
+                    <button
+                      onClick={handleCreate}
+                      disabled={!isValid || isPending || isConfirming}
+                      className="flex-1 px-4 py-3 bg-blue-600 hover:bg-blue-700 disabled:bg-slate-700 disabled:text-gray-500 text-white font-medium rounded-xl transition-colors flex items-center justify-center gap-2"
+                    >
+                      {(isPending || isConfirming) ? (
+                        <>
+                          <Loader2 className="h-4 w-4 animate-spin" />
+                          Creating...
+                        </>
+                      ) : (
+                        'Create Vault'
+                      )}
+                    </button>
+                  </div>
+                </div>
+              </motion.div>
+            </div>
+          </>
+        )}
+      </AnimatePresence>
+    </>
+  )
+}

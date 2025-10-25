@@ -1,7 +1,7 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   images: {
-    domains: ['localhost'],
+    domains: ['localhost', 'ipfs.io', 'gateway.pinata.cloud'],
   },
   env: {
     NEXT_PUBLIC_BASE_SEPOLIA_RPC_URL: process.env.NEXT_PUBLIC_BASE_SEPOLIA_RPC_URL,
@@ -14,6 +14,9 @@ const nextConfig = {
       ...config.resolve.fallback,
       '@react-native-async-storage/async-storage': false,
       'pino-pretty': false,
+      fs: false,
+      net: false,
+      tls: false,
     }
     
     // Add alias for missing modules
@@ -21,23 +24,6 @@ const nextConfig = {
       ...config.resolve.alias,
       '@react-native-async-storage/async-storage': false,
       'pino-pretty': false,
-    }
-    
-    // Fix for vendor chunks issues
-    config.optimization = {
-      ...config.optimization,
-      splitChunks: {
-        ...config.optimization.splitChunks,
-        cacheGroups: {
-          ...config.optimization.splitChunks?.cacheGroups,
-          default: {
-            ...config.optimization.splitChunks?.cacheGroups?.default,
-            minChunks: 1,
-            priority: -20,
-            reuseExistingChunk: true,
-          },
-        },
-      },
     }
     
     return config

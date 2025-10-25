@@ -478,7 +478,7 @@ export function CreateVaultDialog({ children, onSuccess }: CreateVaultDialogProp
             <Button
               onClick={handleSubmit}
               disabled={!isValid || isPending || isSuccess || !hasBalance}
-              variant="gold"
+              variant="default"
             >
               {isSuccess ? '✓ Created!' : isPending ? 'Waiting for confirmation...' : !hasBalance ? 'Insufficient Balance' : 'Create Vault'}
             </Button>

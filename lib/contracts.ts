@@ -145,16 +145,60 @@ export const VAULT_ABI = [
 export const FACTORY_ABI = [
   {
     inputs: [],
-    name: 'deposit',
-    outputs: [],
-    stateMutability: 'payable',
-    type: 'function'
+    name: 'InsufficientBalance',
+    type: 'error'
   },
   {
-    inputs: [{ internalType: 'uint256', name: 'amount', type: 'uint256' }],
-    name: 'withdraw',
-    outputs: [],
-    stateMutability: 'nonpayable',
+    inputs: [],
+    name: 'InsufficientContractBalance',
+    type: 'error'
+  },
+  {
+    inputs: [],
+    name: 'InvalidAmount',
+    type: 'error'
+  },
+  {
+    inputs: [],
+    name: 'TransferFailed',
+    type: 'error'
+  },
+  {
+    anonymous: false,
+    inputs: [
+      { indexed: true, internalType: 'address', name: 'user', type: 'address' },
+      { indexed: false, internalType: 'uint256', name: 'amount', type: 'uint256' }
+    ],
+    name: 'Deposited',
+    type: 'event'
+  },
+  {
+    anonymous: false,
+    inputs: [
+      { indexed: true, internalType: 'address', name: 'owner', type: 'address' },
+      { indexed: true, internalType: 'address', name: 'vault', type: 'address' },
+      { indexed: false, internalType: 'address[]', name: 'beneficiaries', type: 'address[]' },
+      { indexed: false, internalType: 'uint256[]', name: 'percentages', type: 'uint256[]' },
+      { indexed: false, internalType: 'uint256', name: 'threshold', type: 'uint256' },
+      { indexed: false, internalType: 'uint256', name: 'amount', type: 'uint256' }
+    ],
+    name: 'VaultCreated',
+    type: 'event'
+  },
+  {
+    anonymous: false,
+    inputs: [
+      { indexed: true, internalType: 'address', name: 'user', type: 'address' },
+      { indexed: false, internalType: 'uint256', name: 'amount', type: 'uint256' }
+    ],
+    name: 'Withdrawn',
+    type: 'event'
+  },
+  {
+    inputs: [{ internalType: 'uint256', name: '', type: 'uint256' }],
+    name: 'allVaults',
+    outputs: [{ internalType: 'address', name: '', type: 'address' }],
+    stateMutability: 'view',
     type: 'function'
   },
   {
@@ -167,6 +211,20 @@ export const FACTORY_ABI = [
     name: 'createVault',
     outputs: [{ internalType: 'address', name: 'vault', type: 'address' }],
     stateMutability: 'nonpayable',
+    type: 'function'
+  },
+  {
+    inputs: [],
+    name: 'deposit',
+    outputs: [],
+    stateMutability: 'payable',
+    type: 'function'
+  },
+  {
+    inputs: [],
+    name: 'getAllVaults',
+    outputs: [{ internalType: 'address[]', name: '', type: 'address[]' }],
+    stateMutability: 'view',
     type: 'function'
   },
   {
@@ -191,29 +249,32 @@ export const FACTORY_ABI = [
     type: 'function'
   },
   {
-    inputs: [],
-    name: 'getAllVaults',
-    outputs: [{ internalType: 'address[]', name: '', type: 'address[]' }],
+    inputs: [
+      { internalType: 'address', name: '', type: 'address' },
+      { internalType: 'uint256', name: '', type: 'uint256' }
+    ],
+    name: 'ownerVaults',
+    outputs: [{ internalType: 'address', name: '', type: 'address' }],
     stateMutability: 'view',
     type: 'function'
   },
   {
-    anonymous: false,
-    inputs: [
-      { indexed: true, internalType: 'address', name: 'user', type: 'address' },
-      { indexed: false, internalType: 'uint256', name: 'amount', type: 'uint256' }
-    ],
-    name: 'Deposited',
-    type: 'event'
+    inputs: [{ internalType: 'address', name: '', type: 'address' }],
+    name: 'userBalances',
+    outputs: [{ internalType: 'uint256', name: '', type: 'uint256' }],
+    stateMutability: 'view',
+    type: 'function'
   },
   {
-    anonymous: false,
-    inputs: [
-      { indexed: true, internalType: 'address', name: 'user', type: 'address' },
-      { indexed: false, internalType: 'uint256', name: 'amount', type: 'uint256' }
-    ],
-    name: 'Withdrawn',
-    type: 'event'
+    inputs: [{ internalType: 'uint256', name: 'amount', type: 'uint256' }],
+    name: 'withdraw',
+    outputs: [],
+    stateMutability: 'nonpayable',
+    type: 'function'
+  },
+  {
+    stateMutability: 'payable',
+    type: 'receive'
   }
 ] as const
 

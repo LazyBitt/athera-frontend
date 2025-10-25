@@ -1,141 +1,83 @@
-/**
- * Telegram Bot API utility functions for Athera
- * Handles sending notifications to heirs via Telegram
- */
+import axios from 'axios'
 
-export interface TelegramMessage {
-  chatId: string
+const BOT_TOKEN = process.env.NEXT_PUBLIC_TELEGRAM_BOT_TOKEN
+
+export async function sendTelegramNotification(
+  chatId: string,
   message: string
-}
+): Promise<boolean> {
+  if (!BOT_TOKEN) {
+    console.warn('Telegram bot token not configured')
+    return false
+  }
 
-export interface TelegramResponse {
-  success: boolean
-  messageId?: number
-  chatId?: number
-  timestamp?: string
-  error?: string
-}
-
-/**
- * Send a message via Telegram Bot API
- * @param message - The message to send
- * @returns Promise with the response
- */
-export async function sendTelegramMessage(message: TelegramMessage): Promise<TelegramResponse> {
   try {
-    const response = await fetch('/api/sendTelegram', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify(message),
-    })
-
-    const data = await response.json()
-
-    if (!response.ok) {
-      throw new Error(data.error || 'Failed to send Telegram message')
-    }
-
-    return data
+    const response = await axios.post(
+      `https://api.telegram.org/bot${BOT_TOKEN}/sendMessage`,
+      {
+        chat_id: chatId,
+        text: message,
+        parse_mode: 'HTML',
+      }
+    )
+    return response.data.ok
   } catch (error) {
-    console.error('Telegram API error:', error)
-    return {
-      success: false,
-      error: error instanceof Error ? error.message : 'Unknown error'
-    }
+    console.error('Telegram notification error:', error)
+    return false
   }
 }
 
-/**
- * Send inheritance notification to heir
- * @param heir - Heir information
- * @param vaultAddress - Vault address
- * @param amount - Amount to be distributed
- */
-export async function sendInheritanceNotification(
-  heir: { telegramChatId?: string; email?: string },
+export async function notifyCountdownWarning(
+  chatId: string,
+  vaultAddress: string,
+  hoursRemaining: number
+): Promise<boolean> {
+  const message = `
+⚠️ <b>Athera Vault Alert</b>
+
+Your vault is approaching the distribution deadline.
+
+<b>Vault:</b> <code>${vaultAddress.slice(0, 10)}...${vaultAddress.slice(-8)}</code>
+<b>Time Remaining:</b> ${hoursRemaining} hours
+
+Please check in to reset the countdown if you're still active.
+  `.trim()
+
+  return sendTelegramNotification(chatId, message)
+}
+
+export async function notifyInheritanceExecuted(
+  chatId: string,
   vaultAddress: string,
   amount: string
-): Promise<TelegramResponse> {
-  if (!heir.telegramChatId) {
-    return {
-      success: false,
-      error: 'No Telegram chat ID provided'
-    }
-  }
-
+): Promise<boolean> {
   const message = `
-🔔 **Athera Inheritance Notification**
+✅ <b>Inheritance Distributed</b>
 
-Your inheritance distribution has been triggered from vault:
-\`${vaultAddress}\`
+An inheritance vault has been successfully distributed.
 
-💰 **Amount**: ${amount} ETH
+<b>Vault:</b> <code>${vaultAddress.slice(0, 10)}...${vaultAddress.slice(-8)}</code>
+<b>Amount:</b> ${amount} ETH
 
-This distribution was triggered due to the vault owner's inactivity period. Please check your wallet for the received funds.
-
-For support, visit: https://athera.io/support
+The funds have been transferred to the designated beneficiaries.
   `.trim()
 
-  return sendTelegramMessage({
-    chatId: heir.telegramChatId,
-    message
-  })
+  return sendTelegramNotification(chatId, message)
 }
 
-/**
- * Send activity warning notification
- * @param chatId - Telegram chat ID
- * @param daysSinceActivity - Days since last activity
- */
-export async function sendActivityWarning(
-  chatId: string,
-  daysSinceActivity: number
-): Promise<TelegramResponse> {
-  const message = `
-⚠️ **Athera Activity Warning**
-
-Your vault has been inactive for ${daysSinceActivity} days.
-
-To prevent automatic distribution, please interact with your vault soon by:
-• Making a transaction
-• Pinging your vault
-• Updating vault settings
-
-Visit your dashboard: https://athera.io/dashboard
-  `.trim()
-
-  return sendTelegramMessage({
-    chatId,
-    message
-  })
-}
-
-/**
- * Send vault creation confirmation
- * @param chatId - Telegram chat ID
- * @param vaultAddress - New vault address
- */
-export async function sendVaultCreationConfirmation(
+export async function notifyVaultCreated(
   chatId: string,
   vaultAddress: string
-): Promise<TelegramResponse> {
+): Promise<boolean> {
   const message = `
-✅ **Athera Vault Created Successfully**
+🎉 <b>Vault Created Successfully</b>
 
-Your crypto inheritance vault has been created:
-\`${vaultAddress}\`
+Your new inheritance vault is now active.
 
-Your vault is now active and monitoring your wallet activity. You can manage your heirs and settings in the dashboard.
+<b>Vault Address:</b> <code>${vaultAddress}</code>
 
-Dashboard: https://athera.io/dashboard
+You can manage it from your Athera dashboard.
   `.trim()
 
-  return sendTelegramMessage({
-    chatId,
-    message
-  })
+  return sendTelegramNotification(chatId, message)
 }
-
-

@@ -14,7 +14,7 @@
   "node_modules\\@rainbow-me\\rainbowkit\\dist\\index.js -> ./Browser-76IHF3Y2.js": {
     "id": "node_modules\\@rainbow-me\\rainbowkit\\dist\\index.js -> ./Browser-76IHF3Y2.js",
     "files": [
-      "static/chunks/default-vendors-_app-pages-browser_node_modules_rainbow-me_rainbowkit_dist_Browser-76IHF3Y2_js.js"
+      "static/chunks/_app-pages-browser_node_modules_rainbow-me_rainbowkit_dist_Browser-76IHF3Y2_js.js"
     ]
   },
   "node_modules\\@rainbow-me\\rainbowkit\\dist\\index.js -> ./Chrome-65Q5P54Y.js": {
@@ -32,19 +32,19 @@
   "node_modules\\@rainbow-me\\rainbowkit\\dist\\index.js -> ./Firefox-AAHGJQIP.js": {
     "id": "node_modules\\@rainbow-me\\rainbowkit\\dist\\index.js -> ./Firefox-AAHGJQIP.js",
     "files": [
-      "static/chunks/default-vendors-_app-pages-browser_node_modules_rainbow-me_rainbowkit_dist_Firefox-AAHGJQIP_js.js"
+      "static/chunks/_app-pages-browser_node_modules_rainbow-me_rainbowkit_dist_Firefox-AAHGJQIP_js.js"
     ]
   },
   "node_modules\\@rainbow-me\\rainbowkit\\dist\\index.js -> ./Linux-OO4TNCLJ.js": {
     "id": "node_modules\\@rainbow-me\\rainbowkit\\dist\\index.js -> ./Linux-OO4TNCLJ.js",
     "files": [
-      "static/chunks/default-vendors-_app-pages-browser_node_modules_rainbow-me_rainbowkit_dist_Linux-OO4TNCLJ_js.js"
+      "static/chunks/_app-pages-browser_node_modules_rainbow-me_rainbowkit_dist_Linux-OO4TNCLJ_js.js"
     ]
   },
   "node_modules\\@rainbow-me\\rainbowkit\\dist\\index.js -> ./Macos-MW4AE7LN.js": {
     "id": "node_modules\\@rainbow-me\\rainbowkit\\dist\\index.js -> ./Macos-MW4AE7LN.js",
     "files": [
-      "static/chunks/default-vendors-_app-pages-browser_node_modules_rainbow-me_rainbowkit_dist_Macos-MW4AE7LN_js.js"
+      "static/chunks/_app-pages-browser_node_modules_rainbow-me_rainbowkit_dist_Macos-MW4AE7LN_js.js"
     ]
   },
   "node_modules\\@rainbow-me\\rainbowkit\\dist\\index.js -> ./Opera-KQZLSACL.js": {
@@ -56,7 +56,7 @@
   "node_modules\\@rainbow-me\\rainbowkit\\dist\\index.js -> ./Safari-ZPL37GXR.js": {
     "id": "node_modules\\@rainbow-me\\rainbowkit\\dist\\index.js -> ./Safari-ZPL37GXR.js",
     "files": [
-      "static/chunks/default-vendors-_app-pages-browser_node_modules_rainbow-me_rainbowkit_dist_Safari-ZPL37GXR_js.js"
+      "static/chunks/_app-pages-browser_node_modules_rainbow-me_rainbowkit_dist_Safari-ZPL37GXR_js.js"
     ]
   },
   "node_modules\\@rainbow-me\\rainbowkit\\dist\\index.js -> ./Windows-PPTHQER6.js": {
@@ -74,7 +74,7 @@
   "node_modules\\@rainbow-me\\rainbowkit\\dist\\index.js -> ./ar_AR-CTNWGWSS.js": {
     "id": "node_modules\\@rainbow-me\\rainbowkit\\dist\\index.js -> ./ar_AR-CTNWGWSS.js",
     "files": [
-      "static/chunks/default-vendors-_app-pages-browser_node_modules_rainbow-me_rainbowkit_dist_ar_AR-CTNWGWSS_js.js"
+      "static/chunks/_app-pages-browser_node_modules_rainbow-me_rainbowkit_dist_ar_AR-CTNWGWSS_js.js"
     ]
   },
   "node_modules\\@rainbow-me\\rainbowkit\\dist\\index.js -> ./arbitrum-WURIBY6W.js": {
@@ -86,7 +86,7 @@
   "node_modules\\@rainbow-me\\rainbowkit\\dist\\index.js -> ./assets-Q6ZU7ZJ5.js": {
     "id": "node_modules\\@rainbow-me\\rainbowkit\\dist\\index.js -> ./assets-Q6ZU7ZJ5.js",
     "files": [
-      "static/chunks/default-vendors-_app-pages-browser_node_modules_rainbow-me_rainbowkit_dist_assets-Q6ZU7ZJ5_js.js"
+      "static/chunks/_app-pages-browser_node_modules_rainbow-me_rainbowkit_dist_assets-Q6ZU7ZJ5_js.js"
     ]
   },
   "node_modules\\@rainbow-me\\rainbowkit\\dist\\index.js -> ./avalanche-KOMJD3XY.js": {
@@ -152,7 +152,7 @@
   "node_modules\\@rainbow-me\\rainbowkit\\dist\\index.js -> ./de_DE-P43L3PR7.js": {
     "id": "node_modules\\@rainbow-me\\rainbowkit\\dist\\index.js -> ./de_DE-P43L3PR7.js",
     "files": [
-      "static/chunks/default-vendors-_app-pages-browser_node_modules_rainbow-me_rainbowkit_dist_de_DE-P43L3PR7_js.js"
+      "static/chunks/_app-pages-browser_node_modules_rainbow-me_rainbowkit_dist_de_DE-P43L3PR7_js.js"
     ]
   },
   "node_modules\\@rainbow-me\\rainbowkit\\dist\\index.js -> ./degen-FQQ4XGHB.js": {
@@ -170,7 +170,7 @@
   "node_modules\\@rainbow-me\\rainbowkit\\dist\\index.js -> ./es_419-JBX5FS3Q.js": {
     "id": "node_modules\\@rainbow-me\\rainbowkit\\dist\\index.js -> ./es_419-JBX5FS3Q.js",
     "files": [
-      "static/chunks/default-vendors-_app-pages-browser_node_modules_rainbow-me_rainbowkit_dist_es_419-JBX5FS3Q_js.js"
+      "static/chunks/_app-pages-browser_node_modules_rainbow-me_rainbowkit_dist_es_419-JBX5FS3Q_js.js"
     ]
   },
   "node_modules\\@rainbow-me\\rainbowkit\\dist\\index.js -> ./ethereum-RGGVA4PY.js": {
@@ -188,7 +188,7 @@
   "node_modules\\@rainbow-me\\rainbowkit\\dist\\index.js -> ./fr_FR-CM2EDAQC.js": {
     "id": "node_modules\\@rainbow-me\\rainbowkit\\dist\\index.js -> ./fr_FR-CM2EDAQC.js",
     "files": [
-      "static/chunks/default-vendors-_app-pages-browser_node_modules_rainbow-me_rainbowkit_dist_fr_FR-CM2EDAQC_js.js"
+      "static/chunks/_app-pages-browser_node_modules_rainbow-me_rainbowkit_dist_fr_FR-CM2EDAQC_js.js"
     ]
   },
   "node_modules\\@rainbow-me\\rainbowkit\\dist\\index.js -> ./gnosis-37ZC4RBL.js": {
@@ -212,7 +212,7 @@
   "node_modules\\@rainbow-me\\rainbowkit\\dist\\index.js -> ./hi_IN-GYVCUYRD.js": {
     "id": "node_modules\\@rainbow-me\\rainbowkit\\dist\\index.js -> ./hi_IN-GYVCUYRD.js",
     "files": [
-      "static/chunks/default-vendors-_app-pages-browser_node_modules_rainbow-me_rainbowkit_dist_hi_IN-GYVCUYRD_js.js"
+      "static/chunks/_app-pages-browser_node_modules_rainbow-me_rainbowkit_dist_hi_IN-GYVCUYRD_js.js"
     ]
   },
   "node_modules\\@rainbow-me\\rainbowkit\\dist\\index.js -> ./hyperevm-VKPAA4SA.js": {
@@ -224,7 +224,7 @@
   "node_modules\\@rainbow-me\\rainbowkit\\dist\\index.js -> ./id_ID-7ZWSMOOE.js": {
     "id": "node_modules\\@rainbow-me\\rainbowkit\\dist\\index.js -> ./id_ID-7ZWSMOOE.js",
     "files": [
-      "static/chunks/default-vendors-_app-pages-browser_node_modules_rainbow-me_rainbowkit_dist_id_ID-7ZWSMOOE_js.js"
+      "static/chunks/_app-pages-browser_node_modules_rainbow-me_rainbowkit_dist_id_ID-7ZWSMOOE_js.js"
     ]
   },
   "node_modules\\@rainbow-me\\rainbowkit\\dist\\index.js -> ./ink-FZMYZWHG.js": {
@@ -236,7 +236,7 @@
   "node_modules\\@rainbow-me\\rainbowkit\\dist\\index.js -> ./ja_JP-CGMP6VLZ.js": {
     "id": "node_modules\\@rainbow-me\\rainbowkit\\dist\\index.js -> ./ja_JP-CGMP6VLZ.js",
     "files": [
-      "static/chunks/default-vendors-_app-pages-browser_node_modules_rainbow-me_rainbowkit_dist_ja_JP-CGMP6VLZ_js.js"
+      "static/chunks/_app-pages-browser_node_modules_rainbow-me_rainbowkit_dist_ja_JP-CGMP6VLZ_js.js"
     ]
   },
   "node_modules\\@rainbow-me\\rainbowkit\\dist\\index.js -> ./kaia-65D2U3PU.js": {
@@ -248,7 +248,7 @@
   "node_modules\\@rainbow-me\\rainbowkit\\dist\\index.js -> ./ko_KR-YCZDTF7X.js": {
     "id": "node_modules\\@rainbow-me\\rainbowkit\\dist\\index.js -> ./ko_KR-YCZDTF7X.js",
     "files": [
-      "static/chunks/default-vendors-_app-pages-browser_node_modules_rainbow-me_rainbowkit_dist_ko_KR-YCZDTF7X_js.js"
+      "static/chunks/_app-pages-browser_node_modules_rainbow-me_rainbowkit_dist_ko_KR-YCZDTF7X_js.js"
     ]
   },
   "node_modules\\@rainbow-me\\rainbowkit\\dist\\index.js -> ./linea-QRMVQ5DY.js": {
@@ -260,7 +260,7 @@
   "node_modules\\@rainbow-me\\rainbowkit\\dist\\index.js -> ./login-UP3DZBGS.js": {
     "id": "node_modules\\@rainbow-me\\rainbowkit\\dist\\index.js -> ./login-UP3DZBGS.js",
     "files": [
-      "static/chunks/default-vendors-_app-pages-browser_node_modules_rainbow-me_rainbowkit_dist_login-UP3DZBGS_js.js"
+      "static/chunks/_app-pages-browser_node_modules_rainbow-me_rainbowkit_dist_login-UP3DZBGS_js.js"
     ]
   },
   "node_modules\\@rainbow-me\\rainbowkit\\dist\\index.js -> ./manta-SI27YFEJ.js": {
@@ -290,7 +290,7 @@
   "node_modules\\@rainbow-me\\rainbowkit\\dist\\index.js -> ./ms_MY-5LHAYMS7.js": {
     "id": "node_modules\\@rainbow-me\\rainbowkit\\dist\\index.js -> ./ms_MY-5LHAYMS7.js",
     "files": [
-      "static/chunks/default-vendors-_app-pages-browser_node_modules_rainbow-me_rainbowkit_dist_ms_MY-5LHAYMS7_js.js"
+      "static/chunks/_app-pages-browser_node_modules_rainbow-me_rainbowkit_dist_ms_MY-5LHAYMS7_js.js"
     ]
   },
   "node_modules\\@rainbow-me\\rainbowkit\\dist\\index.js -> ./optimism-HAF2GUT7.js": {
@@ -308,7 +308,7 @@
   "node_modules\\@rainbow-me\\rainbowkit\\dist\\index.js -> ./pt_BR-3JTS4PSK.js": {
     "id": "node_modules\\@rainbow-me\\rainbowkit\\dist\\index.js -> ./pt_BR-3JTS4PSK.js",
     "files": [
-      "static/chunks/default-vendors-_app-pages-browser_node_modules_rainbow-me_rainbowkit_dist_pt_BR-3JTS4PSK_js.js"
+      "static/chunks/_app-pages-browser_node_modules_rainbow-me_rainbowkit_dist_pt_BR-3JTS4PSK_js.js"
     ]
   },
   "node_modules\\@rainbow-me\\rainbowkit\\dist\\index.js -> ./rainbowWallet-O26YNBMX.js": {
@@ -332,7 +332,7 @@
   "node_modules\\@rainbow-me\\rainbowkit\\dist\\index.js -> ./ru_RU-6J6XERHI.js": {
     "id": "node_modules\\@rainbow-me\\rainbowkit\\dist\\index.js -> ./ru_RU-6J6XERHI.js",
     "files": [
-      "static/chunks/default-vendors-_app-pages-browser_node_modules_rainbow-me_rainbowkit_dist_ru_RU-6J6XERHI_js.js"
+      "static/chunks/_app-pages-browser_node_modules_rainbow-me_rainbowkit_dist_ru_RU-6J6XERHI_js.js"
     ]
   },
   "node_modules\\@rainbow-me\\rainbowkit\\dist\\index.js -> ./safeWallet-5MNKTR5Z.js": {
@@ -344,7 +344,7 @@
   "node_modules\\@rainbow-me\\rainbowkit\\dist\\index.js -> ./sanko-RHQYXGM5.js": {
     "id": "node_modules\\@rainbow-me\\rainbowkit\\dist\\index.js -> ./sanko-RHQYXGM5.js",
     "files": [
-      "static/chunks/default-vendors-_app-pages-browser_node_modules_rainbow-me_rainbowkit_dist_sanko-RHQYXGM5_js.js"
+      "static/chunks/_app-pages-browser_node_modules_rainbow-me_rainbowkit_dist_sanko-RHQYXGM5_js.js"
     ]
   },
   "node_modules\\@rainbow-me\\rainbowkit\\dist\\index.js -> ./scan-4UYSQ56Q.js": {
@@ -374,19 +374,19 @@
   "node_modules\\@rainbow-me\\rainbowkit\\dist\\index.js -> ./th_TH-STXOD4CR.js": {
     "id": "node_modules\\@rainbow-me\\rainbowkit\\dist\\index.js -> ./th_TH-STXOD4CR.js",
     "files": [
-      "static/chunks/default-vendors-_app-pages-browser_node_modules_rainbow-me_rainbowkit_dist_th_TH-STXOD4CR_js.js"
+      "static/chunks/_app-pages-browser_node_modules_rainbow-me_rainbowkit_dist_th_TH-STXOD4CR_js.js"
     ]
   },
   "node_modules\\@rainbow-me\\rainbowkit\\dist\\index.js -> ./tr_TR-P7QAUUZU.js": {
     "id": "node_modules\\@rainbow-me\\rainbowkit\\dist\\index.js -> ./tr_TR-P7QAUUZU.js",
     "files": [
-      "static/chunks/default-vendors-_app-pages-browser_node_modules_rainbow-me_rainbowkit_dist_tr_TR-P7QAUUZU_js.js"
+      "static/chunks/_app-pages-browser_node_modules_rainbow-me_rainbowkit_dist_tr_TR-P7QAUUZU_js.js"
     ]
   },
   "node_modules\\@rainbow-me\\rainbowkit\\dist\\index.js -> ./uk_UA-JTTBGJGQ.js": {
     "id": "node_modules\\@rainbow-me\\rainbowkit\\dist\\index.js -> ./uk_UA-JTTBGJGQ.js",
     "files": [
-      "static/chunks/default-vendors-_app-pages-browser_node_modules_rainbow-me_rainbowkit_dist_uk_UA-JTTBGJGQ_js.js"
+      "static/chunks/_app-pages-browser_node_modules_rainbow-me_rainbowkit_dist_uk_UA-JTTBGJGQ_js.js"
     ]
   },
   "node_modules\\@rainbow-me\\rainbowkit\\dist\\index.js -> ./unichain-C5BWO2ZY.js": {
@@ -398,7 +398,7 @@
   "node_modules\\@rainbow-me\\rainbowkit\\dist\\index.js -> ./vi_VN-5XUUAVWW.js": {
     "id": "node_modules\\@rainbow-me\\rainbowkit\\dist\\index.js -> ./vi_VN-5XUUAVWW.js",
     "files": [
-      "static/chunks/default-vendors-_app-pages-browser_node_modules_rainbow-me_rainbowkit_dist_vi_VN-5XUUAVWW_js.js"
+      "static/chunks/_app-pages-browser_node_modules_rainbow-me_rainbowkit_dist_vi_VN-5XUUAVWW_js.js"
     ]
   },
   "node_modules\\@rainbow-me\\rainbowkit\\dist\\index.js -> ./walletConnectWallet-YHWKVTDY.js": {
@@ -422,19 +422,19 @@
   "node_modules\\@rainbow-me\\rainbowkit\\dist\\index.js -> ./zh_CN-RGMLPFEP.js": {
     "id": "node_modules\\@rainbow-me\\rainbowkit\\dist\\index.js -> ./zh_CN-RGMLPFEP.js",
     "files": [
-      "static/chunks/default-vendors-_app-pages-browser_node_modules_rainbow-me_rainbowkit_dist_zh_CN-RGMLPFEP_js.js"
+      "static/chunks/_app-pages-browser_node_modules_rainbow-me_rainbowkit_dist_zh_CN-RGMLPFEP_js.js"
     ]
   },
   "node_modules\\@rainbow-me\\rainbowkit\\dist\\index.js -> ./zh_HK-YM3T6EI5.js": {
     "id": "node_modules\\@rainbow-me\\rainbowkit\\dist\\index.js -> ./zh_HK-YM3T6EI5.js",
     "files": [
-      "static/chunks/default-vendors-_app-pages-browser_node_modules_rainbow-me_rainbowkit_dist_zh_HK-YM3T6EI5_js.js"
+      "static/chunks/_app-pages-browser_node_modules_rainbow-me_rainbowkit_dist_zh_HK-YM3T6EI5_js.js"
     ]
   },
   "node_modules\\@rainbow-me\\rainbowkit\\dist\\index.js -> ./zh_TW-HAEH6VE5.js": {
     "id": "node_modules\\@rainbow-me\\rainbowkit\\dist\\index.js -> ./zh_TW-HAEH6VE5.js",
     "files": [
-      "static/chunks/default-vendors-_app-pages-browser_node_modules_rainbow-me_rainbowkit_dist_zh_TW-HAEH6VE5_js.js"
+      "static/chunks/_app-pages-browser_node_modules_rainbow-me_rainbowkit_dist_zh_TW-HAEH6VE5_js.js"
     ]
   },
   "node_modules\\@rainbow-me\\rainbowkit\\dist\\index.js -> ./zksync-DH7HK5U4.js": {
@@ -460,7 +460,7 @@
   "node_modules\\@reown\\appkit-controllers\\node_modules\\@walletconnect\\utils\\node_modules\\viem\\_esm\\utils\\signature\\recoverPublicKey.js -> @noble/curves/secp256k1": {
     "id": "node_modules\\@reown\\appkit-controllers\\node_modules\\@walletconnect\\utils\\node_modules\\viem\\_esm\\utils\\signature\\recoverPublicKey.js -> @noble/curves/secp256k1",
     "files": [
-      "static/chunks/default-vendors-_app-pages-browser_node_modules_reown_appkit-controllers_node_modules_noble_c-c51fb9.js"
+      "static/chunks/_app-pages-browser_node_modules_reown_appkit-controllers_node_modules_noble_curves_esm_secp256k1_js.js"
     ]
   },
   "node_modules\\@reown\\appkit-ui\\dist\\esm\\src\\components\\wui-icon\\index.js -> ../../assets/svg/add.js": {
@@ -910,15 +910,13 @@
   "node_modules\\@reown\\appkit\\dist\\esm\\src\\client\\appkit-core.js -> @reown/appkit-scaffold-ui/basic": {
     "id": "node_modules\\@reown\\appkit\\dist\\esm\\src\\client\\appkit-core.js -> @reown/appkit-scaffold-ui/basic",
     "files": [
-      "static/chunks/vendors-_app-pages-browser_node_modules_reown_appkit-ui_dist_esm_exports_wui-flex_js-_app-pag-30cddb.js",
-      "static/chunks/default-vendors-_app-pages-browser_node_modules_reown_appkit-scaffold-ui_dist_esm_exports_basic_js.js"
+      "static/chunks/_app-pages-browser_node_modules_reown_appkit-scaffold-ui_dist_esm_exports_basic_js.js"
     ]
   },
   "node_modules\\@reown\\appkit\\dist\\esm\\src\\client\\appkit-core.js -> @reown/appkit-scaffold-ui/w3m-modal": {
     "id": "node_modules\\@reown\\appkit\\dist\\esm\\src\\client\\appkit-core.js -> @reown/appkit-scaffold-ui/w3m-modal",
     "files": [
-      "static/chunks/vendors-_app-pages-browser_node_modules_reown_appkit-ui_dist_esm_exports_wui-flex_js-_app-pag-30cddb.js",
-      "static/chunks/default-vendors-_app-pages-browser_node_modules_reown_appkit-scaffold-ui_dist_esm_exports_w3m-042f10.js"
+      "static/chunks/_app-pages-browser_node_modules_reown_appkit-scaffold-ui_dist_esm_exports_w3m-modal_js.js"
     ]
   },
   "node_modules\\@reown\\appkit\\node_modules\\@walletconnect\\utils\\node_modules\\viem\\_esm\\actions\\public\\call.js -> ../../utils/ccip.js": {
@@ -932,14 +930,13 @@
   "node_modules\\@reown\\appkit\\node_modules\\@walletconnect\\utils\\node_modules\\viem\\_esm\\utils\\signature\\recoverPublicKey.js -> @noble/curves/secp256k1": {
     "id": "node_modules\\@reown\\appkit\\node_modules\\@walletconnect\\utils\\node_modules\\viem\\_esm\\utils\\signature\\recoverPublicKey.js -> @noble/curves/secp256k1",
     "files": [
-      "static/chunks/default-vendors-_app-pages-browser_node_modules_reown_appkit_node_modules_noble_curves_esm_se-0bed42.js"
+      "static/chunks/_app-pages-browser_node_modules_reown_appkit_node_modules_noble_curves_esm_secp256k1_js.js"
     ]
   },
   "node_modules\\@wagmi\\connectors\\dist\\esm\\baseAccount.js -> @base-org/account": {
     "id": "node_modules\\@wagmi\\connectors\\dist\\esm\\baseAccount.js -> @base-org/account",
     "files": [
-      "static/chunks/vendors-_app-pages-browser_node_modules_buffer_index_js-_app-pages-browser_node_modules_idb-k-e2ece2.js",
-      "static/chunks/default-vendors-_app-pages-browser_node_modules_base-org_account_dist_index_js.js"
+      "static/chunks/_app-pages-browser_node_modules_base-org_account_dist_index_js.js"
     ]
   },
   "node_modules\\@wagmi\\connectors\\dist\\esm\\coinbaseWallet.js -> @coinbase/wallet-sdk": {
@@ -953,8 +950,7 @@
   "node_modules\\@wagmi\\connectors\\dist\\esm\\metaMask.js -> @metamask/sdk": {
     "id": "node_modules\\@wagmi\\connectors\\dist\\esm\\metaMask.js -> @metamask/sdk",
     "files": [
-      "static/chunks/vendors-_app-pages-browser_node_modules_metamask_sdk_dist_browser_es_metamask-sdk_js.js",
-      "static/chunks/_8367.js"
+      "static/chunks/_app-pages-browser_node_modules_metamask_sdk_dist_browser_es_metamask-sdk_js.js"
     ]
   },
   "node_modules\\@wagmi\\connectors\\dist\\esm\\porto.js -> porto": {
@@ -964,30 +960,25 @@
   "node_modules\\@wagmi\\connectors\\dist\\esm\\safe.js -> @safe-global/safe-apps-provider": {
     "id": "node_modules\\@wagmi\\connectors\\dist\\esm\\safe.js -> @safe-global/safe-apps-provider",
     "files": [
-      "static/chunks/vendors-_app-pages-browser_node_modules_safe-global_safe-gateway-typescript-sdk_dist_index_js.js",
-      "static/chunks/vendors-_app-pages-browser_node_modules_events_events_js.js",
-      "static/chunks/default-vendors-_app-pages-browser_node_modules_safe-global_safe-apps-provider_dist_index_js.js"
+      "static/chunks/_app-pages-browser_node_modules_safe-global_safe-apps-provider_dist_index_js.js"
     ]
   },
   "node_modules\\@wagmi\\connectors\\dist\\esm\\safe.js -> @safe-global/safe-apps-sdk": {
     "id": "node_modules\\@wagmi\\connectors\\dist\\esm\\safe.js -> @safe-global/safe-apps-sdk",
     "files": [
-      "static/chunks/vendors-_app-pages-browser_node_modules_safe-global_safe-gateway-typescript-sdk_dist_index_js.js",
-      "static/chunks/default-vendors-_app-pages-browser_node_modules_safe-global_safe-apps-sdk_dist_esm_index_js.js"
+      "static/chunks/_app-pages-browser_node_modules_safe-global_safe-apps-sdk_dist_esm_index_js.js"
     ]
   },
   "node_modules\\@wagmi\\connectors\\dist\\esm\\walletConnect.js -> @walletconnect/ethereum-provider": {
     "id": "node_modules\\@wagmi\\connectors\\dist\\esm\\walletConnect.js -> @walletconnect/ethereum-provider",
     "files": [
-      "static/chunks/vendors-_app-pages-browser_node_modules_buffer_index_js-_app-pages-browser_node_modules_idb-k-e2ece2.js",
-      "static/chunks/vendors-_app-pages-browser_node_modules_events_events_js.js",
-      "static/chunks/default-vendors-_app-pages-browser_node_modules_walletconnect_ethereum-provider_dist_index_es_js.js"
+      "static/chunks/_app-pages-browser_node_modules_walletconnect_ethereum-provider_dist_index_es_js.js"
     ]
   },
   "node_modules\\@walletconnect\\ethereum-provider\\dist\\index.es.js -> @reown/appkit/core": {
     "id": "node_modules\\@walletconnect\\ethereum-provider\\dist\\index.es.js -> @reown/appkit/core",
     "files": [
-      "static/chunks/default-vendors-_app-pages-browser_node_modules_reown_appkit_dist_esm_exports_core_js.js"
+      "static/chunks/_app-pages-browser_node_modules_reown_appkit_dist_esm_exports_core_js.js"
     ]
   },
   "node_modules\\@walletconnect\\utils\\node_modules\\viem\\_esm\\actions\\public\\call.js -> ../../utils/ccip.js": {
@@ -1001,7 +992,7 @@
   "node_modules\\@walletconnect\\utils\\node_modules\\viem\\_esm\\utils\\signature\\recoverPublicKey.js -> @noble/curves/secp256k1": {
     "id": "node_modules\\@walletconnect\\utils\\node_modules\\viem\\_esm\\utils\\signature\\recoverPublicKey.js -> @noble/curves/secp256k1",
     "files": [
-      "static/chunks/default-vendors-_app-pages-browser_node_modules_walletconnect_utils_node_modules_noble_curves-38b268.js"
+      "static/chunks/_app-pages-browser_node_modules_walletconnect_utils_node_modules_noble_curves_esm_secp256k1_js.js"
     ]
   },
   "node_modules\\viem\\_esm\\actions\\public\\call.js -> ../../utils/ccip.js": {

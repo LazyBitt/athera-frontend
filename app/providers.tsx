@@ -2,13 +2,15 @@
 
 import { WagmiProvider } from 'wagmi'
 import { RainbowKitProvider } from '@rainbow-me/rainbowkit'
-import { config } from '../lib/wagmi'
+import { getConfig } from '../lib/wagmi'
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useMemo } from 'react'
 import '@rainbow-me/rainbowkit/styles.css'
 
 export function Providers({ children }: { children: React.ReactNode }) {
-  const [queryClient] = useState(() => new QueryClient({
+  const [mounted, setMounted] = useState(false)
+  
+  const queryClient = useMemo(() => new QueryClient({
     defaultOptions: {
       queries: {
         retry: (failureCount, error: any) => {
@@ -21,9 +23,13 @@ export function Providers({ children }: { children: React.ReactNode }) {
         staleTime: 1000 * 60 * 5, // 5 minutes
       },
     },
-  }))
+  }), [])
+  
+  const config = useMemo(() => getConfig(), [])
 
   useEffect(() => {
+    setMounted(true)
+    
     // Handle WalletConnect connection errors
     const handleError = (error: any) => {
       if (error?.message?.includes('Connection interrupted')) {
@@ -34,6 +40,10 @@ export function Providers({ children }: { children: React.ReactNode }) {
     window.addEventListener('error', handleError)
     return () => window.removeEventListener('error', handleError)
   }, [])
+  
+  if (!mounted) {
+    return null
+  }
 
   return (
     <WagmiProvider config={config}>
