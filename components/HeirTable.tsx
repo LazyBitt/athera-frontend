@@ -6,6 +6,7 @@ import { Badge } from './ui/badge'
 import { Users, Plus, Edit3, Trash2, MessageSquare, Mail } from 'lucide-react'
 import { useState } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
+import { AddressDisplay } from './AddressDisplay'
 
 interface Heir {
   id: string
@@ -203,7 +204,11 @@ export function HeirTable() {
                       <div className="flex items-center gap-4">
                         <div>
                           <p className="font-mono text-sm font-medium">
-                            {heir.address ? formatAddress(heir.address) : 'No address set'}
+                            {heir.address ? (
+                              <AddressDisplay address={heir.address} isTestnet={true} />
+                            ) : (
+                              'No address set'
+                            )}
                           </p>
                           <div className="flex items-center gap-2 mt-1">
                             <Badge variant="outline">{heir.percentage}%</Badge>

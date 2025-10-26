@@ -5,6 +5,8 @@ import { RainbowKitProvider } from '@rainbow-me/rainbowkit'
 import { getConfig } from '../lib/wagmi'
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
 import { useState, useEffect, useMemo } from 'react'
+import { OnchainKitProvider } from '@coinbase/onchainkit'
+import { base, baseSepolia } from 'viem/chains'
 import '@rainbow-me/rainbowkit/styles.css'
 
 export function Providers({ children }: { children: React.ReactNode }) {
@@ -48,12 +50,17 @@ export function Providers({ children }: { children: React.ReactNode }) {
   return (
     <WagmiProvider config={config}>
       <QueryClientProvider client={queryClient}>
-        <RainbowKitProvider
-          modalSize="compact"
-          showRecentTransactions={true}
+        <OnchainKitProvider
+          apiKey={process.env.NEXT_PUBLIC_ONCHAINKIT_API_KEY}
+          chain={baseSepolia} // or base for mainnet
         >
-          {children}
-        </RainbowKitProvider>
+          <RainbowKitProvider
+            modalSize="compact"
+            showRecentTransactions={true}
+          >
+            {children}
+          </RainbowKitProvider>
+        </OnchainKitProvider>
       </QueryClientProvider>
     </WagmiProvider>
   )
