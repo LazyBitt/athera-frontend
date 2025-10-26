@@ -4,8 +4,15 @@ const PINATA_JWT = process.env.NEXT_PUBLIC_PINATA_JWT
 export async function uploadToIPFS(file: File): Promise<string> {
   try {
     if (!PINATA_JWT) {
-      throw new Error('Pinata JWT not configured')
+      console.error('Pinata JWT is not configured')
+      throw new Error('Pinata JWT not configured. Please add NEXT_PUBLIC_PINATA_JWT to your .env.local file.')
     }
+
+    console.log('Uploading to IPFS:', {
+      name: file.name,
+      type: file.type,
+      size: file.size,
+    })
 
     const formData = new FormData()
     formData.append('file', file)
@@ -18,16 +25,20 @@ export async function uploadToIPFS(file: File): Promise<string> {
       body: formData,
     })
 
+    console.log('Pinata response status:', response.status, response.statusText)
+
     if (!response.ok) {
-      throw new Error(`Pinata upload failed: ${response.statusText}`)
+      const errorText = await response.text()
+      console.error('Pinata error response:', errorText)
+      throw new Error(`Pinata upload failed (${response.status}): ${errorText}`)
     }
 
     const data = await response.json()
-    console.log('File uploaded to IPFS:', data.IpfsHash)
+    console.log('File uploaded to IPFS successfully:', data.IpfsHash)
     return data.IpfsHash
-  } catch (error) {
+  } catch (error: any) {
     console.error('IPFS upload error:', error)
-    throw new Error('Failed to upload to IPFS')
+    throw new Error(error.message || 'Failed to upload to IPFS')
   }
 }
 

@@ -1,6 +1,33 @@
 # Athera
 
-Decentralized inheritance protocol enabling automated crypto asset distribution to designated beneficiaries through time-locked vaults with proof-of-life verification.
+**Automated crypto inheritance on Base**
+
+> $140B+ in crypto is lost forever due to poor inheritance planning. Athera fixes this.
+
+## 🎯 What Makes Athera Different
+
+**Setup in 60 seconds. No custody. No lawyers. Just code.**
+
+Unlike traditional inheritance solutions that require:
+- ❌ Trusting third parties with your keys
+- ❌ Weeks of legal paperwork
+- ❌ Monthly subscription fees
+- ❌ Complex technical setup
+
+Athera offers:
+- ✅ **Automated Distribution** - Smart contracts handle everything
+- ✅ **60-Second Setup** - Create vault instantly
+- ✅ **Non-Custodial** - You keep full control until distribution
+- ✅ **Low Cost** - Only pay gas (powered by Base's low fees)
+- ✅ **Telegram Notifications** - Real-time alerts for you and heirs
+- ✅ **Proof-of-Life** - Simple check-in system to reset countdown
+
+## 🎯 Perfect For
+
+- **Crypto Investors** with $10K+ in digital assets
+- **Early Adopters** protecting their Base ecosystem holdings
+- **Families** planning for digital inheritance
+- **DeFi Users** who want peace of mind
 
 ## Overview
 

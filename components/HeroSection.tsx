@@ -14,7 +14,7 @@ export function HeroSection() {
       {/* Grid background */}
       <div className="absolute inset-0 bg-[linear-gradient(to_right,#1f1f1f_1px,transparent_1px),linear-gradient(to_bottom,#1f1f1f_1px,transparent_1px)] bg-[size:4rem_4rem] [mask-image:radial-gradient(ellipse_80%_50%_at_50%_0%,#000_70%,transparent_110%)]" />
       
-      <div className="relative z-10 max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+      <div className="relative z-10 max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 text-center pt-20">
         {/* Built on Base Badge */}
         <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-blue-500/10 border border-blue-500/20 backdrop-blur-sm mb-8 animate-fade-in">
           <span className="relative flex h-2 w-2">
@@ -30,9 +30,16 @@ export function HeroSection() {
         </h1>
         
         {/* Tagline */}
-        <p className="text-2xl md:text-3xl text-gray-300 max-w-3xl mx-auto mb-12 leading-relaxed animate-fade-in-up" style={{ animationDelay: '0.2s' }}>
-          Your legacy stays alive — <span className="text-cyan-400 font-semibold">even when you're gone.</span>
+        <p className="text-2xl md:text-3xl text-gray-300 max-w-3xl mx-auto mb-6 leading-relaxed animate-fade-in-up" style={{ animationDelay: '0.2s' }}>
+          Automated crypto inheritance on Base
         </p>
+
+        {/* One powerful stat */}
+        <div className="inline-block px-6 py-3 bg-red-500/10 border border-red-500/20 rounded-lg mb-12 animate-fade-in-up" style={{ animationDelay: '0.25s' }}>
+          <p className="text-red-400 font-semibold">
+            $140B+ in crypto lost forever due to poor inheritance planning
+          </p>
+        </div>
 
         {/* CTA Buttons */}
         <div className="flex flex-col sm:flex-row gap-4 justify-center mb-16 animate-fade-in-up" style={{ animationDelay: '0.3s' }}>
@@ -40,30 +47,27 @@ export function HeroSection() {
             href="/dashboard" 
             className="group px-8 py-4 bg-gradient-to-r from-blue-500 to-cyan-500 text-white font-semibold hover:from-blue-600 hover:to-cyan-600 transition-all duration-300 rounded-full shadow-lg shadow-blue-500/50 hover:shadow-xl hover:shadow-blue-500/60 hover:scale-105"
           >
-            Get Started
+            Launch App
             <span className="inline-block ml-2 group-hover:translate-x-1 transition-transform">→</span>
           </Link>
           
-          <button 
+          <Link 
+            href="/docs"
             className="px-8 py-4 border-2 border-gray-700 text-gray-300 hover:border-cyan-500 hover:text-cyan-400 transition-all duration-300 rounded-full backdrop-blur-sm hover:bg-cyan-500/10"
-            onClick={() => {
-              const element = document.getElementById('how-it-works')
-              if (element) {
-                element.scrollIntoView({ behavior: 'smooth' })
-              }
-            }}
           >
-            How it works
-          </button>
+            Read Docs
+          </Link>
         </div>
 
+
+
         {/* Trust Badges */}
-        <div className="flex flex-wrap items-center justify-center gap-8 text-sm text-gray-500 animate-fade-in" style={{ animationDelay: '0.4s' }}>
+        <div className="flex flex-wrap items-center justify-center gap-8 text-sm text-gray-500 animate-fade-in" style={{ animationDelay: '0.5s' }}>
           <div className="flex items-center gap-2">
             <svg className="w-5 h-5 text-cyan-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
             </svg>
-            <span className="text-gray-400">Automated Inheritance</span>
+            <span className="text-gray-400">Non-Custodial</span>
           </div>
           <span className="text-gray-700">•</span>
           <div className="flex items-center gap-2">

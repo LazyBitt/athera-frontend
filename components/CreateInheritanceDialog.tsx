@@ -28,6 +28,7 @@ export function CreateInheritanceDialog({ children, onSuccess }: Props) {
   const [days, setDays] = useState('30')
   const [files, setFiles] = useState<File[]>([])
   const [isUploading, setIsUploading] = useState(false)
+  const [uploadError, setUploadError] = useState<string>('')
   
   const { addNotification } = useDashboardStore()
   const { address } = useAccount()
@@ -73,8 +74,37 @@ export function CreateInheritanceDialog({ children, onSuccess }: Props) {
     parseFloat(days) > 0
   
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setUploadError('')
+    
     if (e.target.files) {
-      setFiles(Array.from(e.target.files))
+      const selectedFiles = Array.from(e.target.files)
+      
+      // Validate file size (max 10MB per file)
+      const maxSize = 10 * 1024 * 1024 // 10MB
+      const oversizedFiles = selectedFiles.filter(f => f.size > maxSize)
+      
+      if (oversizedFiles.length > 0) {
+        setUploadError(`File too large: ${oversizedFiles[0].name}. Max size is 10MB.`)
+        return
+      }
+      
+      // Validate file types (images, PDFs, docs)
+      const allowedTypes = [
+        'image/jpeg', 'image/jpg', 'image/png', 'image/gif', 'image/webp',
+        'application/pdf',
+        'application/msword',
+        'application/vnd.openxmlformats-officedocument.wordprocessingml.document',
+        'text/plain'
+      ]
+      
+      const invalidFiles = selectedFiles.filter(f => !allowedTypes.includes(f.type))
+      
+      if (invalidFiles.length > 0) {
+        setUploadError(`Invalid file type: ${invalidFiles[0].name}. Only images, PDFs, and documents are allowed.`)
+        return
+      }
+      
+      setFiles([...files, ...selectedFiles])
     }
   }
   
@@ -87,6 +117,7 @@ export function CreateInheritanceDialog({ children, onSuccess }: Props) {
     
     try {
       setIsUploading(true)
+      setUploadError('')
       
       // Upload files to IPFS if any
       let ipfsHashes: string[] = []
@@ -96,10 +127,23 @@ export function CreateInheritanceDialog({ children, onSuccess }: Props) {
           message: `Uploading ${files.length} file(s) to IPFS...`,
         })
         
-        for (const file of files) {
-          const hash = await uploadToIPFS(file)
-          ipfsHashes.push(hash)
+        for (let i = 0; i < files.length; i++) {
+          const file = files[i]
+          try {
+            console.log(`Uploading file ${i + 1}/${files.length}:`, file.name, file.type, file.size)
+            const hash = await uploadToIPFS(file)
+            ipfsHashes.push(hash)
+            console.log(`File ${i + 1} uploaded successfully:`, hash)
+          } catch (error: any) {
+            console.error(`Failed to upload ${file.name}:`, error)
+            throw new Error(`Failed to upload ${file.name}: ${error.message}`)
+          }
         }
+        
+        addNotification({
+          type: 'success',
+          message: `Successfully uploaded ${files.length} file(s) to IPFS`,
+        })
       }
       
       const addresses = beneficiaries.map(b => b.address as `0x${string}`)
@@ -126,6 +170,8 @@ export function CreateInheritanceDialog({ children, onSuccess }: Props) {
         message: 'Creating inheritance vault...',
       })
     } catch (error: any) {
+      console.error('Create vault error:', error)
+      setUploadError(error.message || 'Failed to create vault')
       addNotification({
         type: 'error',
         message: error.message || 'Failed to create vault',
@@ -288,40 +334,65 @@ export function CreateInheritanceDialog({ children, onSuccess }: Props) {
                       <label className="flex flex-col items-center justify-center w-full h-32 px-4 border-2 border-dashed border-slate-700 rounded-xl cursor-pointer bg-slate-800/50 hover:bg-slate-800 transition-colors">
                         <Upload className="h-8 w-8 text-gray-400 mb-2" />
                         <span className="text-sm text-gray-400">
-                          Click or drag & drop files
+                          Click to upload files
                         </span>
                         <span className="text-xs text-gray-500 mt-1">
-                          Documents, photos, or other important files
+                          Photos, PDFs, documents (max 10MB each)
                         </span>
                         <input
                           type="file"
                           multiple
+                          accept="image/*,.pdf,.doc,.docx,.txt"
                           onChange={handleFileChange}
                           className="hidden"
                           disabled={availableBalance === 0}
                         />
                       </label>
                       
+                      {uploadError && (
+                        <div className="flex items-center gap-2 p-3 bg-red-500/10 border border-red-500/20 rounded-lg">
+                          <AlertCircle className="h-4 w-4 text-red-400 flex-shrink-0" />
+                          <span className="text-sm text-red-300">{uploadError}</span>
+                        </div>
+                      )}
+                      
                       {files.length > 0 && (
                         <div className="space-y-2">
-                          {files.map((file, index) => (
-                            <div key={index} className="flex items-center gap-2 p-2 bg-slate-800 rounded-lg">
-                              <FileText className="h-4 w-4 text-blue-400 flex-shrink-0" />
-                              <span className="text-sm text-gray-300 flex-1 truncate">
-                                {file.name}
-                              </span>
-                              <span className="text-xs text-gray-500">
-                                {(file.size / 1024).toFixed(1)} KB
-                              </span>
-                              <button
-                                type="button"
-                                onClick={() => removeFile(index)}
-                                className="p-1 hover:bg-slate-700 rounded transition-colors"
-                              >
-                                <X className="h-4 w-4 text-gray-400" />
-                              </button>
-                            </div>
-                          ))}
+                          {files.map((file, index) => {
+                            const isImage = file.type.startsWith('image/')
+                            return (
+                              <div key={index} className="flex items-center gap-3 p-3 bg-slate-800 rounded-lg">
+                                {isImage ? (
+                                  <div className="w-12 h-12 rounded-lg overflow-hidden bg-slate-700 flex-shrink-0">
+                                    <img 
+                                      src={URL.createObjectURL(file)} 
+                                      alt={file.name}
+                                      className="w-full h-full object-cover"
+                                    />
+                                  </div>
+                                ) : (
+                                  <div className="w-12 h-12 rounded-lg bg-slate-700 flex items-center justify-center flex-shrink-0">
+                                    <FileText className="h-6 w-6 text-blue-400" />
+                                  </div>
+                                )}
+                                <div className="flex-1 min-w-0">
+                                  <p className="text-sm text-gray-300 truncate">
+                                    {file.name}
+                                  </p>
+                                  <p className="text-xs text-gray-500">
+                                    {(file.size / 1024).toFixed(1)} KB
+                                  </p>
+                                </div>
+                                <button
+                                  type="button"
+                                  onClick={() => removeFile(index)}
+                                  className="p-2 hover:bg-slate-700 rounded-lg transition-colors"
+                                >
+                                  <X className="h-4 w-4 text-gray-400" />
+                                </button>
+                              </div>
+                            )
+                          })}
                         </div>
                       )}
                     </div>

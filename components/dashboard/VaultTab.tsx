@@ -12,6 +12,8 @@ export function VaultTab() {
   const { address } = useAccount()
   const [depositAmount, setDepositAmount] = useState('')
   const [withdrawAmount, setWithdrawAmount] = useState('')
+  const [selectedDepositTab, setSelectedDepositTab] = useState<string | null>(null)
+  const [selectedWithdrawTab, setSelectedWithdrawTab] = useState<string | null>(null)
   
   const { addNotification } = useDashboardStore()
   
@@ -161,6 +163,63 @@ export function VaultTab() {
           <div className="space-y-4">
             <div>
               <label className="block text-sm text-gray-400 mb-2">Amount (ETH)</label>
+              
+              {/* Quick Amount Tabs */}
+              <div className="flex gap-2 mb-3 flex-wrap">
+                <button
+                  onClick={() => {
+                    setDepositAmount((parseFloat(walletBalanceFormatted) * 0.2).toFixed(4))
+                    setSelectedDepositTab('20')
+                  }}
+                  className={`px-3 py-1.5 text-xs rounded-lg transition-colors border ${
+                    selectedDepositTab === '20'
+                      ? 'bg-indigo-500/20 border-indigo-500/50 text-indigo-300'
+                      : 'bg-slate-800/50 hover:bg-slate-700 text-slate-400 hover:text-white border-slate-700/50'
+                  }`}
+                >
+                  20%
+                </button>
+                <button
+                  onClick={() => {
+                    setDepositAmount((parseFloat(walletBalanceFormatted) * 0.5).toFixed(4))
+                    setSelectedDepositTab('50')
+                  }}
+                  className={`px-3 py-1.5 text-xs rounded-lg transition-colors border ${
+                    selectedDepositTab === '50'
+                      ? 'bg-indigo-500/20 border-indigo-500/50 text-indigo-300'
+                      : 'bg-slate-800/50 hover:bg-slate-700 text-slate-400 hover:text-white border-slate-700/50'
+                  }`}
+                >
+                  50%
+                </button>
+                <button
+                  onClick={() => {
+                    setDepositAmount((parseFloat(walletBalanceFormatted) * 0.75).toFixed(4))
+                    setSelectedDepositTab('75')
+                  }}
+                  className={`px-3 py-1.5 text-xs rounded-lg transition-colors border ${
+                    selectedDepositTab === '75'
+                      ? 'bg-indigo-500/20 border-indigo-500/50 text-indigo-300'
+                      : 'bg-slate-800/50 hover:bg-slate-700 text-slate-400 hover:text-white border-slate-700/50'
+                  }`}
+                >
+                  75%
+                </button>
+                <button
+                  onClick={() => {
+                    setDepositAmount(parseFloat(walletBalanceFormatted).toFixed(4))
+                    setSelectedDepositTab('max')
+                  }}
+                  className={`px-3 py-1.5 text-xs rounded-lg transition-colors border ${
+                    selectedDepositTab === 'max'
+                      ? 'bg-indigo-500/20 border-indigo-500/50 text-indigo-300'
+                      : 'bg-slate-700 hover:bg-slate-600 text-white border-slate-600'
+                  }`}
+                >
+                  Max
+                </button>
+              </div>
+              
               <input
                 type="number"
                 step="0.001"
@@ -174,7 +233,7 @@ export function VaultTab() {
             <button
               onClick={handleDeposit}
               disabled={!depositAmount || isDepositing || isDepositConfirming}
-              className="w-full px-4 py-3 bg-green-600 hover:bg-green-700 disabled:bg-slate-700 disabled:text-gray-500 disabled:shadow-none text-white font-medium rounded-xl transition-all flex items-center justify-center gap-2 shadow-lg shadow-green-500/20"
+              className="w-full px-4 py-3 bg-indigo-600/80 hover:bg-indigo-600 disabled:bg-slate-700 disabled:text-gray-500 disabled:shadow-none text-white font-medium rounded-xl transition-all flex items-center justify-center gap-2 shadow-lg shadow-indigo-500/10"
             >
               {(isDepositing || isDepositConfirming) ? (
                 <>
@@ -208,6 +267,63 @@ export function VaultTab() {
           <div className="space-y-4">
             <div>
               <label className="block text-sm text-gray-400 mb-2">Amount (ETH)</label>
+              
+              {/* Quick Amount Tabs */}
+              <div className="flex gap-2 mb-3 flex-wrap">
+                <button
+                  onClick={() => {
+                    setWithdrawAmount((parseFloat(vaultBalanceFormatted) * 0.2).toFixed(4))
+                    setSelectedWithdrawTab('20')
+                  }}
+                  className={`px-3 py-1.5 text-xs rounded-lg transition-colors border ${
+                    selectedWithdrawTab === '20'
+                      ? 'bg-purple-500/20 border-purple-500/50 text-purple-300'
+                      : 'bg-slate-800/50 hover:bg-slate-700 text-slate-400 hover:text-white border-slate-700/50'
+                  }`}
+                >
+                  20%
+                </button>
+                <button
+                  onClick={() => {
+                    setWithdrawAmount((parseFloat(vaultBalanceFormatted) * 0.5).toFixed(4))
+                    setSelectedWithdrawTab('50')
+                  }}
+                  className={`px-3 py-1.5 text-xs rounded-lg transition-colors border ${
+                    selectedWithdrawTab === '50'
+                      ? 'bg-purple-500/20 border-purple-500/50 text-purple-300'
+                      : 'bg-slate-800/50 hover:bg-slate-700 text-slate-400 hover:text-white border-slate-700/50'
+                  }`}
+                >
+                  50%
+                </button>
+                <button
+                  onClick={() => {
+                    setWithdrawAmount((parseFloat(vaultBalanceFormatted) * 0.75).toFixed(4))
+                    setSelectedWithdrawTab('75')
+                  }}
+                  className={`px-3 py-1.5 text-xs rounded-lg transition-colors border ${
+                    selectedWithdrawTab === '75'
+                      ? 'bg-purple-500/20 border-purple-500/50 text-purple-300'
+                      : 'bg-slate-800/50 hover:bg-slate-700 text-slate-400 hover:text-white border-slate-700/50'
+                  }`}
+                >
+                  75%
+                </button>
+                <button
+                  onClick={() => {
+                    setWithdrawAmount(parseFloat(vaultBalanceFormatted).toFixed(4))
+                    setSelectedWithdrawTab('max')
+                  }}
+                  className={`px-3 py-1.5 text-xs rounded-lg transition-colors border ${
+                    selectedWithdrawTab === 'max'
+                      ? 'bg-purple-500/20 border-purple-500/50 text-purple-300'
+                      : 'bg-slate-700 hover:bg-slate-600 text-white border-slate-600'
+                  }`}
+                >
+                  Max
+                </button>
+              </div>
+              
               <input
                 type="number"
                 step="0.001"
@@ -221,7 +337,7 @@ export function VaultTab() {
             <button
               onClick={handleWithdraw}
               disabled={!withdrawAmount || isWithdrawing || isWithdrawConfirming}
-              className="w-full px-4 py-3 bg-red-600 hover:bg-red-700 disabled:bg-slate-700 disabled:text-gray-500 disabled:shadow-none text-white font-medium rounded-xl transition-all flex items-center justify-center gap-2 shadow-lg shadow-red-500/20"
+              className="w-full px-4 py-3 bg-purple-600/80 hover:bg-purple-600 disabled:bg-slate-700 disabled:text-gray-500 disabled:shadow-none text-white font-medium rounded-xl transition-all flex items-center justify-center gap-2 shadow-lg shadow-purple-500/10"
             >
               {(isWithdrawing || isWithdrawConfirming) ? (
                 <>

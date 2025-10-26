@@ -201,8 +201,49 @@ export function BalanceManager() {
 
         {/* Deposit Form */}
         {showDeposit && (
-          <div className="p-4 bg-green-500/10 border border-green-500/30 rounded-lg">
-            <p className="text-sm text-green-300 mb-3">Deposit ETH to Athera Balance</p>
+          <div className="p-4 bg-green-500/10 border border-green-500/30 rounded-lg space-y-3">
+            <p className="text-sm text-green-300">Deposit ETH to Athera Balance</p>
+            
+            {/* Quick Amount Tabs */}
+            <div className="flex gap-2 flex-wrap">
+              <button
+                onClick={() => {
+                  const balance = walletBalance ? parseFloat(formatEther(walletBalance.value)) : 0
+                  setDepositAmount((balance * 0.2).toFixed(4))
+                }}
+                className="px-3 py-1.5 bg-gray-800 hover:bg-green-600 text-gray-300 hover:text-white text-xs rounded-md transition-colors"
+              >
+                20%
+              </button>
+              <button
+                onClick={() => {
+                  const balance = walletBalance ? parseFloat(formatEther(walletBalance.value)) : 0
+                  setDepositAmount((balance * 0.5).toFixed(4))
+                }}
+                className="px-3 py-1.5 bg-gray-800 hover:bg-green-600 text-gray-300 hover:text-white text-xs rounded-md transition-colors"
+              >
+                50%
+              </button>
+              <button
+                onClick={() => {
+                  const balance = walletBalance ? parseFloat(formatEther(walletBalance.value)) : 0
+                  setDepositAmount((balance * 0.75).toFixed(4))
+                }}
+                className="px-3 py-1.5 bg-gray-800 hover:bg-green-600 text-gray-300 hover:text-white text-xs rounded-md transition-colors"
+              >
+                75%
+              </button>
+              <button
+                onClick={() => {
+                  const balance = walletBalance ? parseFloat(formatEther(walletBalance.value)) : 0
+                  setDepositAmount(balance.toFixed(4))
+                }}
+                className="px-3 py-1.5 bg-green-600 hover:bg-green-700 text-white text-xs rounded-md transition-colors font-medium"
+              >
+                Max
+              </button>
+            </div>
+
             <div className="flex gap-2">
               <input
                 type="number"
@@ -226,8 +267,49 @@ export function BalanceManager() {
 
         {/* Withdraw Form */}
         {showWithdraw && (
-          <div className="p-4 bg-orange-500/10 border border-orange-500/30 rounded-lg">
-            <p className="text-sm text-orange-300 mb-3">Withdraw ETH to your wallet</p>
+          <div className="p-4 bg-orange-500/10 border border-orange-500/30 rounded-lg space-y-3">
+            <p className="text-sm text-orange-300">Withdraw ETH to your wallet</p>
+            
+            {/* Quick Amount Tabs */}
+            <div className="flex gap-2 flex-wrap">
+              <button
+                onClick={() => {
+                  const balance = parseFloat(formatEther(contractBalance))
+                  setWithdrawAmount((balance * 0.2).toFixed(4))
+                }}
+                className="px-3 py-1.5 bg-gray-800 hover:bg-orange-600 text-gray-300 hover:text-white text-xs rounded-md transition-colors"
+              >
+                20%
+              </button>
+              <button
+                onClick={() => {
+                  const balance = parseFloat(formatEther(contractBalance))
+                  setWithdrawAmount((balance * 0.5).toFixed(4))
+                }}
+                className="px-3 py-1.5 bg-gray-800 hover:bg-orange-600 text-gray-300 hover:text-white text-xs rounded-md transition-colors"
+              >
+                50%
+              </button>
+              <button
+                onClick={() => {
+                  const balance = parseFloat(formatEther(contractBalance))
+                  setWithdrawAmount((balance * 0.75).toFixed(4))
+                }}
+                className="px-3 py-1.5 bg-gray-800 hover:bg-orange-600 text-gray-300 hover:text-white text-xs rounded-md transition-colors"
+              >
+                75%
+              </button>
+              <button
+                onClick={() => {
+                  const balance = parseFloat(formatEther(contractBalance))
+                  setWithdrawAmount(balance.toFixed(4))
+                }}
+                className="px-3 py-1.5 bg-orange-600 hover:bg-orange-700 text-white text-xs rounded-md transition-colors font-medium"
+              >
+                Max
+              </button>
+            </div>
+
             <div className="flex gap-2">
               <input
                 type="number"
