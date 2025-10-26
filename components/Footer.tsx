@@ -24,10 +24,6 @@ export function Footer() {
                 Automated crypto inheritance on Base. Set it up once, your family is protected forever.
               </p>
               
-              <p className="text-sm text-gray-500 mb-6">
-                Built on Base • Powered by Chainlink Automation
-              </p>
-              
               {/* Social Links */}
               <div className="flex space-x-4">
                 <a href="https://github.com" target="_blank" rel="noopener noreferrer" className="w-10 h-10 bg-gray-900 border border-gray-800 rounded-lg flex items-center justify-center text-gray-400 hover:text-white hover:border-blue-500 transition-all duration-300">
@@ -100,7 +96,7 @@ export function Footer() {
         <div className="border-t border-gray-800 py-8">
           <div className="flex flex-col md:flex-row justify-between items-center gap-4">
             <p className="text-sm text-gray-400">
-              &copy; 2024 Athera. Built for Base International Hackathon.
+              &copy; 2025 Athera 
             </p>
             
             {/* Status Badge */}
