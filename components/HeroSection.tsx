@@ -30,8 +30,11 @@ export function HeroSection() {
         </h1>
 
         {/* Tagline */}
-        <p className="text-2xl md:text-3xl text-gray-300 max-w-3xl mx-auto mb-6 leading-relaxed animate-fade-in-up" style={{ animationDelay: '0.2s' }}>
-          Your legacy stays alive — even when you're gone.
+        <p className="text-2xl md:text-3xl text-gray-300 max-w-3xl mx-auto mb-3 leading-relaxed animate-fade-in-up" style={{ animationDelay: '0.2s' }}>
+          Your legacy stays alive — <span className="text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 to-blue-400">even when you're gone</span>
+        </p>
+        <p className="text-base md:text-lg text-gray-500 mb-6 animate-fade-in-up" style={{ animationDelay: '0.23s' }}>
+          Automated crypto inheritance on Base
         </p>
 
         {/* One powerful stat */}

@@ -23,7 +23,7 @@ export function Footer() {
               <p className="text-gray-300 mb-6 max-w-md leading-relaxed">
                 Automated crypto inheritance on Base. Set it up once, your family is protected forever.
               </p>
-              
+
               {/* Social Links */}
               <div className="flex space-x-4">
                 <a href="https://github.com" target="_blank" rel="noopener noreferrer" className="w-10 h-10 bg-gray-900 border border-gray-800 rounded-lg flex items-center justify-center text-gray-400 hover:text-white hover:border-blue-500 transition-all duration-300">
@@ -34,7 +34,7 @@ export function Footer() {
                 </a>
               </div>
             </div>
-            
+
             {/* Product Links */}
             <div>
               <h4 className="text-lg font-semibold text-white mb-6">Product</h4>
@@ -65,7 +65,7 @@ export function Footer() {
                 </li>
               </ul>
             </div>
-            
+
             {/* Resources */}
             <div>
               <h4 className="text-lg font-semibold text-white mb-6">Resources</h4>
@@ -91,14 +91,14 @@ export function Footer() {
             </div>
           </div>
         </div>
-        
+
         {/* Bottom Section */}
         <div className="border-t border-gray-800 py-8">
           <div className="flex flex-col md:flex-row justify-between items-center gap-4">
             <p className="text-sm text-gray-400">
-              &copy; 2025 Athera 
+              &copy; 2025 Athera
             </p>
-            
+
             {/* Status Badge */}
             <div className="flex items-center gap-2 text-xs text-gray-400">
               <div className="w-2 h-2 bg-green-500 rounded-full animate-pulse" />
