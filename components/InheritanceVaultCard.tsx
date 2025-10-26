@@ -182,7 +182,7 @@ export function InheritanceVaultCard({ vaultAddress, filter, onUpdate }: Props) 
       </div>
       
       {/* Stats */}
-      <div className="grid grid-cols-3 gap-4 mb-4 pb-4 border-b border-slate-800">
+      <div className="grid grid-cols-2 sm:grid-cols-3 gap-4 mb-4 pb-4 border-b border-slate-800">
         <div>
           <div className="flex items-center gap-1.5 mb-1">
             <Clock className="h-3.5 w-3.5 text-gray-500" />

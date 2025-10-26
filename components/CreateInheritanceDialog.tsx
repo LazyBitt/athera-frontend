@@ -288,7 +288,7 @@ export function CreateInheritanceDialog({ children, onSuccess }: Props) {
                     <label className="block text-sm font-medium text-gray-300 mb-2">
                       Countdown Period
                     </label>
-                    <div className="grid grid-cols-2 sm:grid-cols-4 gap-2 mb-2">
+                    <div className="grid grid-cols-2 gap-2 mb-2">
                       {[
                         { label: '1 Min', days: '0.000694444' },
                         { label: '1 Year', days: '365' },

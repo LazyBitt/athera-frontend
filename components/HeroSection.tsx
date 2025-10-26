@@ -31,7 +31,7 @@ export function HeroSection() {
         
         {/* Tagline */}
         <p className="text-2xl md:text-3xl text-gray-300 max-w-3xl mx-auto mb-6 leading-relaxed animate-fade-in-up" style={{ animationDelay: '0.2s' }}>
-          Automated crypto inheritance on Base
+              Your legacy stays alive — even when you're gone.
         </p>
 
         {/* One powerful stat */}
