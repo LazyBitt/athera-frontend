@@ -110,7 +110,7 @@ export function PlatformStats() {
   ]
 
   return (
-    <section className="py-20 bg-gradient-to-b from-black via-gray-900 to-black border-y border-gray-800">
+    <section className="pt-16 pb-20 bg-gradient-to-b from-black via-gray-900 to-black border-y border-gray-800">
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
           {stats.map((stat, index) => (

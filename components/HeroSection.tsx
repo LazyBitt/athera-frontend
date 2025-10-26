@@ -4,7 +4,7 @@ import Link from 'next/link'
 
 export function HeroSection() {
   return (
-    <section className="relative min-h-screen flex items-center justify-center overflow-hidden bg-gradient-to-b from-black via-gray-900 to-black">
+    <section className="relative min-h-screen flex items-center justify-center overflow-hidden bg-gradient-to-b from-black via-gray-900 to-black pb-16">
       {/* Animated gradient orbs */}
       <div className="absolute inset-0 overflow-hidden">
         <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-blue-500/20 rounded-full blur-3xl animate-pulse" />
@@ -31,7 +31,7 @@ export function HeroSection() {
 
         {/* Tagline */}
         <p className="text-2xl md:text-3xl text-gray-300 max-w-3xl mx-auto mb-3 leading-relaxed animate-fade-in-up" style={{ animationDelay: '0.2s' }}>
-          Your legacy stays alive — <span className="text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 to-blue-400">even when you're gone</span>
+          Your legacy stays alive — <span className="text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 to-blue-400 font-bold">even when you're gone</span>
         </p>
         <p className="text-base md:text-lg text-gray-500 mb-6 animate-fade-in-up" style={{ animationDelay: '0.23s' }}>
           Automated crypto inheritance on Base
@@ -72,14 +72,14 @@ export function HeroSection() {
             </svg>
             <span className="text-gray-400">Non-Custodial</span>
           </div>
-          <span className="text-gray-700">•</span>
+          <span className="text-gray-700 relative top-1">•</span>
           <div className="flex items-center gap-2">
             <svg className="w-5 h-5 text-blue-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4" />
             </svg>
             <span className="text-gray-400">Built on Base</span>
           </div>
-          <span className="text-gray-700">•</span>
+          <span className="text-gray-700 relative top-1">•</span>
           <div className="flex items-center gap-2">
             <svg className="w-5 h-5 text-blue-500" fill="currentColor" viewBox="0 0 24 24">
               <path d="M13.5 2c-5.621 0-10.211 4.443-10.475 10h-3.025l5 6.625 5-6.625h-2.975c.257-3.351 3.06-6 6.475-6 3.584 0 6.5 2.916 6.5 6.5s-2.916 6.5-6.5 6.5c-1.863 0-3.542-.793-4.728-2.053l-2.427 3.216c1.877 1.754 4.389 2.837 7.155 2.837 5.79 0 10.5-4.71 10.5-10.5s-4.71-10.5-10.5-10.5z" />
@@ -90,8 +90,8 @@ export function HeroSection() {
       </div>
 
       {/* Scroll indicator */}
-      <div className="absolute bottom-8 left-1/2 -translate-x-1/2 animate-bounce">
-        <svg className="w-6 h-6 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+      <div className="absolute bottom-6 left-1/2 -translate-x-1/2 animate-bounce z-20">
+        <svg className="w-6 h-6 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 14l-7 7m0 0l-7-7m7 7V3" />
         </svg>
       </div>
